@@ -9,6 +9,7 @@ import { LogoPlaceholder } from "@/components/layout/LogoPlaceholder";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { HeaderCta } from "@/components/layout/HeaderCta";
 import { MobileNav } from "@/components/layout/MobileNav";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { navItems } from "@/lib/navigation";
 import { localizePath, stripLocaleFromPathname } from "@/lib/i18n/paths";
 import { resolveContent } from "@/lib/i18n/resolve";
@@ -74,13 +75,16 @@ export function Header({ locale }: HeaderProps) {
                         href={localizePath(locale, item.href)}
                         aria-current={active ? "page" : undefined}
                         className={cn(
-                          "relative inline-flex items-center py-2 transition-colors",
+                          "relative inline-flex items-center py-2 transition-colors duration-200",
                           isUrdu
                             ? "font-urdu-body text-base"
                             : "text-xs font-semibold uppercase tracking-[0.05em]",
                           active
-                            ? "text-primary"
-                            : "text-muted-foreground hover:text-primary",
+                            ? "text-foreground"
+                            : cn(
+                                "text-muted-foreground hover:text-foreground",
+                                "after:absolute after:inset-x-0 after:-bottom-px after:h-[1.5px] after:origin-center after:scale-x-0 after:bg-secondary/60 after:transition-transform after:duration-300 after:ease-out hover:after:scale-x-100 motion-reduce:after:transition-none",
+                              ),
                         )}
                       >
                         {strings.nav[item.key]}
@@ -97,13 +101,17 @@ export function Header({ locale }: HeaderProps) {
               </ul>
             </nav>
 
-            <span aria-hidden="true" className="h-4 w-px bg-border" />
+            <span aria-hidden="true" className="h-4 w-px bg-secondary/30" />
 
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-3">
               <LanguageSwitcher
                 locale={locale}
                 pathWithoutLocale={pathWithoutLocale}
                 label={strings.header.languageSwitcherLabel}
+              />
+              <ThemeToggle
+                labelSwitchToLight={strings.header.themeToggleToLight}
+                labelSwitchToDark={strings.header.themeToggleToDark}
               />
               <HeaderCta
                 href={prayerHref}
@@ -120,7 +128,7 @@ export function Header({ locale }: HeaderProps) {
             onClick={() => setMenuOpen(true)}
             aria-expanded={menuOpen}
             aria-controls={MOBILE_NAV_ID}
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[2px] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface xl:hidden"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[2px] text-foreground transition-colors duration-200 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface xl:hidden"
           >
             <MenuIcon />
             <span className="sr-only">{strings.header.menuOpen}</span>
@@ -148,6 +156,12 @@ export function Header({ locale }: HeaderProps) {
             locale={locale}
             pathWithoutLocale={pathWithoutLocale}
             label={strings.header.languageSwitcherLabel}
+          />
+        }
+        themeToggle={
+          <ThemeToggle
+            labelSwitchToLight={strings.header.themeToggleToLight}
+            labelSwitchToDark={strings.header.themeToggleToDark}
           />
         }
       />

@@ -7,7 +7,9 @@ import {
   Noto_Sans_Arabic,
 } from "next/font/google";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { locales, directions, isLocale } from "@/lib/i18n/types";
+import { getThemeInitScript } from "@/lib/theme";
 import "../globals.css";
 
 const inter = Inter({
@@ -63,10 +65,17 @@ export default async function LocaleLayout({
       lang={locale}
       dir={directions[locale]}
       className={`${inter.variable} ${lora.variable} ${notoNastaliqUrdu.variable} ${notoSansArabic.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Sets the theme class before first paint to avoid a flash of the
+            wrong theme; see lib/theme.ts. */}
+        <script dangerouslySetInnerHTML={{ __html: getThemeInitScript() }} />
+      </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         <Header locale={locale} />
         {children}
+        <Footer locale={locale} />
       </body>
     </html>
   );

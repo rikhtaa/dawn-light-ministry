@@ -1,15 +1,28 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: toggled by ThemeToggle (components/layout/ThemeToggle.tsx)
+   via `.dark` on <html>, set pre-hydration by the inline script in
+   app/[locale]/layout.tsx to avoid a flash of the wrong theme. */
+@custom-variant dark (&:is(.dark *));
+
 :root {
   --background: #faf8f3;
   --surface: #ffffff;
+  --card: var(--surface);
+  --card-foreground: #1a2333;
   --foreground: #1a2333;
+  --muted: #f1ede2;
   --muted-foreground: #5b6472;
+  /* Brand identity tokens — deliberately constant across themes (navy/gold
+     are the brand, not a themeable surface); only surface/text tokens
+     above and below adapt per theme. */
   --primary: #122b4f;
   --primary-foreground: #faf8f3;
   --secondary: #c6a15b;
   --secondary-foreground: #1a2333;
   --border: #e3ded2;
+  --input: #e3ded2;
+  --ring: var(--primary);
   --success: #2c5940;
   --warning: #8a5a12;
   --error: #9b3b3b;
@@ -17,27 +30,68 @@
   --container-max-width: 75rem;
 }
 
+.dark {
+  --background: #0a1220;
+  --surface: #111f36;
+  --card: var(--surface);
+  --card-foreground: #faf8f3;
+  --foreground: #faf8f3;
+  --muted: #16233b;
+  --muted-foreground: #b6bfcc;
+  --border: #24334d;
+  --input: #24334d;
+  --ring: var(--secondary);
+  --success: #6fbf9a;
+  --warning: #d99a3e;
+  --error: #e08585;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
 
   --font-sans: var(--font-inter);
   --font-serif: var(--font-lora);
+
+  /* Required by components/ui/aurora-background.tsx (Aceternity UI). */
+  --animate-aurora: aurora 60s linear infinite;
+  @keyframes aurora {
+    from {
+      background-position:
+        50% 50%,
+        50% 50%;
+    }
+    to {
+      background-position:
+        350% 50%,
+        350% 50%;
+    }
+  }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   * {
@@ -45,7 +99,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid var(--color-ring);
     outline-offset: 2px;
   }
 }

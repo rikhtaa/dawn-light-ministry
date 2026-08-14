@@ -8,6 +8,7 @@ interface SectionHeaderProps {
   description?: ReactNode;
   align?: "start" | "center";
   headingLevel?: "h1" | "h2" | "h3";
+  isUrdu?: boolean;
   className?: string;
 }
 
@@ -17,10 +18,11 @@ export function SectionHeader({
   description,
   align = "start",
   headingLevel = "h2",
+  isUrdu = false,
   className,
 }: SectionHeaderProps) {
   const HeadingTag = headingLevel;
-  const headingClass =
+  const headingSizeClass =
     headingLevel === "h1"
       ? "text-h1"
       : headingLevel === "h3"
@@ -36,11 +38,22 @@ export function SectionHeader({
       )}
     >
       {eyebrow ? <Badge>{eyebrow}</Badge> : null}
-      <HeadingTag className={cn(headingClass, "text-foreground")}>
+      <HeadingTag
+        className={cn(
+          headingSizeClass,
+          isUrdu && "font-urdu-display",
+          "text-foreground",
+        )}
+      >
         {heading}
       </HeadingTag>
       {description ? (
-        <p className="text-body max-w-2xl text-muted-foreground">
+        <p
+          className={cn(
+            "text-body max-w-2xl text-muted-foreground",
+            isUrdu && "font-urdu-body text-lg",
+          )}
+        >
           {description}
         </p>
       ) : null}

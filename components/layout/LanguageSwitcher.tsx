@@ -48,10 +48,10 @@ export function LanguageSwitcher({
               href={localizePath(loc, pathWithoutLocale)}
               aria-current={active ? "true" : undefined}
               className={cn(
-                "transition-colors",
+                "transition-colors duration-200",
                 active
-                  ? "font-semibold text-primary"
-                  : "text-muted-foreground hover:text-primary",
+                  ? "font-semibold text-foreground"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               {localeLabel[loc]}

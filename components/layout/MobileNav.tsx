@@ -24,6 +24,7 @@ interface MobileNavProps {
   ctaLabel: string;
   isUrdu: boolean;
   languageSwitcher: ReactNode;
+  themeToggle: ReactNode;
 }
 
 export function MobileNav({
@@ -37,6 +38,7 @@ export function MobileNav({
   ctaLabel,
   isUrdu,
   languageSwitcher,
+  themeToggle,
 }: MobileNavProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -121,8 +123,8 @@ export function MobileNav({
                   className={cn(
                     "block border-s-2 py-3 ps-3 transition-colors",
                     item.active
-                      ? "border-secondary text-primary"
-                      : "border-transparent text-foreground hover:border-border hover:text-primary",
+                      ? "border-secondary text-foreground"
+                      : "border-transparent text-foreground hover:border-border hover:text-foreground",
                     isUrdu
                       ? "font-urdu-body text-base"
                       : "text-xs font-semibold uppercase tracking-[0.05em]",
@@ -136,7 +138,10 @@ export function MobileNav({
         </nav>
 
         <div className="flex flex-col gap-6 border-t border-border pt-6">
-          {languageSwitcher}
+          <div className="flex items-center justify-between gap-4">
+            {languageSwitcher}
+            {themeToggle}
+          </div>
           <HeaderCta
             href={ctaHref}
             label={ctaLabel}

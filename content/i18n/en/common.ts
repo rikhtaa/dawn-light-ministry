@@ -22,6 +22,8 @@ export const common = {
     primaryNavLabel: "Primary",
     mobileNavLabel: "Mobile navigation",
     languageSwitcherLabel: "Language",
+    themeToggleToLight: "Switch to light mode",
+    themeToggleToDark: "Switch to dark mode",
   },
 } as const;
 

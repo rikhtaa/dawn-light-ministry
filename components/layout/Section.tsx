@@ -4,14 +4,15 @@ import { cn } from "@/lib/cn";
 interface SectionProps {
   children: ReactNode;
   className?: string;
-  background?: "default" | "surface" | "muted";
+  background?: "default" | "surface" | "muted" | "primary";
   id?: string;
 }
 
 const backgroundClasses: Record<NonNullable<SectionProps["background"]>, string> = {
   default: "bg-background",
   surface: "bg-surface",
-  muted: "bg-border/40",
+  muted: "bg-muted",
+  primary: "bg-primary text-primary-foreground",
 };
 
 export function Section({

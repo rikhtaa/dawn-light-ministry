@@ -44,5 +44,7 @@ export const common: Translated<CommonStrings> = {
     primaryNavLabel: { ...pending },
     mobileNavLabel: { ...pending },
     languageSwitcherLabel: { ...pending },
+    themeToggleToLight: { ...pending },
+    themeToggleToDark: { ...pending },
   },
 };

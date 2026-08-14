@@ -20,10 +20,11 @@ export function HeaderCta({
     <Link
       href={href}
       className={cn(
-        "inline-flex min-h-11 items-center justify-center rounded-[2px] px-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-        variant === "outline"
-          ? "bg-primary text-primary-foreground duration-200 hover:bg-primary/90 focus-visible:ring-offset-surface"
-          : "w-full bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-offset-surface",
+        "inline-flex min-h-9 shrink-0 items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-secondary px-4 text-secondary-foreground shadow-sm transition-all duration-200 dark:text-white",
+        "hover:-translate-y-px hover:bg-secondary/90",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
+        "motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+        variant === "solid" && "w-full",
         isUrdu ? "font-urdu-body text-sm" : "text-sm font-medium",
         className,
       )}
