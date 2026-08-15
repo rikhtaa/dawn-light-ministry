@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  Inter,
-  Lora,
+  Source_Serif_4,
+  IBM_Plex_Sans,
+  IBM_Plex_Mono,
   Noto_Nastaliq_Urdu,
-  Noto_Sans_Arabic,
 } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -12,31 +12,32 @@ import { locales, directions, isLocale } from "@/lib/i18n/types";
 import { getThemeInitScript } from "@/lib/theme";
 import "../globals.css";
 
-const inter = Inter({
+// Typefaces — HANDOFF.md §4.3, frozen with Direction B. No substitutions.
+const sourceSerif4 = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-inter",
+  weight: ["400", "600"],
+  variable: "--font-source-serif",
   display: "swap",
 });
 
-const lora = Lora({
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-lora",
+  weight: ["400", "500", "600"],
+  variable: "--font-ibm-plex-sans",
+  display: "swap",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-ibm-plex-mono",
   display: "swap",
 });
 
 const notoNastaliqUrdu = Noto_Nastaliq_Urdu({
   subsets: ["arabic"],
-  weight: ["400", "700"],
+  weight: ["400"],
   variable: "--font-urdu-nastaliq",
-  display: "swap",
-});
-
-const notoSansArabic = Noto_Sans_Arabic({
-  subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-urdu-sans-ar",
   display: "swap",
 });
 
@@ -64,7 +65,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={directions[locale]}
-      className={`${inter.variable} ${lora.variable} ${notoNastaliqUrdu.variable} ${notoSansArabic.variable} h-full antialiased`}
+      className={`${sourceSerif4.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} ${notoNastaliqUrdu.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

@@ -10,9 +10,18 @@ engineering conventions and guardrails this project follows.
 
 ## Status
 
-Foundation stage. Public pages, bilingual (English/Urdu) support, prayer
-and contact forms, and other features described in `PRD.md` have not
-been built yet.
+Foundation stage. The design system tokens (colour, typography, spacing,
+grid, radius, borders) for the approved **Direction B — "The
+Institution"** design, specified in `HANDOFF.md`, are configured in
+`app/globals.css`. Public pages, bilingual (English/Urdu) support, and
+prayer/contact forms described in `PRD.md` have not been built yet.
+
+Note: `components/` currently also contains an earlier prototype header,
+footer and homepage built before Direction B was frozen. They still
+render (using compatibility aliases in `app/globals.css`) but use a
+different palette, type pairing and motion than the approved design, and
+are scheduled to be rebuilt against the Direction B tokens per
+`HANDOFF.md` §23 Step 2 onward.
 
 ## Tech stack
 

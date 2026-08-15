@@ -5,83 +5,190 @@
    app/[locale]/layout.tsx to avoid a flash of the wrong theme. */
 @custom-variant dark (&:is(.dark *));
 
-:root {
-  --background: #faf8f3;
-  --surface: #ffffff;
-  --card: var(--surface);
-  --card-foreground: #1a2333;
-  --foreground: #1a2333;
-  --muted: #f1ede2;
-  --muted-foreground: #5b6472;
-  /* Brand identity tokens — deliberately constant across themes (navy/gold
-     are the brand, not a themeable surface); only surface/text tokens
-     above and below adapt per theme. */
-  --primary: #122b4f;
-  --primary-foreground: #faf8f3;
-  --secondary: #c6a15b;
-  --secondary-foreground: #1a2333;
-  --border: #e3ded2;
-  --input: #e3ded2;
-  --ring: var(--primary);
-  --success: #2c5940;
-  --warning: #8a5a12;
-  --error: #9b3b3b;
+/* =============================================================================
+   Design tokens — Direction B ("The Institution"), frozen. Source: HANDOFF.md §4.
+   Do not introduce a colour, font or radius that is not listed there.
+   ========================================================================== */
 
-  --container-max-width: 75rem;
+:root {
+  /* --- §4.1 Light mode palette (literal, always these values) --- */
+  --paper: #faf9f6; /* default page ground */
+  --surface: #ffffff; /* content sections, cards */
+  --surface-warm: #fcfbf8; /* inset cards, form grounds */
+  --band: #f4f1ea; /* quiet CTA bands */
+  --ink: #122536; /* navy — all headings, dark bands, footer */
+  --ink-body: #3e3a33; /* body copy */
+  --ink-muted: #5a5449; /* secondary copy */
+  --ink-faint: #7c7466; /* metadata, captions, breadcrumb */
+  --ink-ghost: #8a8375; /* mono labels */
+  --ink-disabled: #a29a8a; /* placeholder text */
+  --disabled-bg: #e7e2d9; /* disabled button fill */
+  --disabled-fg: #9b948a; /* disabled button text */
+  --primary: #7a2e2e; /* oxblood — primary action, section eyebrows */
+  --primary-hover: #5c2222;
+  --accent: #c89b4a; /* brass — 3px rules, education accent. Never a large fill. */
+  --border: #e2ddd3; /* default 1px rule */
+  --border-soft: #efeae1; /* inner list rules */
+  --border-strong: #c4bcac; /* secondary button outline */
+  --input-border: #d8d2c6;
+  --success: #2f6b4f; /* registration open */
+  --warning: #9a6b16; /* [CONFIRM] markers, closed state */
+  --error: #a33a3a; /* cancelled, form errors */
+
+  /* --- §4.2 Dark mode palette (literal, designed — not an inversion) --- */
+  --dark-ground: #0e1a24; /* deep blue-black, warmer than grey */
+  --dark-surface: #152531;
+  --dark-band: #122536; /* navy bands stay this in both modes */
+  --dark-border: #2a3a47;
+  --dark-border-input: #38495a; /* dark-border-2, input variant */
+  --dark-border-button: #46596a; /* dark-border-2, button variant */
+  --dark-heading: #f0ede6; /* soft parchment white, not #fff */
+  --dark-body: #a9b8c4; /* 8.6:1 against dark-ground */
+  --dark-faint: #7e90a0;
+  --dark-accent: #e0b872; /* brass — primary action fill in dark */
+  --dark-clay: #c9847c; /* replaces oxblood for accents (e.g. Urdu wordmark) in dark */
+  --dark-success: #6fae8c;
+  --utility-bar-fg: #b9c6d2;
+
+  /* --- §4.4 Spacing / container / grid / shape ---
+     Spacing scale (4·8·12·16·24·32·48·64·96·128) is Tailwind's default
+     4px-based numeric scale — no override needed; use e.g. p-6 (24px),
+     py-32 (128px) directly. Grid: use grid-cols-4 md:grid-cols-8
+     lg:grid-cols-12 with gap-6 (24px gutter). */
+  --container-max-width: 77.5rem; /* 1240px */
+  --container-gutter: 1.25rem; /* 20px mobile */
+  --rule-width-hairline: 1px;
+  --rule-width-accent: 3px; /* card top rules, brass rules */
+  --rule-width-section: 2px; /* page-section top rules, navy */
+  --radius-input: 2px; /* the one non-zero radius besides pills */
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-gutter: 2rem; /* 32px tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --container-gutter: 2.5rem; /* 40px desktop */
+  }
+}
+
+/* -----------------------------------------------------------------------
+   Legacy semantic aliases (background/foreground/primary/etc.) — kept so
+   the pre-freeze components built before Direction B was approved
+   (Header, Footer, Hero, homepage sections, ui/Button, ui/Card, …) keep
+   resolving to real, approved colours instead of breaking outright. They
+   are slated for rebuild against the literal tokens above in Step 2 per
+   HANDOFF.md §23. New components should reference the literal §4 token
+   names directly, not these aliases.
+   -------------------------------------------------------------------- */
+:root {
+  --background: var(--paper);
+  --card: var(--surface-warm);
+  --card-foreground: var(--ink);
+  --foreground: var(--ink);
+  --muted: var(--band);
+  --muted-foreground: var(--ink-muted);
+  --primary-foreground: #ffffff;
+  --secondary: var(--accent);
+  --secondary-foreground: var(--ink);
+  --input: var(--input-border);
+  --ring: var(--primary);
 }
 
 .dark {
-  --background: #0a1220;
-  --surface: #111f36;
-  --card: var(--surface);
-  --card-foreground: #faf8f3;
-  --foreground: #faf8f3;
-  --muted: #16233b;
-  --muted-foreground: #b6bfcc;
-  --border: #24334d;
-  --input: #24334d;
-  --ring: var(--secondary);
-  --success: #6fbf9a;
-  --warning: #d99a3e;
-  --error: #e08585;
+  --background: var(--dark-ground);
+  --surface: var(--dark-surface);
+  --card: var(--dark-surface);
+  --card-foreground: var(--dark-heading);
+  --foreground: var(--dark-heading);
+  --muted: var(--dark-band);
+  --muted-foreground: var(--dark-body);
+  --primary: var(--dark-accent);
+  --primary-foreground: var(--dark-band);
+  --secondary: var(--dark-clay);
+  --secondary-foreground: var(--dark-heading);
+  --border: var(--dark-border);
+  --input: var(--dark-border-input);
+  --ring: var(--dark-accent);
+  --success: var(--dark-success);
+  /* No dark-specific warning/error given in HANDOFF §4.2 — reuse the
+     light values rather than inventing new ones. */
 }
 
 @theme inline {
-  --color-background: var(--background);
+  /* Literal §4 tokens, exposed as Tailwind utilities (bg-paper, text-ink, …) */
+  --color-paper: var(--paper);
   --color-surface: var(--surface);
+  --color-surface-warm: var(--surface-warm);
+  --color-band: var(--band);
+  --color-ink: var(--ink);
+  --color-ink-body: var(--ink-body);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-ink-ghost: var(--ink-ghost);
+  --color-ink-disabled: var(--ink-disabled);
+  --color-disabled-bg: var(--disabled-bg);
+  --color-disabled-fg: var(--disabled-fg);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-border-strong: var(--border-strong);
+  --color-input-border: var(--input-border);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+
+  --color-dark-ground: var(--dark-ground);
+  --color-dark-surface: var(--dark-surface);
+  --color-dark-band: var(--dark-band);
+  --color-dark-border: var(--dark-border);
+  --color-dark-border-input: var(--dark-border-input);
+  --color-dark-border-button: var(--dark-border-button);
+  --color-dark-heading: var(--dark-heading);
+  --color-dark-body: var(--dark-body);
+  --color-dark-faint: var(--dark-faint);
+  --color-dark-accent: var(--dark-accent);
+  --color-dark-clay: var(--dark-clay);
+  --color-dark-success: var(--dark-success);
+  --color-utility-bar-fg: var(--utility-bar-fg);
+
+  /* Legacy aliases */
+  --color-background: var(--background);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-success: var(--success);
-  --color-warning: var(--warning);
-  --color-error: var(--error);
 
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-lora);
+  /* Typefaces — loaded via next/font/google in app/[locale]/layout.tsx.
+     §4.3: Source Serif 4 (headings) · IBM Plex Sans (body/UI) ·
+     IBM Plex Mono (eyebrows/metadata/mono labels) · Noto Nastaliq Urdu. */
+  --font-serif: var(--font-source-serif);
+  --font-sans: var(--font-ibm-plex-sans);
+  --font-mono: var(--font-ibm-plex-mono);
+  --font-urdu: var(--font-urdu-nastaliq);
 
-  /* Required by components/ui/aurora-background.tsx (Aceternity UI). */
-  --animate-aurora: aurora 60s linear infinite;
-  @keyframes aurora {
-    from {
-      background-position:
-        50% 50%,
-        50% 50%;
-    }
-    to {
-      background-position:
-        350% 50%,
-        350% 50%;
-    }
-  }
+  /* Radius 0 everywhere except pills (rounded-full, untouched) and 2px
+     inputs (rounded-(--radius-input)). */
+  --radius: 0px;
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
 }
 
 @layer base {
@@ -99,8 +206,15 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-ring);
+    outline: var(--rule-width-section) solid var(--color-primary);
     outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  .text-standfirst {
+    text-wrap: pretty;
   }
 }
 
@@ -115,75 +229,145 @@
   }
 }
 
-/* Typography tokens — apply these instead of ad-hoc font-size/weight combinations. */
+/* =============================================================================
+   Typography scale — HANDOFF.md §4.3. Sizes are fluid between the mobile
+   and desktop reference points given in the spec (mobile-first, clamped to
+   the documented min/max — no size invents a value outside its listed
+   range). Measure is capped at 68ch (70ch for legal pages) per §4.3.
+   ========================================================================== */
 
+@utility measure {
+  max-width: 68ch;
+}
+
+@utility measure-legal {
+  max-width: 70ch;
+}
+
+/* Display h1 — 56/44/34, serif 600, line-height 1.08, tracking -.022em */
 @utility text-display {
   font-family: var(--font-serif);
-  font-size: clamp(2.25rem, 1.9rem + 1.5vw, 3.5rem);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
   font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+  font-size: clamp(2.125rem, 1.73rem + 1.97vw, 3.5rem);
 }
 
+/* Page h1 (interior) — 52/44/32, tracking -.022em */
 @utility text-h1 {
   font-family: var(--font-serif);
-  font-size: clamp(1.875rem, 1.6rem + 1vw, 2.75rem);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
   font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.022em;
+  font-size: clamp(2rem, 1.64rem + 1.79vw, 3.25rem);
 }
 
+/* Section h2 — 34–44/30/26, 600, line-height 1.15–1.2, tracking -.015 to -.02em */
 @utility text-h2 {
   font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 1.35rem + 0.6vw, 2rem);
-  line-height: 1.2;
   font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.018em;
+  font-size: clamp(1.625rem, 1.3rem + 1.61vw, 2.75rem);
 }
 
+/* Sub-head h3 — 26–32/24/22, 600 */
 @utility text-h3 {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  line-height: 1.3;
   font-weight: 600;
+  line-height: 1.25;
+  font-size: clamp(1.375rem, 1.2rem + 0.89vw, 2rem);
 }
 
+/* Serif standfirst — 22–25, 400, line-height 1.55–1.6 */
+@utility text-standfirst {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.58;
+  font-size: clamp(1.375rem, 1.32rem + 0.27vw, 1.5625rem);
+}
+
+/* Card title — 19–22, serif 400/600 (weight chosen by caller) */
+@utility text-card-title {
+  font-family: var(--font-serif);
+  line-height: 1.3;
+  font-size: clamp(1.1875rem, 1.13rem + 0.27vw, 1.375rem);
+}
+
+/* Body — 17/1.7, IBM Plex Sans 400 */
 @utility text-body {
   font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.7;
   font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.7;
 }
 
+/* Long-form body — 17.5–18/1.75–1.8 */
+@utility text-body-long {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 1.09375rem;
+  line-height: 1.775;
+}
+
+/* Small / meta — 14.5–15.5 (never below 15px) */
 @utility text-small {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
-  line-height: 1.6;
+  font-size: 0.9375rem;
+  line-height: 1.5;
 }
 
-@utility text-label {
+/* Caption / breadcrumb — 13–14, ink-faint */
+@utility text-caption {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: 0.84375rem;
   line-height: 1.4;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-weight: 600;
+  color: var(--color-ink-faint);
 }
 
+/* Eyebrow — 12 · 600 · .18em · uppercase · primary (dark: accent via
+   the --color-primary alias, which already swaps to brass under .dark) */
+@utility text-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Mono label — 10.5–11 · .14–.16em · uppercase · ink-ghost */
+@utility text-mono-label {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.672rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-ink-ghost);
+}
+
+/* Nav — 14px, IBM Plex Sans, header/footer navigation links */
 @utility text-nav {
   font-family: var(--font-sans);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   line-height: 1.4;
   font-weight: 500;
 }
 
-/* Urdu typography — display for headings/short emphasis, body for paragraphs and UI text. */
-
+/* Urdu typography — §4.3/§21: Noto Nastaliq Urdu, line-height 2.0–2.2
+   minimum, +2px against Latin at the equivalent role, no uppercase, no
+   letter-spacing. One approved Urdu typeface for both display and body
+   roles — kept as two utility names because pre-freeze components
+   already distinguish them, not because a second Urdu font is approved. */
 @utility font-urdu-display {
-  font-family: var(--font-urdu-nastaliq);
-  line-height: 1.9;
+  font-family: var(--font-urdu);
+  line-height: 2.1;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 @utility font-urdu-body {
-  font-family: var(--font-urdu-sans-ar);
-  line-height: 2;
+  font-family: var(--font-urdu);
+  line-height: 2.1;
+  letter-spacing: normal;
+  text-transform: none;
 }
