@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "i18n:generate": "tsx scripts/i18n/generate.ts",
+    "i18n:status": "tsx scripts/i18n/status.ts",
+    "i18n:review": "tsx scripts/i18n/review.ts",
+    "i18n:check": "tsx scripts/i18n/check.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -30,6 +34,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.0",
     "tailwindcss": "^4",
+    "tsx": "^4",
     "typescript": "^5"
   }
 }

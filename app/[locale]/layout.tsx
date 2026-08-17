@@ -6,9 +6,10 @@ import {
   IBM_Plex_Mono,
   Noto_Nastaliq_Urdu,
 } from "next/font/google";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { locales, directions, isLocale } from "@/lib/i18n/types";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { locales, directions, isLocale, type Locale } from "@/lib/i18n/types";
+import { getMetadataContent } from "@/lib/i18n/content-registry";
 import { getThemeInitScript } from "@/lib/theme";
 import "../globals.css";
 
@@ -41,11 +42,26 @@ const notoNastaliqUrdu = Noto_Nastaliq_Urdu({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Dawn of Light Ministry",
-  description:
-    "Dawn of Light Ministry (نور کی صبح) — Bethlehem Church, Seminary & Educational Mission, serving Karachi and Faisalabad, Pakistan.",
-};
+export async function generateMetadata({
+  params,
+}: LayoutProps<"/[locale]">): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : "en";
+  const strings = getMetadataContent(locale);
+
+  const languages = Object.fromEntries(
+    locales.map((l) => [l, `/${l}`]),
+  ) as Record<Locale, string>;
+
+  return {
+    title: strings.title,
+    description: strings.description,
+    alternates: {
+      canonical: `/${locale}`,
+      languages,
+    },
+  };
+}
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -74,9 +90,9 @@ export default async function LocaleLayout({
         <script dangerouslySetInnerHTML={{ __html: getThemeInitScript() }} />
       </head>
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
-        <Header locale={locale} />
+        <SiteHeader locale={locale} />
         {children}
-        <Footer locale={locale} />
+        <SiteFooter locale={locale} />
       </body>
     </html>
   );

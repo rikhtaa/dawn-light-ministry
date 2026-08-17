@@ -1,15 +1,16 @@
 import { notFound } from "next/navigation";
 import { Hero } from "@/components/home/Hero";
-import { FeatureSection } from "@/components/home/FeatureSection";
+import { MissionSection } from "@/components/home/MissionSection";
 import { MinistriesSection } from "@/components/home/MinistriesSection";
-import { PrayerCtaBanner } from "@/components/home/PrayerCtaBanner";
-import { EmptyStateSection } from "@/components/home/EmptyStateSection";
-import { ContactSection } from "@/components/home/ContactSection";
-import { resolveContent } from "@/lib/i18n/resolve";
+import { SeminarySection } from "@/components/home/SeminarySection";
+import { ChildrenEducationSection } from "@/components/home/ChildrenEducationSection";
+import { PrayerSection } from "@/components/home/PrayerSection";
+import { EventsAndResourcesSection } from "@/components/home/EventsAndResourcesSection";
+import { SupportSection } from "@/components/home/SupportSection";
+import { LocationsSection } from "@/components/home/LocationsSection";
+import { getHomeContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
-import { home as homeEn } from "@/content/i18n/en/home";
-import { home as homeUr } from "@/content/i18n/ur/home";
 
 export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -19,37 +20,20 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   }
 
   const isUrdu = locale === "ur";
-  const strings = isUrdu ? resolveContent(homeEn, homeUr) : homeEn;
+  const strings = getHomeContent(locale);
 
   const path = (segment: string) => localizePath(locale, segment);
 
   return (
     <main className="flex flex-1 flex-col">
       <Hero
-        eyebrow={strings.hero.eyebrow}
-        headline={strings.hero.headline}
-        animatedWords={[
-          strings.hero.animatedWords.ministry,
-          strings.hero.animatedWords.church,
-          strings.hero.animatedWords.seminary,
-        ]}
-        supportingMessage={strings.hero.supportingMessage}
-        primaryCta={strings.hero.primaryCta}
-        primaryCtaHref={path("/about/mission-vision")}
-        secondaryCta={strings.hero.secondaryCta}
+        strings={strings.hero}
+        primaryCtaHref={path("/about#mission-vision")}
         secondaryCtaHref={path("/prayer")}
         isUrdu={isUrdu}
       />
 
-      <FeatureSection
-        eyebrow={strings.mission.eyebrow}
-        heading={strings.mission.heading}
-        body={strings.mission.body}
-        ctaLabel={strings.mission.cta}
-        ctaHref={path("/about/mission-vision")}
-        background="default"
-        isUrdu={isUrdu}
-      />
+      <MissionSection strings={strings.mission} ctaHref={path("/about#mission-vision")} isUrdu={isUrdu} />
 
       <MinistriesSection
         locale={locale}
@@ -58,59 +42,34 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         viewAllHref={path("/ministries")}
       />
 
-      <FeatureSection
-        eyebrow={strings.education.eyebrow}
-        heading={strings.education.heading}
-        body={strings.education.body}
-        ctaLabel={strings.education.cta}
-        ctaHref={path("/ministries/childrens-education")}
-        background="muted"
+      <SeminarySection
+        strings={strings.seminary}
+        primaryCtaHref={path("/ministries/seminary")}
+        secondaryCtaHref={path("/contact")}
         isUrdu={isUrdu}
       />
 
-      <PrayerCtaBanner
-        heading={strings.prayerCta.heading}
-        body={strings.prayerCta.body}
-        ctaLabel={strings.prayerCta.cta}
-        ctaHref={path("/prayer")}
+      <ChildrenEducationSection strings={strings.childrenEducation} isUrdu={isUrdu} />
+
+      <PrayerSection strings={strings.prayerCta} ctaHref={path("/prayer")} isUrdu={isUrdu} />
+
+      <EventsAndResourcesSection
+        eventsStrings={strings.events}
+        eventsCtaHref={path("/contact")}
+        eventsAllHref={path("/events")}
+        resourcesStrings={strings.resources}
+        resourcesAllHref={path("/resources")}
         isUrdu={isUrdu}
       />
 
-      <EmptyStateSection
-        eyebrow={strings.events.eyebrow}
-        heading={strings.events.heading}
-        message={strings.events.emptyState}
-        ctaLabel={strings.events.cta}
-        ctaHref={path("/events")}
-        background="default"
-        isUrdu={isUrdu}
-      />
-
-      <EmptyStateSection
-        eyebrow={strings.resources.eyebrow}
-        heading={strings.resources.heading}
-        message={strings.resources.emptyState}
-        ctaLabel={strings.resources.cta}
-        ctaHref={path("/resources")}
-        background="surface"
-        isUrdu={isUrdu}
-      />
-
-      <FeatureSection
-        eyebrow={strings.support.eyebrow}
-        heading={strings.support.heading}
-        body={strings.support.body}
-        ctaLabel={strings.support.cta}
+      <SupportSection
+        strings={strings.support}
         ctaHref={path("/support")}
-        background="muted"
+        prayerHref={path("/prayer")}
         isUrdu={isUrdu}
       />
 
-      <ContactSection
-        strings={strings.contact}
-        ctaHref={path("/contact")}
-        isUrdu={isUrdu}
-      />
+      <LocationsSection strings={strings.contact} isUrdu={isUrdu} />
     </main>
   );
 }

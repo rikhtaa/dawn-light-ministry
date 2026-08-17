@@ -6,7 +6,7 @@ function isTranslatedString(value: unknown): value is TranslatedString {
     typeof value === "object" &&
     value !== null &&
     "value" in value &&
-    "approved" in value
+    "published" in value
   );
 }
 
