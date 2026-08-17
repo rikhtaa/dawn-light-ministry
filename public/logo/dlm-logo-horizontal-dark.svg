@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508 96" width="508" height="96" role="img" aria-label="Dawn of Light Ministry — Bethlehem Church, Seminary &amp; Educational Mission">
+  <defs></defs>
+  <rect width="508" height="96" fill="#122536"></rect>
+<g transform="translate(24,24)">
+  <g>
+  <rect x="0.75" y="0.75" width="45.5" height="45.5" fill="none" stroke="#E0B872" stroke-width="1.5"></rect>
+  <rect x="21.4" y="11.5" width="3.2" height="23.5" fill="#E0B872"></rect>
+  <rect x="15.6" y="18.4" width="14.8" height="3.2" fill="#E0B872"></rect></g>
+  <text x="63" y="21.5" font-family="'Source Serif 4', Georgia, serif" font-weight="600" font-size="21" letter-spacing="-0.21" fill="#F0EDE6">Dawn of Light Ministry</text>
+  <text x="63" y="38" font-family="'IBM Plex Sans', Helvetica, sans-serif" font-weight="400" font-size="11.5" letter-spacing="1.035" fill="#8FA0AE">BETHLEHEM CHURCH, SEMINARY &amp; EDUCATIONAL MISSION</text></g>
+</svg>

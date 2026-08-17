@@ -1,7 +1,6 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { THEME_STORAGE_KEY } from "@/lib/theme";
 
@@ -27,20 +26,34 @@ function getThemeServerSnapshot() {
 }
 
 interface ThemeToggleProps {
-  labelSwitchToLight: string;
-  labelSwitchToDark: string;
+  darkModeLabel: string;
+  lightModeLabel: string;
+  ariaLabelToLight: string;
+  ariaLabelToDark: string;
+  /** "on-dark" — the navy utility bar. "on-light" — the mobile drawer panel. */
+  tone?: "on-dark" | "on-light";
+  /**
+   * "label" — plain text control, HANDOFF.md §8's utility bar ("Dark
+   * mode"). "switch" — a track-and-knob toggle, used in the mobile drawer
+   * per the approved Claude Design mockup (a distinct control there, not
+   * the utility bar's text style repeated).
+   */
+  variant?: "label" | "switch";
   className?: string;
 }
 
 /**
  * Reads/writes the `.dark` class the inline script in
  * app/[locale]/layout.tsx already applied pre-hydration, so this only
- * needs to mirror that state rather than decide it — avoiding a second,
- * possibly-conflicting theme mechanism.
+ * mirrors that state rather than deciding it.
  */
 export function ThemeToggle({
-  labelSwitchToLight,
-  labelSwitchToDark,
+  darkModeLabel,
+  lightModeLabel,
+  ariaLabelToLight,
+  ariaLabelToDark,
+  tone = "on-dark",
+  variant = "label",
   className,
 }: ThemeToggleProps) {
   const isDark = useSyncExternalStore(
@@ -60,30 +73,53 @@ export function ThemeToggle({
     }
   }
 
+  if (variant === "switch") {
+    return (
+      <button
+        type="button"
+        onClick={toggleTheme}
+        role="switch"
+        aria-checked={isDark}
+        aria-label={isDark ? ariaLabelToLight : ariaLabelToDark}
+        className={cn(
+          "flex w-full items-center justify-between gap-4 text-nav text-ink-muted transition-colors duration-150 hover:text-foreground",
+          className,
+        )}
+      >
+        <span>{isDark ? lightModeLabel : darkModeLabel}</span>
+        <span
+          aria-hidden="true"
+          className={cn(
+            "relative inline-flex h-6 w-11 shrink-0 items-center border transition-colors duration-150",
+            isDark ? "border-primary bg-primary" : "border-border-strong bg-transparent",
+          )}
+        >
+          <span
+            className={cn(
+              "inline-block h-5 w-5 border border-border-strong bg-surface transition-transform duration-150",
+              isDark ? "translate-x-[22px]" : "translate-x-0.5",
+            )}
+          />
+        </span>
+      </button>
+    );
+  }
+
   return (
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label={isDark ? labelSwitchToLight : labelSwitchToDark}
       aria-pressed={isDark}
+      aria-label={isDark ? ariaLabelToLight : ariaLabelToDark}
       className={cn(
-        "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors duration-200 hover:border-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
+        "text-[0.8125rem] transition-colors duration-150",
+        tone === "on-dark"
+          ? "text-utility-bar-fg hover:text-white"
+          : "text-ink-muted hover:text-foreground",
         className,
       )}
     >
-      {isDark ? (
-        <Moon
-          className="h-4 w-4 text-foreground"
-          fill="currentColor"
-          aria-hidden="true"
-        />
-      ) : (
-        <Sun
-          className="h-4 w-4 text-foreground"
-          fill="currentColor"
-          aria-hidden="true"
-        />
-      )}
+      {isDark ? lightModeLabel : darkModeLabel}
     </button>
   );
 }

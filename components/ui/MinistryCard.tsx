@@ -1,53 +1,60 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
+import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { cn } from "@/lib/cn";
 
+type TopRule = "oxblood" | "navy" | "brass" | "success";
+
 interface MinistryCardProps {
+  kicker: string;
   title: string;
   description: string;
+  meta: string;
+  /** True when `meta` carries a [CONFIRM]/[PSEUDO/PLACEHOLDER] marker. */
+  metaUnconfirmed?: boolean;
   href: string;
-  linkLabel: string;
+  topRule: TopRule;
   isUrdu?: boolean;
   className?: string;
 }
 
+/**
+ * The whole card is the link — the approved mockup shows no separate
+ * "Learn more" affordance per card, just the numbered mono kicker, title,
+ * description and a ruled meta line.
+ */
 export function MinistryCard({
+  kicker,
   title,
   description,
+  meta,
+  metaUnconfirmed = false,
   href,
-  linkLabel,
+  topRule,
   isUrdu = false,
   className,
 }: MinistryCardProps) {
   return (
-    <Card hoverable className={cn("flex flex-col gap-3", className)}>
-      <h3
-        className={cn(
-          "text-h3 text-foreground",
-          isUrdu && "font-urdu-display",
-        )}
-      >
-        {title}
-      </h3>
-      <p
-        className={cn(
-          "text-body flex-1 text-muted-foreground",
-          isUrdu && "font-urdu-body text-lg",
-        )}
-      >
-        {description}
-      </p>
-      <Link
-        href={href}
-        aria-label={`${linkLabel} — ${title}`}
-        className={cn(
-          "text-nav inline-flex items-center gap-1 self-start text-primary transition-colors hover:text-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface rounded-sm",
-          isUrdu && "font-urdu-body",
-        )}
-      >
-        {linkLabel}
-        <span aria-hidden="true">→</span>
-      </Link>
-    </Card>
+    <Link
+      href={href}
+      aria-label={title}
+      className={cn(
+        "block transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+        className,
+      )}
+    >
+      <Card topRule={topRule} tone="surface" className="flex h-full flex-col gap-3.5 hover:bg-surface-warm">
+        <span className="text-mono-label text-ink-disabled">{kicker}</span>
+        <h3 className={cn("text-card-title font-semibold text-foreground", isUrdu && "font-urdu-display")}>
+          {title}
+        </h3>
+        <p className={cn("text-small flex-1 text-ink-muted", isUrdu && "font-urdu-body text-base")}>
+          {description}
+        </p>
+        <div className="border-t border-border-soft pt-3 text-caption">
+          {metaUnconfirmed ? <PlaceholderTag>{meta}</PlaceholderTag> : meta}
+        </div>
+      </Card>
+    </Link>
   );
 }

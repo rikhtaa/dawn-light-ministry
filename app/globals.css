@@ -34,6 +34,11 @@
   --success: #2f6b4f; /* registration open */
   --warning: #9a6b16; /* [CONFIRM] markers, closed state */
   --error: #a33a3a; /* cancelled, form errors */
+  /* Utility bar / footer chrome — same as ink in light mode; dark mode
+     gives it a distinct deeper tone (verified from the approved Claude
+     Design homepage mockup: utility bar and footer both use #081119 in
+     dark, not the constant navy content bands stay at per §9). */
+  --ink-recessed: var(--ink);
 
   /* --- §4.2 Dark mode palette (literal, designed — not an inversion) --- */
   --dark-ground: #0e1a24; /* deep blue-black, warmer than grey */
@@ -99,8 +104,42 @@
 }
 
 .dark {
-  --background: var(--dark-ground);
+  /* §9's literal mapping (paper→dark-ground, white surfaces→dark-surface,
+     headings→dark-heading, body→dark-body, borders→dark-border) applied
+     to the §4.1 tokens themselves, not just the legacy aliases below —
+     every component that references e.g. `bg-paper` or `text-ink`
+     directly (not through the background/foreground aliases) needs these
+     to resolve correctly under `.dark` too. */
+  --paper: var(--dark-ground);
   --surface: var(--dark-surface);
+  --surface-warm: var(--dark-surface);
+  /* No dark "quiet band" hex is given — closest approved lifted-surface
+     tone, same role band plays against paper in light mode. */
+  --band: var(--dark-surface);
+  /* --ink is NOT re-aliased here: §4.1 gives it a dual role (heading text
+     AND the navy fill for content bands), and §9 keeps navy content bands
+     the same literal #122536 in both modes. Text consumers use
+     `text-foreground` (already ink → dark-heading) instead of `text-ink`
+     directly; background consumers (`bg-ink`) correctly stay constant.
+     Chrome elements (utility bar, footer) are a different case — see
+     --ink-recessed below, verified against the approved mockup. */
+  --ink-recessed: #081119;
+  --ink-body: var(--dark-body);
+  /* §9 gives one dark "body" tone; light mode's ink-body/ink-muted
+     two-tier distinction collapses to it rather than inventing a second. */
+  --ink-muted: var(--dark-body);
+  --ink-faint: var(--dark-faint);
+  --ink-ghost: var(--dark-faint);
+  --ink-disabled: var(--dark-faint);
+  --disabled-bg: var(--dark-surface);
+  --disabled-fg: var(--dark-faint);
+  --border: var(--dark-border);
+  --border-soft: var(--dark-border);
+  /* §5's own button table names these exact dark counterparts. */
+  --border-strong: var(--dark-border-button);
+  --input-border: var(--dark-border-input);
+
+  --background: var(--dark-ground);
   --card: var(--dark-surface);
   --card-foreground: var(--dark-heading);
   --foreground: var(--dark-heading);
@@ -110,12 +149,14 @@
   --primary-foreground: var(--dark-band);
   --secondary: var(--dark-clay);
   --secondary-foreground: var(--dark-heading);
-  --border: var(--dark-border);
   --input: var(--dark-border-input);
   --ring: var(--dark-accent);
   --success: var(--dark-success);
   /* No dark-specific warning/error given in HANDOFF §4.2 — reuse the
      light values rather than inventing new ones. */
+  /* §5 "Primary hover" gives no dark hex ("brass darkened; fill only") —
+     derived from the approved dark-accent token rather than inventing one. */
+  --primary-hover: color-mix(in srgb, var(--dark-accent) 82%, black);
 }
 
 @theme inline {
@@ -125,6 +166,7 @@
   --color-surface-warm: var(--surface-warm);
   --color-band: var(--band);
   --color-ink: var(--ink);
+  --color-ink-recessed: var(--ink-recessed);
   --color-ink-body: var(--ink-body);
   --color-ink-muted: var(--ink-muted);
   --color-ink-faint: var(--ink-faint);

@@ -1,120 +1,200 @@
 /**
- * Authoritative English homepage copy (PRD §7). Every claim here traces
- * back to verified organization facts in PRD §3/§4/§9 — no invented
- * statistics, testimonials, addresses, or schedules.
+ * Authoritative English homepage copy — transcribed from the approved
+ * Claude Design mockup (Dawn of Light - Homepage Design.dc.html,
+ * "02 — Homepage · desktop · light"), not paraphrased. Every claim traces
+ * to verified organization facts (PRD §3/§4/§9); everything the mockup
+ * itself marks as unverified stays marked here.
  */
 export const home = {
   hero: {
-    // PRD §3: verified associated-identity name.
-    eyebrow: "Church, Bethlehem Seminary & Educational Mission",
-    // PRD §7.2 has no approved marketing headline yet — using the
-    // verified organization name (PRD §3) rather than inventing copy.
-    // "Ministry" moved into animatedWords below — it cycles with
-    // "Church"/"seminary" rather than sitting fixed in the static headline.
-    headline: "Dawn of Light",
-    // The three facets of the org's own associated identity (PRD §3:
-    // "Bethlehem Church, Seminary & Educational Mission") that the Hero
-    // headline cycles through via LayoutTextFlip.
-    animatedWords: {
-      ministry: "Ministry",
-      church: "Church",
-      seminary: "Seminary",
+    eyebrow: "A Baptist church, seminary and educational mission · since 1982",
+    headline: "God's Word taught, pastors trained, children sent to school.",
+    urduName: "نور کی صبح",
+    standfirst:
+      "[PSEUDO/PLACEHOLDER — FINAL HERO COPY TO BE APPROVED] Dawn of Light Ministry serves Karachi and Faisalabad: preaching among Christians and non-Christians, training students at Bethlehem Seminary, and helping Christian children receive an education and build a brighter future.",
+    primaryCta: "Learn about our mission",
+    secondaryCta: "Request prayer",
+    facts: {
+      founded: { value: "1982", label: "Founded" },
+      cities: { value: "Two cities", label: "Karachi & Faisalabad" },
+      seminary: { value: "Daily", label: "Seminary classes" },
+      tradition: { value: "Baptist", label: "Christian tradition" },
     },
-    // PRD §7.2 supporting-message brief (Word, education, children,
-    // service, hope, Pakistan), paraphrased from already-approved mission
-    // language in this same file rather than inventing new claims.
-    supportingMessage:
-      "Sharing God's Word, strengthening Christian education, and helping children build a brighter future in Pakistan.",
-    // PRD §7.2
-    primaryCta: "Learn About Our Mission",
-    secondaryCta: "Request Prayer",
+    imageCaption: "[Caption to be supplied — photograph, location and date]",
+    imagePlaceholder: "Congregation or seminary class",
   },
   mission: {
-    eyebrow: "Our Mission",
-    heading: "Preaching God's Word, Educating for a Brighter Future",
-    body: "Dawn of Light Ministry exists to help people know God's Word and to encourage them to read the Bible for themselves, while addressing the spiritual and educational needs of the communities we serve — especially through the education of children.",
-    cta: "Read Our Mission & Vision",
+    eyebrow: "Our mission",
+    quote:
+      "To preach God's Word among Christians and non-Christians, and to help Christian children receive an education and build a brighter future.",
+    body: "Our vision is educated children who contribute to the advancement of the nation. We work to take the light of knowledge into communities facing poverty, and to teach sustainable ways of improving life rather than relying on short-term assistance alone.",
+    // A keyed object, not an array — lib/i18n/types.ts's `Translated<T>`
+    // maps `[K in keyof T]`, which for an array type would also try to
+    // map built-in methods like `length`/`push`, not just its indices.
+    values: {
+      faith: "Faith in Christ",
+      biblicalTruth: "Biblical truth",
+      prayer: "Prayer",
+      love: "Love",
+      service: "Service",
+      integrity: "Integrity",
+      christianEducation: "Christian education",
+      helpingThoseInNeed: "Helping those in need",
+    },
+    cta: "Read our mission & vision",
   },
   ministries: {
-    eyebrow: "Ministries",
-    heading: "How We Serve",
-    body: "From weekly worship to daily seminary classes, our ministries carry out one shared calling: to teach God's Word and to educate.",
-    cta: "View All Ministries",
-    learnMore: "Learn more",
+    eyebrow: "Our work",
+    heading: "Six ministries, one mission",
+    cta: "All ministries",
     items: {
       church: {
+        kicker: "01 · Worship",
         title: "Church",
         description:
-          "Weekly worship, preaching and teaching, with Holy Communion observed monthly.",
+          "Services twice weekly, Holy Communion monthly, worship, preaching and teaching in the Baptist tradition.",
+        meta: "Service times [PSEUDO/PLACEHOLDER — CONFIRM]",
       },
       seminary: {
-        title: "Seminary",
+        kicker: "02 · Education",
+        title: "Bethlehem Seminary",
         description:
-          "Daily seminary classes offering biblical and theological training.",
-      },
-      christianEducation: {
-        title: "Christian Education",
-        description:
-          "Christian articles and teaching that help believers grow in God's Word.",
+          "Daily classes in biblical education, doctrine and pastoral practice, with public lectures.",
+        meta: "Classes daily · course list [CONFIRM]",
       },
       childrensEducation: {
-        title: "Children's Education",
+        kicker: "03 · Children",
+        title: "Children's education",
         description:
-          "Sunday School, free books, and educational-fee assistance for children.",
+          "Weekly Sunday School, free books, and assistance with school fees for Christian children.",
+        meta: "Sunday School weekly",
       },
       publishing: {
-        title: "Publishing & Articles",
+        kicker: "04 · Publishing",
+        title: "Christian articles",
         description:
-          "Christian articles and educational material written and shared with the community.",
+          "Writing and distributing Christian educational material, encouraging people to read the Bible themselves.",
+        meta: "Free books distributed",
       },
       teachingLectures: {
-        title: "Teaching & Lectures",
+        kicker: "05 · Teaching",
+        title: "Lectures",
         description:
-          "Lectures that bring biblical and educational knowledge to the wider community.",
+          "Public teaching on Scripture and Christian living for congregations and students in both cities.",
+        meta: "Karachi & Faisalabad",
+      },
+      outreach: {
+        kicker: "06 · Outreach",
+        title: "Educational outreach",
+        description:
+          "Bringing knowledge and educational opportunity to communities facing hardship, and teaching sustainable ways to improve life.",
+        meta: "Ongoing",
       },
     },
   },
-  education: {
-    eyebrow: "Education",
-    heading: "Investing in Children's Education",
-    body: "Improving children's education is central to our work. Through Sunday School, free books, and help with school fees, we walk alongside children in Karachi and Faisalabad as they build a foundation for the future.",
-    cta: "Learn About Children's Education",
+  seminary: {
+    eyebrow: "Bethlehem Seminary",
+    heading: "Theological education, taught daily, in the language of the church.",
+    body: "Students at Bethlehem Seminary study Scripture, doctrine and pastoral practice so that congregations in Pakistan are led by people trained in God's Word. Teaching draws on the commonly used Urdu Bible translation.",
+    primaryCta: "About the seminary",
+    secondaryCta: "Enquire about classes",
+    imageCaption: "Seminary classroom",
+    facts: {
+      classes: { label: "Classes", value: "Daily" },
+      instruction: { label: "Instruction", value: "Urdu & English" },
+      statementOfFaith: { label: "Statement of faith", value: "Christian Trinity" },
+      coursesSchedule: { label: "Courses & schedule", value: "[CONFIRM]" },
+    },
+  },
+  childrenEducation: {
+    eyebrow: "Children & education",
+    heading: "A child in school today is a nation's teacher tomorrow.",
+    body: "Sunday School meets weekly. Beyond it, the ministry provides free books and helps families with school fees so that Christian children in Karachi and Faisalabad can stay in education.",
+    list: {
+      sundaySchool: { label: "Sunday School", value: "Weekly" },
+      freeBooks: { label: "Free books", value: "Provided" },
+      feeAssistance: { label: "School-fee assistance", value: "By request" },
+    },
+    note: "No numerical impact claims are published. Photographs of identifiable children appear only with written permission.",
+    imagePlaceholder: "Children's education — permission required",
   },
   prayerCta: {
-    heading: "Need Prayer?",
-    body: "We would be glad to pray with you. Every request is kept private.",
-    cta: "Request Prayer",
+    eyebrow: "Prayer",
+    heading: "Need prayer?",
+    body: "Send your request to the pastor. Prayer requests are private: they are never displayed on this website, never published, and never shared beyond the ministry.",
+    note: "You may write in Urdu or English. Name and email are optional — a request may be sent anonymously.",
+    formTitle: "Request prayer",
+    nameLabel: "Name",
+    namePlaceholder: "Your name",
+    emailLabel: "Email",
+    emailPlaceholder: "you@example.com",
+    requestLabel: "Your prayer request",
+    requestPlaceholder: "Write here — Urdu or English",
+    followUpLabel: "You may follow up with me about this request.",
+    consentLabel: "I understand this request is sent privately to the ministry.",
+    cta: "Send prayer request",
   },
   events: {
-    eyebrow: "Events",
-    heading: "Upcoming Events",
+    heading: "Upcoming events",
+    cta: "All events",
+    emptyHeading: "No events scheduled at the moment",
     emptyState:
-      "No upcoming events are scheduled at this time. Please check back soon.",
-    cta: "View All Events",
+      "Services continue twice weekly and Sunday School meets weekly. Contact the ministry for current times.",
+    emptyCta: "Contact the ministry",
   },
   resources: {
-    eyebrow: "Resources",
-    heading: "Sermons & Resources",
-    emptyState: "Resources are being added. Please check back soon.",
-    cta: "View All Resources",
+    heading: "Resources",
+    cta: "All resources",
+    items: {
+      sermon: {
+        kicker: "Sermon",
+        title: "[Sermon title — to be supplied]",
+        meta: "Pastor Nayyer Gull · Urdu · video",
+      },
+      article: {
+        kicker: "Article",
+        title: "[Christian article — to be supplied]",
+        meta: "Written for congregations and students",
+      },
+      study: {
+        kicker: "Study",
+        title: "[Bible study — to be supplied]",
+        meta: "Urdu Bible translation · PDF",
+      },
+      book: {
+        kicker: "Book",
+        title: "[Free book — to be supplied]",
+        meta: "Distributed without charge",
+      },
+    },
   },
   support: {
-    eyebrow: "Support",
-    heading: "Support the Mission",
-    body: "Your support sustains church ministry, seminary training, and children's education in Karachi and Faisalabad. Giving options will be published once an approved payment provider is confirmed.",
-    cta: "Learn How to Support",
+    eyebrow: "Support the mission",
+    heading: "Support goes to teaching, books and school fees.",
+    body: "There are several ways to stand with Dawn of Light: pray for the ministry, share its work, volunteer your time, or give towards the cost of educating a child. Financial giving opens once the organization's payment arrangements are approved.",
+    cta: "How you can help",
+    pray: { title: "Pray with us", description: "Receive prayer needs from the ministry" },
+    give: {
+      title: "Give towards education",
+      description: "Books and school fees for children",
+      badge: "Coming soon",
+    },
+    speak: {
+      title: "Speak with the pastor",
+      description: "Phone or WhatsApp 03442316634",
+    },
   },
   contact: {
-    eyebrow: "Visit or Contact Us",
-    heading: "Karachi & Faisalabad, Pakistan",
-    body: "We would love to hear from you. Reach out by phone, WhatsApp, or email, or visit us in either city.",
-    addressPending: "[PSEUDO/PLACEHOLDER — ADDRESS TO BE CONFIRMED]",
+    eyebrow: "Visit or contact us",
+    heading: "Two cities, one ministry",
+    addressPending: "[PSEUDO/PLACEHOLDER — CONFIRM]",
+    serviceTimesPending: "Service times [CONFIRM]",
+    reachHeading: "Reach the ministry",
     phoneLabel: "Phone / WhatsApp",
     emailLabel: "Email",
-    cta: "Contact Us",
     cities: {
-      karachi: "Karachi",
-      faisalabad: "Faisalabad",
+      karachi: "Karachi, Sindh",
+      faisalabad: "Faisalabad, Punjab",
     },
   },
 } as const;

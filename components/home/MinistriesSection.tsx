@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
-import { Section } from "@/components/layout/Section";
-import { SectionHeader } from "@/components/layout/SectionHeader";
 import { MinistryCard } from "@/components/ui/MinistryCard";
-import { ministryItems } from "@/lib/ministries";
+import { ministryItems, type MinistryKey } from "@/lib/ministries";
 import { localizePath } from "@/lib/i18n/paths";
 import type { Locale } from "@/lib/i18n/types";
 import { cn } from "@/lib/cn";
@@ -16,6 +14,27 @@ interface MinistriesSectionProps {
   viewAllHref: string;
 }
 
+// Structural — not translatable content, so it lives here rather than in
+// content/i18n (mirrors lib/ministries.ts's own structure/copy split).
+// Verified against the approved mockup's six cards.
+const topRuleByKey: Record<MinistryKey, "oxblood" | "navy" | "brass" | "success"> = {
+  church: "oxblood",
+  seminary: "navy",
+  childrensEducation: "brass",
+  publishing: "success",
+  teachingLectures: "navy",
+  outreach: "brass",
+};
+
+const metaUnconfirmedByKey: Record<MinistryKey, boolean> = {
+  church: true,
+  seminary: true,
+  childrensEducation: false,
+  publishing: false,
+  teachingLectures: false,
+  outreach: false,
+};
+
 export function MinistriesSection({
   locale,
   isUrdu,
@@ -23,41 +42,50 @@ export function MinistriesSection({
   viewAllHref,
 }: MinistriesSectionProps) {
   return (
-    <Section background="surface">
+    <section className="border-t border-border bg-paper py-16 lg:py-26">
       <Container>
-        <div className="flex flex-col items-center gap-10">
-          <SectionHeader
-            eyebrow={strings.eyebrow}
-            heading={strings.heading}
-            description={strings.body}
-            align="center"
-            isUrdu={isUrdu}
-          />
-
-          <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {ministryItems.map((item) => (
-              <MinistryCard
-                key={item.key}
-                title={strings.items[item.key].title}
-                description={strings.items[item.key].description}
-                href={localizePath(locale, item.href)}
-                linkLabel={strings.learnMore}
-                isUrdu={isUrdu}
-              />
-            ))}
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p
+              className={cn(
+                "text-eyebrow text-primary",
+                isUrdu && "font-urdu-body text-base normal-case tracking-normal",
+              )}
+            >
+              {strings.eyebrow}
+            </p>
+            <h2 className={cn("text-h2 mt-2.5 text-foreground", isUrdu && "font-urdu-display")}>
+              {strings.heading}
+            </h2>
           </div>
-
           <Link
             href={viewAllHref}
             className={cn(
-              "text-nav text-primary underline decoration-secondary decoration-2 underline-offset-4 transition-colors hover:text-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm",
+              "text-[0.9375rem] font-medium text-primary underline decoration-[1.5px] underline-offset-[3px] transition-colors duration-150 hover:brightness-90 dark:text-dark-accent",
               isUrdu && "font-urdu-body",
             )}
           >
             {strings.cta}
+            <span aria-hidden="true"> {isUrdu ? "←" : "→"}</span>
           </Link>
         </div>
+
+        <div className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {ministryItems.map((item) => (
+            <MinistryCard
+              key={item.key}
+              kicker={strings.items[item.key].kicker}
+              title={strings.items[item.key].title}
+              description={strings.items[item.key].description}
+              meta={strings.items[item.key].meta}
+              metaUnconfirmed={metaUnconfirmedByKey[item.key]}
+              href={localizePath(locale, item.href)}
+              topRule={topRuleByKey[item.key]}
+              isUrdu={isUrdu}
+            />
+          ))}
+        </div>
       </Container>
-    </Section>
+    </section>
   );
 }
