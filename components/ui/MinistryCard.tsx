@@ -39,11 +39,19 @@ export function MinistryCard({
       href={href}
       aria-label={title}
       className={cn(
-        "block transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+        "block h-full transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
         className,
       )}
     >
-      <Card topRule={topRule} tone="surface" className="flex h-full flex-col gap-3.5 hover:bg-surface-warm">
+      <Card
+        topRule={topRule}
+        tone="surface"
+        interactive
+        // Directional hover border (not `border-*`, which would also touch
+        // border-top and dull the family-colour rule that identifies the
+        // card) — start/end/bottom only, logical properties for RTL.
+        className="flex h-full flex-col gap-3.5 hover:border-s-border-strong hover:border-e-border-strong hover:border-b-border-strong hover:bg-surface-warm"
+      >
         <span className="text-mono-label text-ink-disabled">{kicker}</span>
         <h3 className={cn("text-card-title font-semibold text-foreground", isUrdu && "font-urdu-display")}>
           {title}

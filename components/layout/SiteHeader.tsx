@@ -117,7 +117,7 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
                           href={localizePath(locale, item.href)}
                           aria-current={active ? "page" : undefined}
                           className={cn(
-                            "relative inline-flex items-center px-2 py-2.5 transition-colors duration-150",
+                            "group relative inline-flex items-center px-2 py-2.5 transition-colors duration-300",
                             isUrdu
                               ? "font-urdu-body text-base"
                               : "text-[0.875rem] text-[#4b4a45] dark:text-[#bcc8d2]",
@@ -127,12 +127,23 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
                           )}
                         >
                           {strings.nav[item.key]}
-                          {active ? (
-                            <span
-                              aria-hidden="true"
-                              className="absolute inset-x-2 bottom-[-5px] h-[2px] bg-accent"
-                            />
-                          ) : null}
+                          {/* One indicator, not two: SiteHeader persists across
+                              client-side route changes (same <Link> DOM node,
+                              same `key`), so animating `scale-x` here — instead
+                              of swapping a static full-width span in/out — lets
+                              the active mark visibly grow into place when it
+                              moves to a new item, not just appear. `origin-center`
+                              (not `-left`) keeps the grow direction identical in
+                              Urdu/RTL, where "left" isn't the natural start edge. */}
+                          <span
+                            aria-hidden="true"
+                            className={cn(
+                              "absolute inset-x-2 bottom-[-5px] h-[2px] origin-center transition-transform duration-300 ease-out",
+                              active
+                                ? "scale-x-100 bg-accent"
+                                : "scale-x-0 bg-ink-faint group-hover:scale-x-100 dark:bg-dark-faint",
+                            )}
+                          />
                         </Link>
                       </li>
                     );

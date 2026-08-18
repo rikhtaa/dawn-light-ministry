@@ -21,7 +21,7 @@ export function FooterCompact({ locale }: FooterCompactProps) {
   const footer = getFooterContent(locale);
 
   const linkClass = cn(
-    "text-small text-dark-body transition-colors duration-150 hover:text-dark-heading",
+    "text-small text-dark-body transition-colors duration-300 hover:text-dark-heading",
     isUrdu && "font-urdu-body text-base",
   );
 

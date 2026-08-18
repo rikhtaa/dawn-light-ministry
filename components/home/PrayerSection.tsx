@@ -1,5 +1,6 @@
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import type { HomeStrings } from "@/content/i18n/en/home";
 
@@ -22,7 +23,7 @@ export function PrayerSection({ strings, ctaHref, isUrdu }: PrayerSectionProps) 
   return (
     <section className="border-t border-border bg-band py-16 lg:py-24">
       <Container>
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_520px] lg:gap-16">
+        <Reveal className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_520px] lg:gap-16">
           <div className="min-w-0">
             <p
               className={cn(
@@ -63,7 +64,7 @@ export function PrayerSection({ strings, ctaHref, isUrdu }: PrayerSectionProps) 
               <PreviewCheckbox label={strings.consentLabel} checked />
             </div>
           </div>
-        </div>
+        </Reveal>
 
         <div className="mt-8 lg:ms-auto lg:w-[520px]">
           <Button href={ctaHref} variant="primary" isUrdu={isUrdu} className="w-full">

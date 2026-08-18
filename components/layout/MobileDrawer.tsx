@@ -151,7 +151,7 @@ export function MobileDrawer({
                         <Link
                           href={item.href}
                           aria-current={item.active ? "page" : undefined}
-                          className={cn("transition-colors duration-150 hover:text-foreground", navTextClass)}
+                          className={cn("transition-colors duration-300 hover:text-foreground", navTextClass)}
                         >
                           {item.label}
                         </Link>
@@ -160,7 +160,7 @@ export function MobileDrawer({
                           onClick={() => setMinistriesExpanded((expanded) => !expanded)}
                           aria-expanded={ministriesExpanded}
                           aria-controls={`${id}-ministries-submenu`}
-                          className="inline-flex min-h-11 min-w-11 items-center justify-center text-ink-disabled transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                          className="inline-flex min-h-11 min-w-11 items-center justify-center text-ink-disabled transition-colors duration-300 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                         >
                           <span aria-hidden="true" className="text-lg leading-none">
                             {ministriesExpanded ? "−" : "+"}
@@ -174,7 +174,7 @@ export function MobileDrawer({
                               <Link
                                 href={sub.href}
                                 className={cn(
-                                  "block min-h-11 py-3 ps-8 text-ink-muted transition-colors duration-150 hover:text-foreground",
+                                  "block min-h-11 py-3 ps-8 text-ink-muted transition-colors duration-300 hover:text-foreground",
                                   navTextClass,
                                 )}
                               >
@@ -194,7 +194,7 @@ export function MobileDrawer({
                       href={item.href}
                       aria-current={item.active ? "page" : undefined}
                       className={cn(
-                        "block min-h-11 border-s-[3px] py-3 ps-3 transition-colors duration-150",
+                        "block min-h-11 border-s-[3px] py-3 ps-3 transition-colors duration-300",
                         item.active
                           ? "border-accent text-foreground font-semibold"
                           : "border-transparent text-ink-muted hover:border-border-strong hover:text-foreground",

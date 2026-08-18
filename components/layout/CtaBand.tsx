@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { Container } from "@/components/layout/Container";
+import { Reveal } from "@/components/ui/Reveal";
 
 interface CtaBandProps {
   heading: ReactNode;
@@ -20,7 +21,7 @@ export function CtaBand({ heading, body, actions, isUrdu = false, className }: C
   return (
     <section className={cn("bg-band py-9 md:py-16 lg:py-24", className)}>
       <Container>
-        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
+        <Reveal className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-col gap-2">
             <h2 className={cn("text-h2 text-foreground", isUrdu && "font-urdu-display")}>
               {heading}
@@ -37,7 +38,7 @@ export function CtaBand({ heading, body, actions, isUrdu = false, className }: C
             ) : null}
           </div>
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">{actions}</div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

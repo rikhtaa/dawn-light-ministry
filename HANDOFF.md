@@ -225,9 +225,12 @@ gap 72; ministry body `1fr 380px` gap 72; detail `1fr 300px` gap 36; form page
 | Tertiary link | `#7A2E2E`, 1.5px underline, 3px offset, trailing `→` | `#E0B872` same |
 | Disabled | `#E7E2D9` fill, `#9B948A` text, reason stated beside it | equivalent |
 
-Square corners, no shadow, no gradient. Minimum target **48×48 on touch**. Focus is a
-**2px oxblood outline with 2px offset**, on every control, never removed. Hover
-changes fill or colour only — **nothing moves or scales**.
+Square corners, no gradient. Minimum target **48×48 on touch**. Focus is a
+**2px oxblood outline with 2px offset**, on every control, never removed.
+~~Hover changes fill or colour only — nothing moves or scales.~~ **Revised
+2026-08-18 — see §11 "Amendment":** primary/secondary hover now also lifts 2px
+with a soft tinted shadow, settling back on press. Tertiary (a text link, not a
+box) is unchanged — colour-only.
 
 CTA hierarchy (from the coherence rules): **one oxblood primary per section, at
 most.** Prayer and Support are the only CTAs allowed twice on a page — once in the
@@ -244,7 +247,12 @@ buttons right-aligned on desktop, stacked full-width on mobile.
 **Cards are flat and bordered.** 1px `#E2DDD3`, ground `#FCFBF8` or `#FFFFFF`,
 padding 20–26. A **3px coloured top border identifies the family**: oxblood for
 church/action, navy for seminary/institutional, brass for education/children.
-Elevation is a rule, never a shadow.
+~~Elevation is a rule, never a shadow.~~ **Revised 2026-08-18 — see §11
+"Amendment":** true only for *static* cards now. A card that's itself a link
+(e.g. a ministry card) lifts 2px with a soft shadow on hover, settling back on
+press. A card that only displays information (e.g. a contact panel) stays flat
+and shadow-free, exactly as before — hover motion is reserved for things that
+are actually clickable.
 
 **Prefer ruled rows to cards for lists.** The default list primitive is
 `border-top: 1px #E2DDD3` on the container with `border-bottom: 1px #EFEAE1` per row,
@@ -360,9 +368,12 @@ band sits above the archive; images keep their ratio and never crop faces.
 
 One idea: **content settles, nothing performs.**
 
-- Entry: fade-and-rise 8px over **240ms**, once, staggered 60ms across **at most
-  three** items.
-- Hover: **120ms colour only.** Nothing moves, scales or lifts.
+- ~~Entry: fade-and-rise 8px over 240ms, once, staggered 60ms across at most
+  three items.~~ **Revised 2026-08-18 — see §11 "Amendment":** 400ms / 100ms
+  stagger, to match the site's revised link/button/card hover timing.
+- ~~Hover: 120ms colour only. Nothing moves, scales or lifts.~~ **Revised
+  2026-08-18 — see §11 "Amendment":** 300ms colour (links/buttons/toggles),
+  or colour + lift + shadow at 350ms for clickable cards.
 - Focus: instant, 2px oxblood outline, 2px offset.
 - Sticky: the header, and the article rail on ≥1024. Nothing else.
 - **No parallax, carousels, counters, hero animation, auto-advancing anything,
@@ -372,6 +383,58 @@ One idea: **content settles, nothing performs.**
 - All motion disabled under `prefers-reduced-motion`, including entry animation.
 - Video: click-to-play facade only; no autoplay, no background video.
 
+### Amendment (2026-08-18) — hover lift/shadow approved for clickable elements
+
+The original "hover: colour only, nothing moves/scales/lifts" rule above was a
+deliberate Direction B choice, applied faithfully through two implementation
+passes. The organization then explicitly requested a more tactile hover
+feel — lift and soft shadow on buttons and on clickable cards — and, when told
+this conflicted with the frozen rule, confirmed they wanted the rule overridden
+rather than worked around. This amendment supersedes the "nothing moves, scales
+or lifts" line for interactive elements only; it does not reopen anything else
+in this document.
+
+- **Buttons (primary/secondary), links and nav/toggle controls**: hover lift
+  (buttons) plus any colour/underline change is **300ms ease-out** (site-wide
+  250-300ms links/buttons band, refined same day from an initial 150-200ms
+  pass once every hover across the site was in place — see the timing note
+  below).
+- **Clickable cards** (a card that's itself a link, e.g. a ministry card, a
+  bordered link-panel like a Support row): hover lifts **2px**
+  (`translateY(-2px)`) with a **soft, colour-tinted shadow** (each
+  button/card's own fill or ink tone, not a generic grey), `active:` settles
+  back to baseline for a pressed feel. Timing **350ms ease-out** (site-wide
+  300-400ms cards band — slightly slower than buttons/links so a card's
+  larger surface doesn't feel like it's snapping), covering colour +
+  transform + shadow together (not colour alone).
+- **Tertiary buttons** (text links) and **static cards** (display-only, not a
+  link — e.g. a contact-info panel) are unchanged in kind: colour-only, no
+  lift, no shadow. Hover motion stays reserved for things that are actually
+  clickable; their colour transition still runs at the same 300ms as every
+  other link (static cards' colour transition — a theme-switch smoothing,
+  not a hover — sits at the low end of the cards band, 300ms).
+- **Ruled rows** (§6 "Prefer ruled rows to cards for lists") are unchanged too —
+  they're deliberately a different pattern from cards; giving them the card
+  lift/shadow would blur that distinction. Background-colour hover only.
+- **Nav-link active/hover indicator** (header): now one `scale-x` transform
+  instead of a static bar swapped for a hover-only one — it visibly grows into
+  place (`transform-origin: center`, so it grows identically under Urdu/RTL)
+  rather than appearing instantly, both on hover and when the active route
+  changes.
+- **Entry animation**: fade-and-rise 8px over **400ms**, staggered **100ms**
+  across at most three items (`components/ui/Reveal.tsx`) — revised same day
+  from the first bullet's original 240ms/60ms figures once the site-wide
+  timing pass below was applied, so entry motion reads at the same
+  deliberate pace as the new hover timings rather than snappier than them.
+  Still the only *scroll-triggered* motion on the site, still once per
+  element, still skipped for anything already on screen at mount.
+- `prefers-reduced-motion` is still respected, by the same mechanism as
+  everywhere else on the site: app/globals.css's blanket rule forces every
+  `transition-duration`/`animation-duration` to ~0ms, so hover lift/shadow/
+  underline-growth still occur but snap instead of animating. No new
+  per-element `motion-reduce:`/`motion-safe:` handling was added — this keeps
+  the new hover motion consistent with how every pre-existing hover effect on
+  the site already complies.
 ---
 
 ## 12. Logo & asset usage
@@ -862,13 +925,17 @@ foundation is verified.
    navy bands in sequence.
 3. Type pairing: Source Serif 4 + IBM Plex Sans + IBM Plex Mono + Noto Nastaliq Urdu.
    No substitutions, no Inter, no Roboto.
-4. **Radius 0** (language pills and 2px inputs excepted). No shadows. Elevation is a
-   1px rule or a 3px coloured top border.
+4. **Radius 0** (language pills and 2px inputs excepted, unchanged). Elevation is a
+   1px rule or a 3px coloured top border by default; §11 "Amendment (2026-08-18)"
+   adds a soft hover shadow, but only on things that are actually clickable
+   (buttons, clickable cards) — static content stays flat and shadow-free.
 5. Brass is never a large fill; oxblood is never a body-text colour; navy carries all
    headings.
 6. One oxblood primary per section. Prayer and Support are the only twice-per-page
    CTAs.
-7. Motion budget: 8px / 240ms entry once, 120ms hover colour, nothing else. No
+7. Motion budget: 8px / 400ms entry once, 100ms stagger (max 3 items); hover is
+   colour at 300ms (links/buttons/toggles) or, per §11 "Amendment", colour +
+   a 2px lift and soft shadow at 350ms (clickable cards only). No
    parallax, carousels, counters or hero animation. Header is the only sticky element
    besides the article rail.
 8. The logo lockup geometry, colours and descriptor line in §12.

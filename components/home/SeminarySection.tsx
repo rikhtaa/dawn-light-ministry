@@ -2,6 +2,7 @@ import { NavyBand } from "@/components/layout/NavyBand";
 import { Button } from "@/components/ui/Button";
 import { FactTable } from "@/components/ui/FactTable";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import type { HomeStrings } from "@/content/i18n/en/home";
 
@@ -27,7 +28,7 @@ export function SeminarySection({
 
   return (
     <NavyBand size="section">
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+      <Reveal className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
         <div className="min-w-0">
           <p
             className={cn(
@@ -66,7 +67,7 @@ export function SeminarySection({
           <ImagePlaceholder ratio="16:9" caption={strings.imageCaption} className="mb-6" />
           <FactTable facts={facts} layout="stacked" tone="on-navy" isUrdu={isUrdu} />
         </div>
-      </div>
+      </Reveal>
     </NavyBand>
   );
 }

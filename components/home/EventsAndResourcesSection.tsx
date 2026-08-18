@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { RuledList, RuledRow } from "@/components/ui/RuledRow";
+import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import type { HomeStrings } from "@/content/i18n/en/home";
 
@@ -31,7 +32,7 @@ function ColumnHeading({
       <Link
         href={href}
         className={cn(
-          "shrink-0 text-[0.90625rem] font-medium text-primary underline decoration-[1.5px] underline-offset-[3px] transition-colors duration-150 hover:brightness-90 dark:text-dark-accent",
+          "shrink-0 text-[0.90625rem] font-medium text-primary underline decoration-[1.5px] underline-offset-[3px] transition-colors duration-300 hover:brightness-90 dark:text-dark-accent",
           isUrdu && "font-urdu-body",
         )}
       >
@@ -60,7 +61,7 @@ export function EventsAndResourcesSection({
     <section className="border-t border-border bg-surface py-16 lg:py-26">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="min-w-0">
+          <Reveal index={0} className="min-w-0">
             <ColumnHeading
               heading={eventsStrings.heading}
               cta={eventsStrings.cta}
@@ -83,9 +84,9 @@ export function EventsAndResourcesSection({
                 {eventsStrings.emptyCta}
               </Button>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="min-w-0">
+          <Reveal index={1} className="min-w-0">
             <ColumnHeading
               heading={resourcesStrings.heading}
               cta={resourcesStrings.cta}
@@ -112,7 +113,7 @@ export function EventsAndResourcesSection({
                 </RuledRow>
               ))}
             </RuledList>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>

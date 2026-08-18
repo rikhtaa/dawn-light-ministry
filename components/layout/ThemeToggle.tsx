@@ -82,7 +82,7 @@ export function ThemeToggle({
         aria-checked={isDark}
         aria-label={isDark ? ariaLabelToLight : ariaLabelToDark}
         className={cn(
-          "flex w-full items-center justify-between gap-4 text-nav text-ink-muted transition-colors duration-150 hover:text-foreground",
+          "flex w-full items-center justify-between gap-4 text-nav text-ink-muted transition-colors duration-300 hover:text-foreground",
           className,
         )}
       >
@@ -90,13 +90,13 @@ export function ThemeToggle({
         <span
           aria-hidden="true"
           className={cn(
-            "relative inline-flex h-6 w-11 shrink-0 items-center border transition-colors duration-150",
+            "relative inline-flex h-6 w-11 shrink-0 items-center border transition-colors duration-300",
             isDark ? "border-primary bg-primary" : "border-border-strong bg-transparent",
           )}
         >
           <span
             className={cn(
-              "inline-block h-5 w-5 border border-border-strong bg-surface transition-transform duration-150",
+              "inline-block h-5 w-5 border border-border-strong bg-surface transition-transform duration-300",
               isDark ? "translate-x-[22px]" : "translate-x-0.5",
             )}
           />
@@ -112,7 +112,7 @@ export function ThemeToggle({
       aria-pressed={isDark}
       aria-label={isDark ? ariaLabelToLight : ariaLabelToDark}
       className={cn(
-        "text-[0.8125rem] transition-colors duration-150",
+        "text-[0.8125rem] transition-colors duration-300",
         tone === "on-dark"
           ? "text-utility-bar-fg hover:text-white"
           : "text-ink-muted hover:text-foreground",

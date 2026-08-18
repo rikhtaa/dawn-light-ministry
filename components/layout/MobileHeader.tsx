@@ -29,7 +29,7 @@ export const MobileHeader = forwardRef<HTMLButtonElement, MobileHeaderProps>(
           onClick={onOpen}
           aria-expanded={menuOpen}
           aria-controls={menuId}
-          className="inline-flex min-h-11 min-w-11 items-center justify-center border border-border text-foreground transition-colors duration-150 hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center border border-border text-foreground transition-colors duration-300 hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         >
           <MenuIcon />
           <span className="sr-only">{openLabel}</span>

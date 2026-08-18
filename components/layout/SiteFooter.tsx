@@ -42,11 +42,11 @@ export function SiteFooter({ locale }: SiteFooterProps) {
   const pathWithoutLocale = "/";
 
   const linkClass = cn(
-    "text-small text-dark-body transition-colors duration-150 hover:text-dark-heading",
+    "text-small text-dark-body transition-colors duration-300 hover:text-dark-heading",
     isUrdu && "font-urdu-body text-base",
   );
   const accentLinkClass = cn(
-    "text-small text-dark-accent transition-colors duration-150 hover:text-dark-heading",
+    "text-small text-dark-accent transition-colors duration-300 hover:text-dark-heading",
     isUrdu && "font-urdu-body text-base",
   );
   const headingClass = cn(

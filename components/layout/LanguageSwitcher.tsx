@@ -42,7 +42,7 @@ export function LanguageSwitcher({
               href={localizePath(loc, pathWithoutLocale)}
               aria-current={active ? "true" : undefined}
               className={cn(
-                "text-nav inline-flex min-h-11 flex-1 items-center justify-center border px-4 text-center transition-colors duration-150",
+                "text-nav inline-flex min-h-11 flex-1 items-center justify-center border px-4 text-center transition-colors duration-300",
                 active
                   ? "border-foreground text-foreground font-semibold"
                   : "border-border text-ink-muted hover:border-border-strong hover:text-foreground",
@@ -76,7 +76,7 @@ export function LanguageSwitcher({
               href={localizePath(loc, pathWithoutLocale)}
               aria-current={active ? "true" : undefined}
               className={cn(
-                "transition-colors duration-150",
+                "transition-colors duration-300",
                 active ? "font-semibold text-white" : "hover:text-white",
               )}
             >

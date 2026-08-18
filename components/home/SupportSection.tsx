@@ -1,5 +1,6 @@
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import { organization } from "@/lib/organization";
 import type { HomeStrings } from "@/content/i18n/en/home";
@@ -21,7 +22,7 @@ export function SupportSection({
     <section className="border-t border-border bg-band py-16 lg:py-24">
       <Container>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
-          <div className="min-w-0">
+          <Reveal index={0} className="min-w-0">
             <p
               className={cn(
                 "text-eyebrow text-primary",
@@ -44,9 +45,9 @@ export function SupportSection({
             <Button href={ctaHref} variant="primary" isUrdu={isUrdu} className="mt-7">
               {strings.cta}
             </Button>
-          </div>
+          </Reveal>
 
-          <div className="min-w-0 flex flex-col gap-3.5">
+          <Reveal index={1} className="flex min-w-0 flex-col gap-3.5">
             <SupportRow
               href={prayerHref}
               title={strings.pray.title}
@@ -67,7 +68,7 @@ export function SupportSection({
               isUrdu={isUrdu}
               showArrow
             />
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>
@@ -115,7 +116,10 @@ function SupportRow({
   if (!href) return content;
 
   return (
-    <a href={href} className="block transition-colors duration-150 hover:bg-black/[0.02] dark:hover:bg-white/[0.03]">
+    <a
+      href={href}
+      className="block transition-[background-color,transform,box-shadow] duration-[350ms] ease-out hover:-translate-y-0.5 hover:bg-black/[0.02] hover:shadow-[0_6px_18px_rgba(18,37,54,0.10)] active:translate-y-0 active:shadow-none dark:hover:bg-white/[0.03] dark:hover:shadow-[0_6px_20px_rgba(0,0,0,0.4)]"
+    >
       {content}
     </a>
   );

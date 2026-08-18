@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
+import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import type { HomeStrings } from "@/content/i18n/en/home";
 
@@ -15,7 +16,7 @@ export function MissionSection({ strings, ctaHref, isUrdu }: MissionSectionProps
   return (
     <section className="border-t border-border bg-surface py-16 lg:py-26">
       <Container>
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[340px_1fr] lg:gap-16">
+        <Reveal className="grid grid-cols-1 gap-10 lg:grid-cols-[340px_1fr] lg:gap-16">
           <div className="min-w-0">
             <p
               className={cn(
@@ -60,7 +61,7 @@ export function MissionSection({ strings, ctaHref, isUrdu }: MissionSectionProps
             <Link
               href={ctaHref}
               className={cn(
-                "mt-7 inline-flex items-center gap-1 text-[0.96875rem] font-medium text-primary underline decoration-[1.5px] underline-offset-[3px] transition-colors duration-150 hover:brightness-90 dark:text-dark-accent",
+                "mt-7 inline-flex items-center gap-1 text-[0.96875rem] font-medium text-primary underline decoration-[1.5px] underline-offset-[3px] transition-colors duration-300 hover:brightness-90 dark:text-dark-accent",
                 isUrdu && "font-urdu-body",
               )}
             >
@@ -68,7 +69,7 @@ export function MissionSection({ strings, ctaHref, isUrdu }: MissionSectionProps
               <span aria-hidden="true">{isUrdu ? "←" : "→"}</span>
             </Link>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

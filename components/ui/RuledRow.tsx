@@ -34,7 +34,7 @@ export function RuledRow({ children, className, asLink, align = "between" }: Rul
     "flex flex-col gap-2 border-b border-border-soft py-4 sm:flex-row sm:items-center sm:gap-6 sm:py-[15px]",
     align === "between" ? "sm:justify-between" : "sm:justify-start",
     asLink &&
-      "transition-colors duration-150 hover:bg-black/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:-ring-offset-2 dark:hover:bg-white/[0.03]",
+      "transition-colors duration-300 hover:bg-black/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:-ring-offset-2 dark:hover:bg-white/[0.03]",
     className,
   );
 

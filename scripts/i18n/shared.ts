@@ -9,6 +9,7 @@ import { common as commonEn } from "../../content/i18n/en/common";
 import { home as homeEn } from "../../content/i18n/en/home";
 import { footer as footerEn } from "../../content/i18n/en/footer";
 import { metadata as metadataEn } from "../../content/i18n/en/metadata";
+import { about as aboutEn } from "../../content/i18n/en/about";
 
 export interface TranslatedLeaf {
   value: string;
@@ -64,11 +65,11 @@ function normalizeLeaf(raw: unknown): TranslatedLeaf | undefined {
 export type LeafTree = { [key: string]: string | LeafTree };
 export type TranslatedTree = { [key: string]: TranslatedLeaf | TranslatedTree };
 
-type NamespaceName = "common" | "home" | "footer" | "metadata";
+type NamespaceName = "common" | "home" | "footer" | "metadata" | "about";
 
 interface Namespace {
   name: NamespaceName;
-  typeName: "CommonStrings" | "HomeStrings" | "FooterStrings" | "MetadataStrings";
+  typeName: "CommonStrings" | "HomeStrings" | "FooterStrings" | "MetadataStrings" | "AboutStrings";
   english: LeafTree;
   loadExisting(locale: string): Promise<TranslatedTree | Record<string, never>>;
 }
@@ -114,6 +115,12 @@ export const namespaces: Namespace[] = [
     typeName: "MetadataStrings",
     english: metadataEn as unknown as LeafTree,
     loadExisting: (locale) => loadExistingModule("metadata", locale),
+  },
+  {
+    name: "about",
+    typeName: "AboutStrings",
+    english: aboutEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("about", locale),
   },
 ];
 
@@ -187,6 +194,12 @@ export const contentTiers: Record<NamespaceName, Map<string, ContentTier>> = {
     // are informational/link-label copy, not pure chrome — default "content".
   ]),
   metadata: new Map<string, ContentTier>(),
+  about: new Map<string, ContentTier>([
+    ["missionVision.mission", "sensitive"],
+    ["missionVision.vision", "sensitive"],
+    ["statementOfFaith.trinity", "sensitive"],
+    ["statementOfFaith.doctrine", "sensitive"],
+  ]),
 };
 
 export function tierOf(namespace: NamespaceName, path: string): ContentTier {

@@ -32,22 +32,47 @@ interface CardProps {
   topRule?: TopRule;
   /** "surface-warm" (#FCFBF8) is the default inset-card ground; "surface" is white. */
   tone?: "surface-warm" | "surface";
+  /**
+   * True for a card that's itself a link/button (e.g. MinistryCard) —
+   * adds the 2026-08-18 hover lift + shadow (HANDOFF.md §11 "Amendment"),
+   * timed to the site's 300-400ms cards band (350ms).
+   * False/omitted for a static info card (e.g. LocationsSection's contact
+   * panels): no hover state, since hovering a non-interactive card would
+   * falsely suggest it's clickable. Kept as one prop switching one
+   * transition utility, rather than combining `transition-colors` with a
+   * separate `transition-transform` class — two Tailwind transition
+   * utilities on the same element don't merge; the later one in the
+   * generated stylesheet just overwrites the earlier one's
+   * `transition-property` (source order, not class order, decides which).
+   */
+  interactive?: boolean;
 }
 
 /**
- * Flat and bordered — 1px border, no shadow. Elevation is a rule, never a
- * shadow (HANDOFF.md §6/§24).
+ * Flat and bordered — 1px border. Static cards stay shadow-free, exactly
+ * as HANDOFF.md §6/§24 originally specified ("elevation is a rule, never
+ * a shadow"); `interactive` cards now lift 2px with a soft tinted shadow
+ * on hover, settling back on `active:` for a pressed feel — the
+ * 2026-08-18 motion pass deliberately revised that rule for anything
+ * clickable (see HANDOFF.md §11 "Amendment"). Reduced motion isn't
+ * handled per-card: app/globals.css's blanket `prefers-reduced-motion`
+ * rule already forces every transition to ~0ms, so the lift/shadow still
+ * apply on hover but snap instead of animating.
  */
 export function Card({
   children,
   className,
   topRule,
   tone = "surface-warm",
+  interactive = false,
 }: CardProps) {
   return (
     <div
       className={cn(
         "border border-border p-6",
+        interactive
+          ? "transition-[background-color,border-color,transform,box-shadow] duration-[350ms] ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgba(18,37,54,0.10)] active:translate-y-0 active:shadow-none dark:hover:shadow-[0_6px_20px_rgba(0,0,0,0.4)]"
+          : "transition-colors duration-300",
         tone === "surface-warm" ? "bg-surface-warm" : "bg-surface",
         topRule && cn("border-t-[3px]", topRuleClasses[topRule]),
         className,

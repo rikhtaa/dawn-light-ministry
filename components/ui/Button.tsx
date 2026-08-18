@@ -5,14 +5,26 @@ type ButtonVariant = "primary" | "secondary" | "tertiary";
 type ButtonSize = "default" | "compact";
 
 /**
- * HANDOFF.md §5. Square corners (radius 0 via the theme override in
- * app/globals.css), no shadow, no gradient, nothing moves or scales on
- * hover — only fill/border/colour change, over 120ms. Focus is always a
- * 2px oxblood outline, 2px offset (app/globals.css `:focus-visible`).
- * Minimum touch target 48×48 on primary/secondary at the default size.
+ * HANDOFF.md §5, revised per the 2026-08-18 motion pass (see HANDOFF.md
+ * §11 "Amendment", timing refined same day to the site-wide 250-300ms
+ * links/buttons band): square corners (radius 0 via the theme override in
+ * app/globals.css), no gradient, focus always a 2px oxblood outline with
+ * 2px offset (app/globals.css `:focus-visible`), 48×48 minimum touch
+ * target on primary/secondary at the default size — all still frozen.
+ * Hover now also lifts 2px with a soft tinted shadow (previously
+ * colour-only); `active:` settles back to baseline for a pressed feel.
+ * A single `transition-[...]` utility (not `transition-colors` plus a
+ * separate `transition-transform`) — two Tailwind transition utilities on
+ * one element don't merge, the later one in the generated stylesheet just
+ * overwrites the earlier one's `transition-property`, so every animated
+ * property has to be listed in one utility. Reduced motion isn't handled
+ * per-element: app/globals.css's blanket `prefers-reduced-motion` rule
+ * already forces every transition to ~0ms, so the lift/shadow still
+ * apply on hover but snap instead of animating — the same mechanism every
+ * other hover effect in this file already relies on.
  */
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors duration-150 disabled:pointer-events-none disabled:border-transparent disabled:bg-disabled-bg disabled:text-disabled-fg";
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-[background-color,border-color,color,transform,box-shadow] duration-300 ease-out disabled:pointer-events-none disabled:border-transparent disabled:bg-disabled-bg disabled:text-disabled-fg";
 
 // §5's literal 14×24 (primary) / 13×24 (secondary) padding rounds to one
 // shared box size here — the 1px difference isn't visually distinguishable.
@@ -41,9 +53,15 @@ const secondaryToneClasses = {
 const variantClasses: Record<ButtonVariant, string> = {
   // Dark primary buttons carry more weight (600) than light (500) — the
   // mockup does this consistently everywhere a primary button appears in
-  // dark mode, not just in one place.
-  primary: "bg-primary text-primary-foreground hover:bg-primary-hover dark:font-semibold",
-  secondary: "border",
+  // dark mode, not just in one place. Shadow is tinted with each button's
+  // own fill colour (oxblood / ink) rather than a generic grey, so it
+  // reads as that button's own elevation, not a default browser shadow.
+  primary:
+    "bg-primary text-primary-foreground hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(122,46,46,0.28)] active:translate-y-0 active:shadow-none dark:font-semibold dark:hover:shadow-[0_4px_14px_rgba(0,0,0,0.45)]",
+  secondary:
+    "border hover:-translate-y-0.5 hover:shadow-[0_4px_10px_rgba(18,37,54,0.12)] active:translate-y-0 active:shadow-none dark:hover:shadow-[0_4px_12px_rgba(0,0,0,0.4)]",
+  // Tertiary is a text link, not a boxed button — colour-only, no
+  // lift/shadow (nothing to lift; the underline already carries motion).
   tertiary:
     "text-primary underline decoration-[1.5px] underline-offset-[3px] hover:brightness-90 dark:text-dark-accent",
 };

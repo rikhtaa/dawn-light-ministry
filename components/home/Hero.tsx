@@ -1,6 +1,7 @@
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 import type { HomeStrings } from "@/content/i18n/en/home";
 
@@ -27,51 +28,54 @@ export function Hero({ strings, primaryCtaHref, secondaryCtaHref, isUrdu }: Hero
       <Container>
         <div className="grid grid-cols-1 gap-10 py-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-20">
           <div className="flex min-w-0 flex-col justify-center">
-            <p
-              className={cn(
-                "text-eyebrow text-primary",
-                isUrdu && "font-urdu-body text-base normal-case tracking-normal",
-              )}
-            >
-              {strings.eyebrow}
-            </p>
-            <h1
-              className={cn(
-                "text-display mt-5 text-foreground",
-                isUrdu && "font-urdu-display",
-              )}
-            >
-              {strings.headline}
-            </h1>
-            {/* dir="rtl" for correct Nastaliq shaping; text-align stays
-                left regardless of page direction, matching the mockup
-                exactly (`direction:rtl; text-align:left`). */}
-            <p
-              className="font-urdu-display mt-4 text-left text-2xl leading-[2] text-primary dark:text-dark-clay"
-              dir="rtl"
-            >
-              {strings.urduName}
-            </p>
-            <p
-              className={cn(
-                "text-body-long measure mt-6 text-ink-body",
-                isUrdu && "font-urdu-body",
-              )}
-            >
-              {strings.standfirst}
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href={primaryCtaHref} variant="primary" isUrdu={isUrdu}>
-                {strings.primaryCta}
-              </Button>
-              <Button href={secondaryCtaHref} variant="secondary" isUrdu={isUrdu}>
-                {strings.secondaryCta}
-              </Button>
-            </div>
+            <Reveal>
+              <p
+                className={cn(
+                  "text-eyebrow text-primary",
+                  isUrdu && "font-urdu-body text-base normal-case tracking-normal",
+                )}
+              >
+                {strings.eyebrow}
+              </p>
+              <h1
+                className={cn(
+                  "text-display mt-5 text-foreground",
+                  isUrdu && "font-urdu-display",
+                )}
+              >
+                {strings.headline}
+              </h1>
+              {/* dir="rtl" for correct Nastaliq shaping; text-align stays
+                  left regardless of page direction, matching the mockup
+                  exactly (`direction:rtl; text-align:left`). */}
+              <p
+                className="font-urdu-display mt-4 text-left text-2xl leading-[2] text-primary dark:text-dark-clay"
+                dir="rtl"
+              >
+                {strings.urduName}
+              </p>
+              <p
+                className={cn(
+                  "text-body-long measure mt-6 text-ink-body",
+                  isUrdu && "font-urdu-body",
+                )}
+              >
+                {strings.standfirst}
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button href={primaryCtaHref} variant="primary" isUrdu={isUrdu}>
+                  {strings.primaryCta}
+                </Button>
+                <Button href={secondaryCtaHref} variant="secondary" isUrdu={isUrdu}>
+                  {strings.secondaryCta}
+                </Button>
+              </div>
+            </Reveal>
             <div className="mt-11 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-5 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-              {facts.map((fact) => (
-                <div
+              {facts.map((fact, i) => (
+                <Reveal
                   key={fact.label}
+                  index={i}
                   className={cn(
                     "flex min-w-0 flex-col gap-1",
                     "border-s border-border ps-4 md:ps-6",
@@ -92,7 +96,7 @@ export function Hero({ strings, primaryCtaHref, secondaryCtaHref, isUrdu }: Hero
                   <span className="text-caption text-balance leading-snug">
                     {fact.label}
                   </span>
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>

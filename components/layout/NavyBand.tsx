@@ -4,6 +4,7 @@ import { Container } from "@/components/layout/Container";
 
 interface NavyBandProps {
   children: ReactNode;
+  id?: string;
   className?: string;
   containerClassName?: string;
   /**
@@ -26,12 +27,14 @@ interface NavyBandProps {
  */
 export function NavyBand({
   children,
+  id,
   className,
   containerClassName,
   size = "band",
 }: NavyBandProps) {
   return (
     <section
+      id={id}
       className={cn(
         "bg-ink text-dark-body",
         size === "band" ? "py-9 md:py-16 lg:py-24" : "py-9 md:py-16 lg:py-26",

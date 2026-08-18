@@ -34,7 +34,7 @@ export function Breadcrumb({ items, isUrdu = false, className }: BreadcrumbProps
                 <Link
                   href={item.href}
                   className={cn(
-                    "text-ink-faint transition-colors duration-150 hover:text-primary",
+                    "text-ink-faint transition-colors duration-300 hover:text-primary",
                     isUrdu && "font-urdu-body",
                   )}
                 >
