@@ -12,6 +12,7 @@ import { metadata as metadataEn } from "../../content/i18n/en/metadata";
 import { about as aboutEn } from "../../content/i18n/en/about";
 import { ministries as ministriesEn } from "../../content/i18n/en/ministries";
 import { seminary as seminaryEn } from "../../content/i18n/en/seminary";
+import { sermons as sermonsEn } from "../../content/i18n/en/sermons";
 
 export interface TranslatedLeaf {
   value: string;
@@ -67,7 +68,15 @@ function normalizeLeaf(raw: unknown): TranslatedLeaf | undefined {
 export type LeafTree = { [key: string]: string | LeafTree };
 export type TranslatedTree = { [key: string]: TranslatedLeaf | TranslatedTree };
 
-type NamespaceName = "common" | "home" | "footer" | "metadata" | "about" | "ministries" | "seminary";
+type NamespaceName =
+  | "common"
+  | "home"
+  | "footer"
+  | "metadata"
+  | "about"
+  | "ministries"
+  | "seminary"
+  | "sermons";
 
 interface Namespace {
   name: NamespaceName;
@@ -78,7 +87,8 @@ interface Namespace {
     | "MetadataStrings"
     | "AboutStrings"
     | "MinistriesStrings"
-    | "SeminaryStrings";
+    | "SeminaryStrings"
+    | "SermonsStrings";
   english: LeafTree;
   loadExisting(locale: string): Promise<TranslatedTree | Record<string, never>>;
 }
@@ -142,6 +152,12 @@ export const namespaces: Namespace[] = [
     typeName: "SeminaryStrings",
     english: seminaryEn as unknown as LeafTree,
     loadExisting: (locale) => loadExistingModule("seminary", locale),
+  },
+  {
+    name: "sermons",
+    typeName: "SermonsStrings",
+    english: sermonsEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("sermons", locale),
   },
 ];
 
@@ -247,6 +263,10 @@ export const contentTiers: Record<NamespaceName, Map<string, ContentTier>> = {
   // place/phone facts embedded mid-sentence, so every key here defaults
   // to "content".
   seminary: new Map<string, ContentTier>(),
+  // No theological claims, and the one place/phone-adjacent detail
+  // (visitCta.locationNote) is already an explicit [CONFIRM] placeholder,
+  // not a stated fact — every key here defaults to "content".
+  sermons: new Map<string, ContentTier>(),
 };
 
 export function tierOf(namespace: NamespaceName, path: string): ContentTier {

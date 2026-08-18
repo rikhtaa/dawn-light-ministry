@@ -31,6 +31,16 @@ interface ImagePlaceholderProps {
    * portraits, Hero, etc.) already relies on.
    */
   bordered?: boolean;
+  /**
+   * "on-navy" — for a placeholder that always sits on a permanently-navy
+   * surface regardless of the app theme (e.g. Sermons' latest-sermon band
+   * — Dawn of Light - Sermons.dc.html's YouTube facade), forces the
+   * darker stripe (otherwise only shown under `.dark`) and drops the
+   * light caption pill for plain `dark-faint` text, matching the mockup's
+   * unconditional treatment there. Defaults to "default", every other
+   * placement's existing light/dark-toggling behaviour.
+   */
+  tone?: "default" | "on-navy";
   className?: string;
 }
 
@@ -44,22 +54,33 @@ export function ImagePlaceholder({
   ratio = "3:2",
   photoCaption,
   bordered = true,
+  tone = "default",
   className,
 }: ImagePlaceholderProps) {
+  const onNavy = tone === "on-navy";
+
   return (
     <div
       role="img"
       aria-label={`Photograph pending: ${caption}`}
       className={cn(
         "relative flex items-center justify-center",
-        bordered && "border border-border",
+        bordered && (onNavy ? "border border-dark-border" : "border border-border"),
         ratioClasses[ratio],
-        "[background-image:repeating-linear-gradient(135deg,#E8E2D6_0_10px,#DFD8CA_10px_20px)]",
-        "dark:[background-image:repeating-linear-gradient(135deg,#1B3145_0_10px,#16293A_10px_20px)]",
+        onNavy
+          ? "[background-image:repeating-linear-gradient(135deg,#1B3145_0_10px,#16293A_10px_20px)]"
+          : "[background-image:repeating-linear-gradient(135deg,#E8E2D6_0_10px,#DFD8CA_10px_20px)] dark:[background-image:repeating-linear-gradient(135deg,#1B3145_0_10px,#16293A_10px_20px)]",
         className,
       )}
     >
-      <span className="text-mono-label bg-surface/90 px-2 py-1 text-ink-ghost">{caption}</span>
+      <span
+        className={cn(
+          "text-mono-label",
+          onNavy ? "text-dark-faint" : "bg-surface/90 px-2 py-1 text-ink-ghost",
+        )}
+      >
+        {caption}
+      </span>
       {photoCaption ? (
         // Not the `text-caption` utility — that bakes in ink-faint as its
         // own colour, which would collide with the dark-body override

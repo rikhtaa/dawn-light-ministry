@@ -71,9 +71,15 @@ const variantClasses: Record<ButtonVariant, string> = {
 // navy text instead of the standard oxblood fill, in both light and dark
 // mode (oxblood doesn't read clearly against navy). `accent`/`dark-accent`
 // and `ink` are the same established tokens used everywhere else brass
-// appears against navy — no new colour introduced.
+// appears against navy — no new colour introduced. baseClasses' own
+// `disabled:bg-disabled-bg` (0,2,0 specificity) can't reliably beat
+// `dark:bg-dark-accent` (also 0,2,0) when both match — Tailwind resolves
+// equal-specificity ties by generation order, not by which is "more
+// disabled", so the disabled fill silently lost to the brass fill in
+// dark mode. Repeating the disabled override here as `dark:disabled:*`
+// (0,3,0) makes it win unconditionally, regardless of generation order.
 const brassPrimaryClasses =
-  "bg-accent text-ink hover:brightness-95 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(200,155,74,0.35)] active:translate-y-0 active:shadow-none dark:bg-dark-accent dark:hover:shadow-[0_4px_14px_rgba(0,0,0,0.45)]";
+  "bg-accent text-ink hover:brightness-95 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(200,155,74,0.35)] active:translate-y-0 active:shadow-none dark:bg-dark-accent dark:hover:shadow-[0_4px_14px_rgba(0,0,0,0.45)] disabled:bg-disabled-bg disabled:text-disabled-fg dark:disabled:bg-disabled-bg dark:disabled:text-disabled-fg";
 
 interface CommonProps {
   variant?: ButtonVariant;
