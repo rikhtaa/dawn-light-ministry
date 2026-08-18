@@ -68,17 +68,30 @@ export function Hero({ strings, primaryCtaHref, secondaryCtaHref, isUrdu }: Hero
                 {strings.secondaryCta}
               </Button>
             </div>
-            <div className="mt-11 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-5 sm:grid-cols-4">
-              {facts.map((fact, index) => (
+            <div className="mt-11 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-5 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+              {facts.map((fact) => (
                 <div
                   key={fact.label}
                   className={cn(
-                    "flex flex-col gap-1",
-                    index > 0 && "sm:border-s sm:border-border sm:ps-6",
+                    "flex min-w-0 flex-col gap-1",
+                    "border-s border-border ps-4 md:ps-6",
+                    "[&:nth-child(2n+1)]:border-s-0 [&:nth-child(2n+1)]:ps-0",
+                    "md:[&:nth-child(2n+1)]:border-s md:[&:nth-child(2n+1)]:ps-6 md:first:border-s-0 md:first:ps-0",
+                    "lg:[&:nth-child(2n+1)]:border-s-0 lg:[&:nth-child(2n+1)]:ps-0",
+                    "xl:[&:nth-child(2n+1)]:border-s xl:[&:nth-child(2n+1)]:ps-6 xl:first:border-s-0 xl:first:ps-0",
                   )}
                 >
-                  <span className="font-serif text-[1.4375rem] text-foreground">{fact.value}</span>
-                  <span className="text-caption">{fact.label}</span>
+                  <span
+                    className={cn(
+                      "font-serif text-[1.375rem] leading-tight text-foreground",
+                      "xl:whitespace-nowrap",
+                    )}
+                  >
+                    {fact.value}
+                  </span>
+                  <span className="text-caption text-balance leading-snug">
+                    {fact.label}
+                  </span>
                 </div>
               ))}
             </div>

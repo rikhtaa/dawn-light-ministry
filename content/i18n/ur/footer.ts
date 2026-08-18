@@ -26,11 +26,11 @@ export const footer: Translated<FooterStrings> = {
   ministriesHeading: { value: "خدمتیں", source: "author", published: true, reviewed: true, sourceHash: "2886dec38d47fac0" },
   ministriesLinks: {
     church: { value: "کلیسیا", source: "author", published: true, reviewed: true, sourceHash: "837aa0d985b27908" },
-    seminary: { value: "بیت لحم سیمینری", source: "author", published: true, reviewed: true, sourceHash: "0ee81d84a2c817e6" },
+    seminary: { value: "بیت لحم سیمنری", source: "author", published: true, reviewed: true, sourceHash: "0ee81d84a2c817e6" },
     childrensEducation: { value: "بچوں کی تعلیم", source: "author", published: true, reviewed: true, sourceHash: "340c6a743f4566b6" },
     christianArticles: { value: "مسیحی مضامین", source: "author", published: true, reviewed: true, sourceHash: "7757967b0b658586" },
     lectures: { value: "لیکچرز", source: "author", published: true, reviewed: true, sourceHash: "d953c00b4a161106" },
-    outreach: { value: "ترویجی خدمت", source: "author", published: true, reviewed: true, sourceHash: "f9f5b81f2696fd5b" },
+    outreach: { value: "خدمت عامہ", source: "author", published: true, reviewed: true, sourceHash: "f9f5b81f2696fd5b" },
   },
   contactHeading: { value: "رابطہ", source: "author", published: true, reviewed: true, sourceHash: "2b5c3d26721ae9c3" },
   requestPrayerLabel: { value: "دعا کی درخواست", source: "author", published: true, reviewed: true, sourceHash: "f4559c3380c0d748" },

@@ -25,7 +25,7 @@ export const common: Translated<CommonStrings> = {
     home: { value: "ہوم", source: "author", published: true, reviewed: true, sourceHash: "3a78695388b38b5c" },
     about: { value: "ہمارے بارے میں", source: "author", published: true, reviewed: true, sourceHash: "4efca0d10c5feb8e" },
     ministries: { value: "خدمتیں", source: "author", published: true, reviewed: true, sourceHash: "2886dec38d47fac0" },
-    seminary: { value: "سیمینری", source: "author", published: true, reviewed: true, sourceHash: "72be8da89808691c" },
+    seminary: { value: "سیمنری", source: "author", published: true, reviewed: true, sourceHash: "72be8da89808691c" },
     sermons: { value: "واعظ", source: "author", published: true, reviewed: true, sourceHash: "37ad9d4c407fd2cd" },
     resources: { value: "وسائل", source: "author", published: true, reviewed: true, sourceHash: "e89b30aa1dc30a6a" },
     events: { value: "تقاریب", source: "author", published: true, reviewed: true, sourceHash: "8d14f6e72de8f18a" },

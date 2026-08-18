@@ -30,7 +30,7 @@ export const home: Translated<HomeStrings> = {
       sourceHash: "1305ee13e41b8e7a",
     },
     headline: {
-      value: "خدا کے کلام کی تعلیم، پادریوں کی تربیت، اور بچوں کی تعلیم کے ذریعے روشن مستقبل کی تعمیر۔",
+      value: "خدا کے کلام کی تعلیم، خادمین کی تربیت، اور بچوں کی تعلیم کے ذریعے روشن مستقبل کی تعمیر۔",
       source: "author",
       published: true,
       reviewed: true,
@@ -306,7 +306,7 @@ export const home: Translated<HomeStrings> = {
           sourceHash: "0ee81d84a2c817e6",
         },
         description: {
-          value: "بائبلی تعلیم، مسیحی عقیدے اور پادریانہ خدمت میں روزانہ کی کلاسوں کے ذریعے طلبہ کو تربیت دینا، ساتھ ہی عوامی تعلیم و تدریس فراہم کرنا۔",
+          value: "بائبلی تعلیم، مسیحی عقیدے اور کلیسیائی خدمت میں روزانہ کی کلاسوں کے ذریعے طلبہ کو تربیت دینا، ساتھ ہی عوامی تعلیم و تدریس فراہم کرنا۔",
           source: "author",
           published: true,
           reviewed: true,

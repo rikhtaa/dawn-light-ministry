@@ -13,13 +13,15 @@ interface MobileHeaderProps {
 /**
  * HANDOFF.md §8/§12 mobile specifics: 36px mark, two-line wordmark, and a
  * 3-bar menu button sitting in its own 1px bordered box. Rendered below
- * `lg` inside SiteHeader; the full desktop lockup + inline nav render at
- * `lg` and up.
+ * `xl` inside SiteHeader; the full desktop lockup + inline nav only render
+ * at `xl` (1280px) and up — the nine nav items plus the Support CTA don't
+ * have room to breathe below that, so the 1024–1279px tier gets this
+ * (already spacious) drawer nav instead of a cramped inline one.
  */
 export const MobileHeader = forwardRef<HTMLButtonElement, MobileHeaderProps>(
   function MobileHeader({ locale, menuOpen, menuId, openLabel, onOpen }, ref) {
     return (
-      <div className="flex items-center justify-between gap-4 py-4 lg:hidden">
+      <div className="flex items-center justify-between gap-4 py-4 xl:hidden">
         <LogoLockup locale={locale} size="compact" />
         <button
           ref={ref}

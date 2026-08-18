@@ -40,10 +40,13 @@ function isActiveHref(href: string, pathWithoutLocale: string): boolean {
 }
 
 /**
- * HANDOFF.md §8: utility bar, then this header. Desktop nav ≥1024px
- * (§10: "768–1023 … Nav collapses to the drawer" implies full nav holds
- * through the 1024–1279 tier), drawer below. Nav order per §8: Home ·
- * About · Ministries · Seminary · Sermons · Resources · Events · Prayer ·
+ * HANDOFF.md §8: utility bar, then this header. Desktop nav renders at
+ * `xl` (1280px) and up — nine nav items plus the Support CTA need more
+ * room than the 1024–1279px tier has to give without feeling congested,
+ * so that tier uses the drawer nav (MobileHeader/MobileDrawer) instead;
+ * see LogoLockup's descriptor line, which was already gated to the same
+ * `xl` breakpoint for the same reason. Nav order per §8: Home · About ·
+ * Ministries · Seminary · Sermons · Resources · Events · Prayer ·
  * Contact, then the Support the mission CTA — Support is a button, not a
  * plain nav link (lib/navigation.ts).
  */
@@ -100,12 +103,12 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
             onOpen={() => setMenuOpen(true)}
           />
 
-          <div className="hidden items-center justify-between gap-6 py-5 lg:flex">
-            <LogoLockup locale={locale} />
+          <div className="hidden items-center justify-between gap-7 py-5 xl:flex">
+            <LogoLockup locale={locale} showDescriptor={false} />
 
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-6">
               <nav aria-label={strings.header.primaryNavLabel}>
-                <ul className="flex items-center gap-2.5">
+                <ul className="flex items-center gap-1.5">
                   {navItems.map((item) => {
                     const active = isActiveHref(item.href, pathWithoutLocale);
                     return (
@@ -114,7 +117,7 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
                           href={localizePath(locale, item.href)}
                           aria-current={active ? "page" : undefined}
                           className={cn(
-                            "relative inline-flex items-center py-2 transition-colors duration-150",
+                            "relative inline-flex items-center px-2 py-2.5 transition-colors duration-150",
                             isUrdu
                               ? "font-urdu-body text-base"
                               : "text-[0.875rem] text-[#4b4a45] dark:text-[#bcc8d2]",
@@ -127,7 +130,7 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
                           {active ? (
                             <span
                               aria-hidden="true"
-                              className="absolute inset-x-0 bottom-[-5px] h-[2px] bg-accent"
+                              className="absolute inset-x-2 bottom-[-5px] h-[2px] bg-accent"
                             />
                           ) : null}
                         </Link>

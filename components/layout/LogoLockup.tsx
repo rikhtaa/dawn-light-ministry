@@ -19,6 +19,15 @@ interface LogoLockupProps {
    * the same literal colour in both modes (HANDOFF.md §9).
    */
   tone?: "auto" | "on-dark";
+  /**
+   * Default size only. The descriptor line ("Bethlehem Church, Seminary
+   * & Educational Mission") measures ~140px wider than the wordmark
+   * alone — inside SiteHeader's fixed 1160px content width, showing it
+   * alongside a nine-item nav plus the Support CTA overflows the
+   * container. SiteHeader passes `false`; any other context that has
+   * room to spare can leave this at its default.
+   */
+  showDescriptor?: boolean;
   className?: string;
 }
 
@@ -26,6 +35,7 @@ export function LogoLockup({
   locale,
   size = "default",
   tone = "auto",
+  showDescriptor = true,
   className,
 }: LogoLockupProps) {
   const isCompact = size === "compact";
@@ -81,18 +91,16 @@ export function LogoLockup({
             >
               Dawn of Light Ministry
             </span>
-            <span
-              className={cn(
-                // Hidden below xl: at 1024–1279 there isn't room for the
-                // full nav + CTA alongside the descriptor line (measured
-                // overflow otherwise) — the wordmark alone still identifies
-                // the org at that tier.
-                "hidden text-[0.71875rem] leading-[1.4] tracking-[0.09em] uppercase xl:block",
-                onDark ? "text-[#8FA0AE]" : "text-ink-faint dark:text-[#8FA0AE]",
-              )}
-            >
-              Bethlehem Church, Seminary &amp; Educational Mission
-            </span>
+            {showDescriptor ? (
+              <span
+                className={cn(
+                  "hidden text-[0.71875rem] leading-[1.4] tracking-[0.09em] uppercase xl:block",
+                  onDark ? "text-[#8FA0AE]" : "text-ink-faint dark:text-[#8FA0AE]",
+                )}
+              >
+                Bethlehem Church, Seminary &amp; Educational Mission
+              </span>
+            ) : null}
           </>
         )}
       </span>
