@@ -2,23 +2,23 @@ import type { Translated } from "@/lib/i18n/types";
 import type { AboutStrings } from "@/content/i18n/en/about";
 
 /**
- * Urdu content for the About page — currently an unpublished stub, not a
- * translation. Every leaf below is { value: "", published: false,
- * reviewed: false, sourceHash: <hash of the current English text> } —
- * schema-identical to what `npm run i18n:generate -- --locale=ur` would
- * write before a TranslationProvider fills in a value
- * (scripts/i18n/generate.ts), produced the same way (reconcileTree,
- * scripts/i18n/shared.ts) but without calling a translation API. Because
- * every entry is unpublished, t() (lib/i18n/t.ts) falls back to the
- * English content on /ur/about until a real translation is generated and
- * a fluent human reviews it — see HANDOFF.md §21: theological content
- * (the Statement of Faith section, tagged "sensitive" in
- * scripts/i18n/shared.ts's contentTiers.about) must never be
- * machine-translated straight to production.
+ * GENERATED FILE — do not hand-edit the structure or add entries by hand.
+ * Produced by `npm run i18n:generate -- --locale=ur`
+ * (scripts/i18n/generate.ts), which calls the configured TranslationProvider
+ * (lib/i18n/translation-provider.ts) for any entry whose sourceHash no
+ * longer matches its English source. Regenerating preserves every entry
+ * whose sourceHash still matches exactly, byte-for-byte — it never
+ * overwrites an existing translation on its own.
  *
- * To fill this in for real: run
- *   TRANSLATION_PROVIDER=google GOOGLE_TRANSLATE_API_KEY=<key> npm run i18n:generate -- --locale=ur
- * then `npm run i18n:review -- --locale=ur` to review and publish.
+ * `published` controls whether this value renders on the live site at all
+ * (see lib/i18n/t.ts); `reviewed` records whether a fluent human has
+ * actually checked it. No tier auto-publishes — every machine translation,
+ * including "label" (pure UI chrome), is written `published: false`. A
+ * human has to review it and flip both `reviewed` and `published` here
+ * by hand before it reaches visitors. scripts/i18n/shared.ts's
+ * `contentTiers` ("label"/"content"/"sensitive"/"critical") only affects
+ * review *priority* in `npm run i18n:review -- --locale=ur`, not
+ * whether something publishes. See HANDOFF.md §21.
  */
 export const about: Translated<AboutStrings> = {
   metadata: {
@@ -36,6 +36,8 @@ export const about: Translated<AboutStrings> = {
     missionVision: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "43166268ac9a5224" },
     statementOfFaith: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "b3d1e1960612b1e1" },
     leadership: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "ec75f79040af1755" },
+    missionVisionMobile: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "e6b85bfbf55020aa" },
+    statementOfFaithMobile: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "403109cf2448759b" },
   },
   ourStory: {
     eyebrow: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9247cb620a1c3221" },
@@ -50,6 +52,8 @@ export const about: Translated<AboutStrings> = {
       ongoing: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "e45d76877d84fe95" },
     },
     note: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "1b2052f7b3617355" },
+    imagePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "cf78207d626481a6" },
+    imageCaption: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "4fe4bb405ba7114a" },
   },
   missionVision: {
     eyebrow: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "43166268ac9a5224" },

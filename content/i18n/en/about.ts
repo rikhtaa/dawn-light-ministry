@@ -29,6 +29,11 @@ export const about = {
     missionVision: "Mission & vision",
     statementOfFaith: "Statement of faith",
     leadership: "Leadership",
+    // Shortened labels for the mobile scrolling tab strip (Dawn of Light -
+    // About.dc.html "Mobile · 390") — "Our story"/"Leadership" already fit
+    // as-is and reuse the fields above; only these two need a shorter form.
+    missionVisionMobile: "Mission",
+    statementOfFaithMobile: "Faith",
   },
   ourStory: {
     eyebrow: "Our story",
@@ -44,6 +49,8 @@ export const about = {
       ongoing: "Ministry activity continuing to the present day, in Karachi and Faisalabad.",
     },
     note: "[CONTENT REQUIRED FROM ORGANIZATION] A fuller, approved account of the ministry's founding and history will replace this list once supplied.",
+    imagePlaceholder: "Archive photograph — early ministry or church building",
+    imageCaption: "[Caption to be supplied — subject, location, year]",
   },
   missionVision: {
     eyebrow: "Mission & vision",

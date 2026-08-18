@@ -51,8 +51,16 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
 
   const railItems = [
     { id: "our-story", label: strings.rail.ourStory },
-    { id: "mission-vision", label: strings.rail.missionVision },
-    { id: "statement-of-faith", label: strings.rail.statementOfFaith },
+    {
+      id: "mission-vision",
+      label: strings.rail.missionVision,
+      mobileLabel: strings.rail.missionVisionMobile,
+    },
+    {
+      id: "statement-of-faith",
+      label: strings.rail.statementOfFaith,
+      mobileLabel: strings.rail.statementOfFaithMobile,
+    },
     { id: "leadership", label: strings.rail.leadership },
   ];
 
@@ -105,6 +113,16 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
               <p className="mt-6">
                 <PlaceholderTag>{strings.ourStory.note}</PlaceholderTag>
               </p>
+              <div className="measure mt-7 border border-border">
+                <ImagePlaceholder
+                  ratio="16:9"
+                  caption={strings.ourStory.imagePlaceholder}
+                  bordered={false}
+                />
+                <p className="border-t border-border px-4 py-3 text-caption text-ink-faint">
+                  {strings.ourStory.imageCaption}
+                </p>
+              </div>
             </Reveal>
           </section>
 
@@ -225,12 +243,28 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
             >
               {strings.statementOfFaith.trinity}
             </p>
+            {/*
+             * Mobile-only inline treatment (Dawn of Light - About.dc.html
+             * "Mobile · 390"): the doctrine sentence sits directly under
+             * the Trinity statement with just a left accent rule, no box —
+             * the boxed aside below is a desktop-only composition.
+             */}
+            <div className="mt-6 border-s-[3px] border-dark-border ps-4 lg:hidden">
+              <p
+                className={cn(
+                  "text-body text-dark-body",
+                  isUrdu && "font-urdu-body",
+                )}
+              >
+                {strings.statementOfFaith.doctrine}
+              </p>
+            </div>
             <p className="mt-5">
               <PlaceholderTag>{strings.statementOfFaith.note}</PlaceholderTag>
             </p>
           </div>
 
-          <div className="border border-dark-border bg-dark-surface p-6">
+          <div className="hidden border border-dark-border bg-dark-surface p-6 lg:block">
             <p
               className={cn(
                 "text-mono-label text-dark-faint",

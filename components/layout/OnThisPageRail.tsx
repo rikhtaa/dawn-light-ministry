@@ -6,6 +6,13 @@ import { cn } from "@/lib/cn";
 export interface OnThisPageItem {
   id: string;
   label: string;
+  /**
+   * Shorter label for the mobile scrolling tab strip (Dawn of Light -
+   * About.dc.html "Mobile · 390" — "Mission" / "Faith" rather than the
+   * desktop rail's "Mission & vision" / "Statement of faith"). Falls back
+   * to `label` when an item's mobile and desktop wording already match.
+   */
+  mobileLabel?: string;
 }
 
 interface OnThisPageRailProps {
@@ -110,7 +117,7 @@ export function OnThisPageRail({ items, label, isUrdu = false }: OnThisPageRailP
                     isUrdu && "font-urdu-body text-base",
                   )}
                 >
-                  {item.label}
+                  {item.mobileLabel ?? item.label}
                 </a>
               </li>
             );

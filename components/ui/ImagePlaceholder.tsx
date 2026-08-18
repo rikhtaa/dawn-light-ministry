@@ -22,6 +22,15 @@ interface ImagePlaceholderProps {
    * placeholder string until supplied.
    */
   photoCaption?: string;
+  /**
+   * False for placements where the surrounding element already draws its
+   * own border/frame around the image tile (e.g. Ministries' row/mobile
+   * card — the approved mockup's image tile has no border of its own,
+   * just the fill flush against the row or card). Defaults to true, the
+   * shape every other placement (About's archive photo, leadership
+   * portraits, Hero, etc.) already relies on.
+   */
+  bordered?: boolean;
   className?: string;
 }
 
@@ -34,6 +43,7 @@ export function ImagePlaceholder({
   caption,
   ratio = "3:2",
   photoCaption,
+  bordered = true,
   className,
 }: ImagePlaceholderProps) {
   return (
@@ -41,7 +51,8 @@ export function ImagePlaceholder({
       role="img"
       aria-label={`Photograph pending: ${caption}`}
       className={cn(
-        "relative flex items-center justify-center border border-border",
+        "relative flex items-center justify-center",
+        bordered && "border border-border",
         ratioClasses[ratio],
         "[background-image:repeating-linear-gradient(135deg,#E8E2D6_0_10px,#DFD8CA_10px_20px)]",
         "dark:[background-image:repeating-linear-gradient(135deg,#1B3145_0_10px,#16293A_10px_20px)]",

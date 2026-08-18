@@ -28,3 +28,30 @@ export const ministryItems: MinistryItem[] = [
   { key: "teachingLectures", href: "/sermons" },
   { key: "outreach", href: "/ministries/education" },
 ];
+
+export type MinistryTopRule = "oxblood" | "navy" | "brass" | "success";
+
+/**
+ * Structural — not translatable content, so it lives here rather than in
+ * content/i18n. Verified against the approved mockup's six cards. Shared
+ * by Home's MinistriesSection and the /ministries index page, which render
+ * the same six cards in two places.
+ */
+export const ministryTopRuleByKey: Record<MinistryKey, MinistryTopRule> = {
+  church: "oxblood",
+  seminary: "navy",
+  childrensEducation: "brass",
+  publishing: "success",
+  teachingLectures: "navy",
+  outreach: "brass",
+};
+
+/** True when a card's `meta` line carries a [CONFIRM]/[PSEUDO/PLACEHOLDER] marker. */
+export const ministryMetaUnconfirmedByKey: Record<MinistryKey, boolean> = {
+  church: true,
+  seminary: true,
+  childrensEducation: false,
+  publishing: false,
+  teachingLectures: false,
+  outreach: false,
+};

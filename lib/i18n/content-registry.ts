@@ -5,11 +5,13 @@ import { home as homeEn, type HomeStrings } from "@/content/i18n/en/home";
 import { footer as footerEn, type FooterStrings } from "@/content/i18n/en/footer";
 import { metadata as metadataEn, type MetadataStrings } from "@/content/i18n/en/metadata";
 import { about as aboutEn, type AboutStrings } from "@/content/i18n/en/about";
+import { ministries as ministriesEn, type MinistriesStrings } from "@/content/i18n/en/ministries";
 import { common as commonUr } from "@/content/i18n/ur/common";
 import { home as homeUr } from "@/content/i18n/ur/home";
 import { footer as footerUr } from "@/content/i18n/ur/footer";
 import { metadata as metadataUr } from "@/content/i18n/ur/metadata";
 import { about as aboutUr } from "@/content/i18n/ur/about";
+import { ministries as ministriesUr } from "@/content/i18n/ur/ministries";
 
 /**
  * The single place that maps a locale to its generated translation
@@ -73,5 +75,15 @@ export function getAboutContent(locale: Locale): AboutStrings {
       return resolveContent(aboutEn, aboutUr);
     default:
       return aboutEn;
+  }
+}
+
+export function getMinistriesContent(locale: Locale): MinistriesStrings {
+  if (locale === defaultLocale) return ministriesEn;
+  switch (locale) {
+    case "ur":
+      return resolveContent(ministriesEn, ministriesUr);
+    default:
+      return ministriesEn;
   }
 }

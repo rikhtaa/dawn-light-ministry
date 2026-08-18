@@ -53,7 +53,7 @@ export function PageMasthead({
           {standfirst ? (
             <p
               className={cn(
-                "text-standfirst measure text-ink-muted",
+                "text-body-long measure text-ink-muted",
                 isUrdu && "font-urdu-body",
               )}
             >

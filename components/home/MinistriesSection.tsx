@@ -2,7 +2,11 @@ import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { MinistryCard } from "@/components/ui/MinistryCard";
 import { Reveal } from "@/components/ui/Reveal";
-import { ministryItems, type MinistryKey } from "@/lib/ministries";
+import {
+  ministryItems,
+  ministryTopRuleByKey,
+  ministryMetaUnconfirmedByKey,
+} from "@/lib/ministries";
 import { localizePath } from "@/lib/i18n/paths";
 import type { Locale } from "@/lib/i18n/types";
 import { cn } from "@/lib/cn";
@@ -14,27 +18,6 @@ interface MinistriesSectionProps {
   strings: HomeStrings["ministries"];
   viewAllHref: string;
 }
-
-// Structural — not translatable content, so it lives here rather than in
-// content/i18n (mirrors lib/ministries.ts's own structure/copy split).
-// Verified against the approved mockup's six cards.
-const topRuleByKey: Record<MinistryKey, "oxblood" | "navy" | "brass" | "success"> = {
-  church: "oxblood",
-  seminary: "navy",
-  childrensEducation: "brass",
-  publishing: "success",
-  teachingLectures: "navy",
-  outreach: "brass",
-};
-
-const metaUnconfirmedByKey: Record<MinistryKey, boolean> = {
-  church: true,
-  seminary: true,
-  childrensEducation: false,
-  publishing: false,
-  teachingLectures: false,
-  outreach: false,
-};
 
 export function MinistriesSection({
   locale,
@@ -79,9 +62,9 @@ export function MinistriesSection({
                 title={strings.items[item.key].title}
                 description={strings.items[item.key].description}
                 meta={strings.items[item.key].meta}
-                metaUnconfirmed={metaUnconfirmedByKey[item.key]}
+                metaUnconfirmed={ministryMetaUnconfirmedByKey[item.key]}
                 href={localizePath(locale, item.href)}
-                topRule={topRuleByKey[item.key]}
+                topRule={ministryTopRuleByKey[item.key]}
                 isUrdu={isUrdu}
               />
             </Reveal>

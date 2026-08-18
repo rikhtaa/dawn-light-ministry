@@ -10,6 +10,7 @@ import { home as homeEn } from "../../content/i18n/en/home";
 import { footer as footerEn } from "../../content/i18n/en/footer";
 import { metadata as metadataEn } from "../../content/i18n/en/metadata";
 import { about as aboutEn } from "../../content/i18n/en/about";
+import { ministries as ministriesEn } from "../../content/i18n/en/ministries";
 
 export interface TranslatedLeaf {
   value: string;
@@ -65,11 +66,17 @@ function normalizeLeaf(raw: unknown): TranslatedLeaf | undefined {
 export type LeafTree = { [key: string]: string | LeafTree };
 export type TranslatedTree = { [key: string]: TranslatedLeaf | TranslatedTree };
 
-type NamespaceName = "common" | "home" | "footer" | "metadata" | "about";
+type NamespaceName = "common" | "home" | "footer" | "metadata" | "about" | "ministries";
 
 interface Namespace {
   name: NamespaceName;
-  typeName: "CommonStrings" | "HomeStrings" | "FooterStrings" | "MetadataStrings" | "AboutStrings";
+  typeName:
+    | "CommonStrings"
+    | "HomeStrings"
+    | "FooterStrings"
+    | "MetadataStrings"
+    | "AboutStrings"
+    | "MinistriesStrings";
   english: LeafTree;
   loadExisting(locale: string): Promise<TranslatedTree | Record<string, never>>;
 }
@@ -121,6 +128,12 @@ export const namespaces: Namespace[] = [
     typeName: "AboutStrings",
     english: aboutEn as unknown as LeafTree,
     loadExisting: (locale) => loadExistingModule("about", locale),
+  },
+  {
+    name: "ministries",
+    typeName: "MinistriesStrings",
+    english: ministriesEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("ministries", locale),
   },
 ];
 
@@ -199,6 +212,26 @@ export const contentTiers: Record<NamespaceName, Map<string, ContentTier>> = {
     ["missionVision.vision", "sensitive"],
     ["statementOfFaith.trinity", "sensitive"],
     ["statementOfFaith.doctrine", "sensitive"],
+  ]),
+  // No theological or place/phone-embedded copy on this page — the six
+  // ministries' own substantive copy lives in "home" (reused, not
+  // duplicated here). rows.*.linkLabel/imagePlaceholder are pure UI chrome
+  // (a directional-link label, a dev-facing placeholder caption), not
+  // informational content, so those are tagged "label"; everything else
+  // defaults to "content".
+  ministries: new Map<string, ContentTier>([
+    ["rows.church.linkLabel", "label"],
+    ["rows.church.imagePlaceholder", "label"],
+    ["rows.seminary.linkLabel", "label"],
+    ["rows.seminary.imagePlaceholder", "label"],
+    ["rows.childrensEducation.linkLabel", "label"],
+    ["rows.childrensEducation.imagePlaceholder", "label"],
+    ["rows.publishing.linkLabel", "label"],
+    ["rows.publishing.imagePlaceholder", "label"],
+    ["rows.teachingLectures.linkLabel", "label"],
+    ["rows.teachingLectures.imagePlaceholder", "label"],
+    ["rows.outreach.linkLabel", "label"],
+    ["rows.outreach.imagePlaceholder", "label"],
   ]),
 };
 
