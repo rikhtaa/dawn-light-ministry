@@ -9,6 +9,15 @@ export interface BreadcrumbItem {
 interface BreadcrumbProps {
   items: BreadcrumbItem[];
   isUrdu?: boolean;
+  /**
+   * "on-navy" — light text/hover regardless of the app theme, for a
+   * breadcrumb sitting directly on a dark surface (e.g. Seminary's
+   * masthead — Dawn of Light - Seminary.dc.html — which is a navy fill in
+   * light mode and the page's own dark background in dark mode; either
+   * way the ambient `text-ink-faint` default reads too dark). Mirrors
+   * Button's/FactTable's own "on-navy" tone.
+   */
+  tone?: "default" | "on-navy";
   className?: string;
 }
 
@@ -17,7 +26,9 @@ interface BreadcrumbProps {
  * [Item]`." The final item has no href (current page). Separator mirrors
  * automatically under `dir="rtl"` — no manual class-swapping needed.
  */
-export function Breadcrumb({ items, isUrdu = false, className }: BreadcrumbProps) {
+export function Breadcrumb({ items, isUrdu = false, tone = "default", className }: BreadcrumbProps) {
+  const onNavy = tone === "on-navy";
+
   return (
     <nav aria-label="Breadcrumb" className={className}>
       <ol className="flex flex-wrap items-center gap-2 text-caption">
@@ -26,7 +37,7 @@ export function Breadcrumb({ items, isUrdu = false, className }: BreadcrumbProps
           return (
             <li key={`${item.label}-${index}`} className="flex items-center gap-2">
               {index > 0 ? (
-                <span aria-hidden="true" className="text-ink-faint">
+                <span aria-hidden="true" className={onNavy ? "text-dark-faint" : "text-ink-faint"}>
                   /
                 </span>
               ) : null}
@@ -34,7 +45,9 @@ export function Breadcrumb({ items, isUrdu = false, className }: BreadcrumbProps
                 <Link
                   href={item.href}
                   className={cn(
-                    "text-ink-faint transition-colors duration-300 hover:text-primary",
+                    onNavy
+                      ? "text-dark-faint transition-colors duration-300 hover:text-dark-accent"
+                      : "text-ink-faint transition-colors duration-300 hover:text-primary",
                     isUrdu && "font-urdu-body",
                   )}
                 >
@@ -44,8 +57,8 @@ export function Breadcrumb({ items, isUrdu = false, className }: BreadcrumbProps
                 <span
                   aria-current={isLast ? "page" : undefined}
                   className={cn(
-                    "text-ink-faint",
-                    isLast && "text-ink-muted",
+                    onNavy ? "text-dark-faint" : "text-ink-faint",
+                    isLast && (onNavy ? "text-dark-heading" : "text-ink-muted"),
                     isUrdu && "font-urdu-body",
                   )}
                 >

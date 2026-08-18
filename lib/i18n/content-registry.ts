@@ -6,12 +6,14 @@ import { footer as footerEn, type FooterStrings } from "@/content/i18n/en/footer
 import { metadata as metadataEn, type MetadataStrings } from "@/content/i18n/en/metadata";
 import { about as aboutEn, type AboutStrings } from "@/content/i18n/en/about";
 import { ministries as ministriesEn, type MinistriesStrings } from "@/content/i18n/en/ministries";
+import { seminary as seminaryEn, type SeminaryStrings } from "@/content/i18n/en/seminary";
 import { common as commonUr } from "@/content/i18n/ur/common";
 import { home as homeUr } from "@/content/i18n/ur/home";
 import { footer as footerUr } from "@/content/i18n/ur/footer";
 import { metadata as metadataUr } from "@/content/i18n/ur/metadata";
 import { about as aboutUr } from "@/content/i18n/ur/about";
 import { ministries as ministriesUr } from "@/content/i18n/ur/ministries";
+import { seminary as seminaryUr } from "@/content/i18n/ur/seminary";
 
 /**
  * The single place that maps a locale to its generated translation
@@ -85,5 +87,15 @@ export function getMinistriesContent(locale: Locale): MinistriesStrings {
       return resolveContent(ministriesEn, ministriesUr);
     default:
       return ministriesEn;
+  }
+}
+
+export function getSeminaryContent(locale: Locale): SeminaryStrings {
+  if (locale === defaultLocale) return seminaryEn;
+  switch (locale) {
+    case "ur":
+      return resolveContent(seminaryEn, seminaryUr);
+    default:
+      return seminaryEn;
   }
 }

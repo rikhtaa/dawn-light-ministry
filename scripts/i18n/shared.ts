@@ -11,6 +11,7 @@ import { footer as footerEn } from "../../content/i18n/en/footer";
 import { metadata as metadataEn } from "../../content/i18n/en/metadata";
 import { about as aboutEn } from "../../content/i18n/en/about";
 import { ministries as ministriesEn } from "../../content/i18n/en/ministries";
+import { seminary as seminaryEn } from "../../content/i18n/en/seminary";
 
 export interface TranslatedLeaf {
   value: string;
@@ -66,7 +67,7 @@ function normalizeLeaf(raw: unknown): TranslatedLeaf | undefined {
 export type LeafTree = { [key: string]: string | LeafTree };
 export type TranslatedTree = { [key: string]: TranslatedLeaf | TranslatedTree };
 
-type NamespaceName = "common" | "home" | "footer" | "metadata" | "about" | "ministries";
+type NamespaceName = "common" | "home" | "footer" | "metadata" | "about" | "ministries" | "seminary";
 
 interface Namespace {
   name: NamespaceName;
@@ -76,7 +77,8 @@ interface Namespace {
     | "FooterStrings"
     | "MetadataStrings"
     | "AboutStrings"
-    | "MinistriesStrings";
+    | "MinistriesStrings"
+    | "SeminaryStrings";
   english: LeafTree;
   loadExisting(locale: string): Promise<TranslatedTree | Record<string, never>>;
 }
@@ -134,6 +136,12 @@ export const namespaces: Namespace[] = [
     typeName: "MinistriesStrings",
     english: ministriesEn as unknown as LeafTree,
     loadExisting: (locale) => loadExistingModule("ministries", locale),
+  },
+  {
+    name: "seminary",
+    typeName: "SeminaryStrings",
+    english: seminaryEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("seminary", locale),
   },
 ];
 
@@ -233,6 +241,12 @@ export const contentTiers: Record<NamespaceName, Map<string, ContentTier>> = {
     ["rows.outreach.linkLabel", "label"],
     ["rows.outreach.imagePlaceholder", "label"],
   ]),
+  // No theological claims on this page (the "Doctrine" subject is a course
+  // label, not a statement of belief — HANDOFF.md's own doctrine/Trinity
+  // wording lives on About, already tagged "sensitive" there) and no
+  // place/phone facts embedded mid-sentence, so every key here defaults
+  // to "content".
+  seminary: new Map<string, ContentTier>(),
 };
 
 export function tierOf(namespace: NamespaceName, path: string): ContentTier {

@@ -66,11 +66,22 @@ const variantClasses: Record<ButtonVariant, string> = {
     "text-primary underline decoration-[1.5px] underline-offset-[3px] hover:brightness-90 dark:text-dark-accent",
 };
 
+// Primary only, opt-in via `brassFill` — the Seminary page's navy masthead
+// (Dawn of Light - Seminary.dc.html) uses a brass-filled primary CTA with
+// navy text instead of the standard oxblood fill, in both light and dark
+// mode (oxblood doesn't read clearly against navy). `accent`/`dark-accent`
+// and `ink` are the same established tokens used everywhere else brass
+// appears against navy — no new colour introduced.
+const brassPrimaryClasses =
+  "bg-accent text-ink hover:brightness-95 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(200,155,74,0.35)] active:translate-y-0 active:shadow-none dark:bg-dark-accent dark:hover:shadow-[0_4px_14px_rgba(0,0,0,0.45)]";
+
 interface CommonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   /** Secondary only — see secondaryToneClasses. */
   tone?: "auto" | "on-navy";
+  /** Primary only — see brassPrimaryClasses. */
+  brassFill?: boolean;
   /** Tertiary only: append the trailing arrow, flipped for Urdu/RTL. */
   showArrow?: boolean;
   isUrdu?: boolean;
@@ -93,6 +104,7 @@ export function Button({
   variant = "primary",
   size = "default",
   tone = "auto",
+  brassFill = false,
   showArrow = false,
   isUrdu = false,
   className,
@@ -102,7 +114,7 @@ export function Button({
   const classes = cn(
     baseClasses,
     variant !== "tertiary" && sizeClasses[size],
-    variantClasses[variant],
+    variant === "primary" && brassFill ? brassPrimaryClasses : variantClasses[variant],
     variant === "secondary" && secondaryToneClasses[tone],
     isUrdu && "font-urdu-body",
     className,

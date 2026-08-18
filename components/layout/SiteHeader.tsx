@@ -40,6 +40,26 @@ function isActiveHref(href: string, pathWithoutLocale: string): boolean {
 }
 
 /**
+ * Every nav item whose href matches the current path via isActiveHref(),
+ * picking the longest (most specific) one — now that Seminary's own nav
+ * item (/ministries/seminary) nests under Ministries' (/ministries),
+ * visiting it would otherwise match both hrefs and highlight both items,
+ * which the approved Seminary mockup's header does not show (only
+ * "Seminary" is active there). Every previously-single-match route (Home,
+ * About, Ministries alone, etc.) still resolves to that same one match,
+ * since "most specific among one candidate" is just that candidate.
+ */
+function findActiveHref(pathWithoutLocale: string): string | undefined {
+  let best: string | undefined;
+  for (const item of navItems) {
+    if (isActiveHref(item.href, pathWithoutLocale) && (!best || item.href.length > best.length)) {
+      best = item.href;
+    }
+  }
+  return best;
+}
+
+/**
  * HANDOFF.md §8: utility bar, then this header. Desktop nav renders at
  * `xl` (1280px) and up — nine nav items plus the Support CTA need more
  * room than the 1024–1279px tier has to give without feeling congested,
@@ -53,6 +73,7 @@ function isActiveHref(href: string, pathWithoutLocale: string): boolean {
 export function SiteHeader({ locale }: SiteHeaderProps) {
   const pathname = usePathname();
   const pathWithoutLocale = stripLocaleFromPathname(pathname);
+  const activeHref = findActiveHref(pathWithoutLocale);
   const isUrdu = locale === "ur";
   const strings = getCommonContent(locale);
   const footerStrings = getFooterContent(locale);
@@ -110,7 +131,7 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
               <nav aria-label={strings.header.primaryNavLabel}>
                 <ul className="flex items-center gap-1.5">
                   {navItems.map((item) => {
-                    const active = isActiveHref(item.href, pathWithoutLocale);
+                    const active = item.href === activeHref;
                     return (
                       <li key={item.key}>
                         <Link
@@ -171,7 +192,7 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
           key: item.key,
           href: localizePath(locale, item.href),
           label: strings.nav[item.key],
-          active: isActiveHref(item.href, pathWithoutLocale),
+          active: item.href === activeHref,
         }))}
         ministryItems={ministryDrawerLinks.map((item) => ({
           key: item.key,
