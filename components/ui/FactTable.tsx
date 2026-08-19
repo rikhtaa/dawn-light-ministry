@@ -7,8 +7,21 @@ export interface Fact {
   unconfirmed?: boolean;
 }
 
+// Ministries' "at a glance" strip is 3 facts on Education, 4 everywhere
+// else (Dawn of Light - Ministry Pages.dc.html) — the only two counts the
+// design uses for this layout. Explicit classes, not a template literal,
+// since Tailwind's build-time scan can't see a computed `sm:grid-cols-${n}`.
+const rowColumnClasses: Record<3 | 4, string> = {
+  3: "sm:grid-cols-3",
+  4: "sm:grid-cols-4",
+};
+
 interface FactTableProps {
-  facts: Fact[];
+  // `readonly` — accepts both a plain array and a `[...] as const` tuple
+  // (e.g. built from `as const` content, Dawn of Light - Ministry
+  // Pages.dc.html's ministry pages) without the caller needing a cast.
+  // `.map()` doesn't mutate, so every existing caller keeps working as-is.
+  facts: readonly Fact[];
   /**
    * "row" — 3–4 facts spread across the full width (ministry "at-a-glance"
    * strips, HANDOFF.md §14). "stacked" — ruled label/value rows, label
@@ -16,6 +29,9 @@ interface FactTableProps {
    * mockup's Seminary and Children's-education fact lists).
    */
   layout?: "row" | "stacked";
+  /** "row" layout only — the mockup uses 4 columns everywhere except
+   * Education's 3-fact strip. No effect on "stacked". */
+  columns?: 3 | 4;
   /** "on-navy" — sits on a NavyBand, whose background stays constant
    * regardless of the app theme, so border/text need to as well. */
   tone?: "default" | "on-navy";
@@ -26,6 +42,7 @@ interface FactTableProps {
 export function FactTable({
   facts,
   layout = "stacked",
+  columns = 4,
   tone = "default",
   isUrdu = false,
   className,
@@ -36,7 +53,8 @@ export function FactTable({
     return (
       <dl
         className={cn(
-          "grid grid-cols-2 gap-6 divide-y border-t py-6 sm:grid-cols-4 sm:divide-y-0 sm:divide-x sm:[&>div]:px-6 sm:[&>div:first-child]:ps-0",
+          "grid grid-cols-2 gap-6 divide-y border-t py-6 sm:divide-y-0 sm:divide-x sm:[&>div]:px-6 sm:[&>div:first-child]:ps-0",
+          rowColumnClasses[columns],
           onNavy
             ? "divide-white/10 border-white/10"
             : "divide-border-soft border-border",
@@ -44,10 +62,14 @@ export function FactTable({
         )}
       >
         {facts.map((fact) => (
-          <div key={fact.label} className="flex flex-col gap-1">
+          <div key={fact.label} className="flex flex-col gap-2">
+            {/* Mono-label + serif value — matches the design's own
+                "at a glance" typography exactly (IBM Plex Mono 10.5px
+                uppercase label, Source Serif 20px value), distinct from
+                the sans caption/body pairing "stacked" uses. */}
             <dt
               className={cn(
-                "text-caption uppercase tracking-[0.06em]",
+                "text-mono-label",
                 onNavy && "text-dark-faint",
               )}
             >
@@ -55,9 +77,9 @@ export function FactTable({
             </dt>
             <dd
               className={cn(
-                "text-body",
-                onNavy ? "text-dark-heading" : "text-ink-body",
-                isUrdu && "font-urdu-body",
+                "text-card-title",
+                onNavy ? "text-dark-heading" : "text-foreground",
+                isUrdu && "font-urdu-display",
               )}
             >
               {fact.unconfirmed ? <PlaceholderTag>{fact.value}</PlaceholderTag> : fact.value}

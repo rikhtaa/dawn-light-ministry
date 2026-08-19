@@ -15,6 +15,7 @@ import { seminary as seminaryEn } from "../../content/i18n/en/seminary";
 import { sermons as sermonsEn } from "../../content/i18n/en/sermons";
 import { events as eventsEn } from "../../content/i18n/en/events";
 import { resources as resourcesEn } from "../../content/i18n/en/resources";
+import { ministryPages as ministryPagesEn } from "../../content/i18n/en/ministryPages";
 
 export interface TranslatedLeaf {
   value: string;
@@ -80,7 +81,8 @@ type NamespaceName =
   | "seminary"
   | "sermons"
   | "events"
-  | "resources";
+  | "resources"
+  | "ministryPages";
 
 interface Namespace {
   name: NamespaceName;
@@ -94,7 +96,8 @@ interface Namespace {
     | "SeminaryStrings"
     | "SermonsStrings"
     | "EventsStrings"
-    | "ResourcesStrings";
+    | "ResourcesStrings"
+    | "MinistryPagesStrings";
   english: LeafTree;
   loadExisting(locale: string): Promise<TranslatedTree | Record<string, never>>;
 }
@@ -176,6 +179,12 @@ export const namespaces: Namespace[] = [
     typeName: "ResourcesStrings",
     english: resourcesEn as unknown as LeafTree,
     loadExisting: (locale) => loadExistingModule("resources", locale),
+  },
+  {
+    name: "ministryPages",
+    typeName: "MinistryPagesStrings",
+    english: ministryPagesEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("ministryPages", locale),
   },
 ];
 
@@ -291,6 +300,12 @@ export const contentTiers: Record<NamespaceName, Map<string, ContentTier>> = {
   events: new Map<string, ContentTier>(),
   // Same reasoning as events — every key defaults to "content".
   resources: new Map<string, ContentTier>(),
+  // Only one doctrinal statement on these four pages — Church's baptism
+  // formula, in its Activities list — tagged "sensitive" to match About's
+  // own statementOfFaith tagging. Everything else is scheduling/logistics
+  // copy or an already-explicit [CONFIRM]/[PSEUDO/PLACEHOLDER] marker, not
+  // a stated fact.
+  ministryPages: new Map<string, ContentTier>([["church.body.activities.baptism", "sensitive"]]),
 };
 
 export function tierOf(namespace: NamespaceName, path: string): ContentTier {

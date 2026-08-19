@@ -10,6 +10,7 @@ import { seminary as seminaryEn, type SeminaryStrings } from "@/content/i18n/en/
 import { sermons as sermonsEn, type SermonsStrings } from "@/content/i18n/en/sermons";
 import { events as eventsEn, type EventsStrings } from "@/content/i18n/en/events";
 import { resources as resourcesEn, type ResourcesStrings } from "@/content/i18n/en/resources";
+import { ministryPages as ministryPagesEn, type MinistryPagesStrings } from "@/content/i18n/en/ministryPages";
 import { common as commonUr } from "@/content/i18n/ur/common";
 import { home as homeUr } from "@/content/i18n/ur/home";
 import { footer as footerUr } from "@/content/i18n/ur/footer";
@@ -20,6 +21,7 @@ import { seminary as seminaryUr } from "@/content/i18n/ur/seminary";
 import { sermons as sermonsUr } from "@/content/i18n/ur/sermons";
 import { events as eventsUr } from "@/content/i18n/ur/events";
 import { resources as resourcesUr } from "@/content/i18n/ur/resources";
+import { ministryPages as ministryPagesUr } from "@/content/i18n/ur/ministryPages";
 
 /**
  * The single place that maps a locale to its generated translation
@@ -133,5 +135,15 @@ export function getResourcesContent(locale: Locale): ResourcesStrings {
       return resolveContent(resourcesEn, resourcesUr);
     default:
       return resourcesEn;
+  }
+}
+
+export function getMinistryPagesContent(locale: Locale): MinistryPagesStrings {
+  if (locale === defaultLocale) return ministryPagesEn;
+  switch (locale) {
+    case "ur":
+      return resolveContent(ministryPagesEn, ministryPagesUr);
+    default:
+      return ministryPagesEn;
   }
 }
