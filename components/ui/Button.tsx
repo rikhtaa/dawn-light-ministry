@@ -24,7 +24,11 @@ type ButtonSize = "default" | "compact";
  * other hover effect in this file already relies on.
  */
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-[background-color,border-color,color,transform,box-shadow] duration-300 ease-out disabled:pointer-events-none disabled:border-transparent disabled:bg-disabled-bg disabled:text-disabled-fg";
+  // `translate`, not `transform` — Tailwind v4's `-translate-y-*`/`translate-y-*`
+  // utilities set the standalone CSS `translate` property (not `transform`),
+  // so listing `transform` here silently excludes the hover-lift/press-settle
+  // from the transition and it snaps instead of easing.
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-[background-color,border-color,color,translate,box-shadow] duration-300 ease-out disabled:pointer-events-none disabled:border-transparent disabled:bg-disabled-bg disabled:text-disabled-fg";
 
 // §5's literal 14×24 (primary) / 13×24 (secondary) padding rounds to one
 // shared box size here — the 1px difference isn't visually distinguishable.

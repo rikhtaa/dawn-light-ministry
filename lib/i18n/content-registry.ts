@@ -11,6 +11,12 @@ import { sermons as sermonsEn, type SermonsStrings } from "@/content/i18n/en/ser
 import { events as eventsEn, type EventsStrings } from "@/content/i18n/en/events";
 import { resources as resourcesEn, type ResourcesStrings } from "@/content/i18n/en/resources";
 import { ministryPages as ministryPagesEn, type MinistryPagesStrings } from "@/content/i18n/en/ministryPages";
+import { prayer as prayerEn, type PrayerStrings } from "@/content/i18n/en/prayer";
+import { support as supportEn, type SupportStrings } from "@/content/i18n/en/support";
+import { contact as contactEn, type ContactStrings } from "@/content/i18n/en/contact";
+import { privacy as privacyEn, type PrivacyStrings } from "@/content/i18n/en/privacy";
+import { websiteNotice as websiteNoticeEn, type WebsiteNoticeStrings } from "@/content/i18n/en/websiteNotice";
+import { errors as errorsEn, type ErrorsStrings } from "@/content/i18n/en/errors";
 import { common as commonUr } from "@/content/i18n/ur/common";
 import { home as homeUr } from "@/content/i18n/ur/home";
 import { footer as footerUr } from "@/content/i18n/ur/footer";
@@ -22,6 +28,12 @@ import { sermons as sermonsUr } from "@/content/i18n/ur/sermons";
 import { events as eventsUr } from "@/content/i18n/ur/events";
 import { resources as resourcesUr } from "@/content/i18n/ur/resources";
 import { ministryPages as ministryPagesUr } from "@/content/i18n/ur/ministryPages";
+import { prayer as prayerUr } from "@/content/i18n/ur/prayer";
+import { support as supportUr } from "@/content/i18n/ur/support";
+import { contact as contactUr } from "@/content/i18n/ur/contact";
+import { privacy as privacyUr } from "@/content/i18n/ur/privacy";
+import { websiteNotice as websiteNoticeUr } from "@/content/i18n/ur/websiteNotice";
+import { errors as errorsUr } from "@/content/i18n/ur/errors";
 
 /**
  * The single place that maps a locale to its generated translation
@@ -145,5 +157,65 @@ export function getMinistryPagesContent(locale: Locale): MinistryPagesStrings {
       return resolveContent(ministryPagesEn, ministryPagesUr);
     default:
       return ministryPagesEn;
+  }
+}
+
+export function getPrayerContent(locale: Locale): PrayerStrings {
+  if (locale === defaultLocale) return prayerEn;
+  switch (locale) {
+    case "ur":
+      return resolveContent(prayerEn, prayerUr);
+    default:
+      return prayerEn;
+  }
+}
+
+export function getSupportContent(locale: Locale): SupportStrings {
+  if (locale === defaultLocale) return supportEn;
+  switch (locale) {
+    case "ur":
+      return resolveContent(supportEn, supportUr);
+    default:
+      return supportEn;
+  }
+}
+
+export function getContactContent(locale: Locale): ContactStrings {
+  if (locale === defaultLocale) return contactEn;
+  switch (locale) {
+    case "ur":
+      return resolveContent(contactEn, contactUr);
+    default:
+      return contactEn;
+  }
+}
+
+export function getPrivacyContent(locale: Locale): PrivacyStrings {
+  if (locale === defaultLocale) return privacyEn;
+  switch (locale) {
+    case "ur":
+      return resolveContent(privacyEn, privacyUr);
+    default:
+      return privacyEn;
+  }
+}
+
+export function getWebsiteNoticeContent(locale: Locale): WebsiteNoticeStrings {
+  if (locale === defaultLocale) return websiteNoticeEn;
+  switch (locale) {
+    case "ur":
+      return resolveContent(websiteNoticeEn, websiteNoticeUr);
+    default:
+      return websiteNoticeEn;
+  }
+}
+
+export function getErrorsContent(locale: Locale): ErrorsStrings {
+  if (locale === defaultLocale) return errorsEn;
+  switch (locale) {
+    case "ur":
+      return resolveContent(errorsEn, errorsUr);
+    default:
+      return errorsEn;
   }
 }

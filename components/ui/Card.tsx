@@ -70,8 +70,11 @@ export function Card({
     <div
       className={cn(
         "border border-border p-6",
+        // `translate`, not `transform` — see components/ui/Button.tsx's
+        // own note; Tailwind v4's translate-y utilities set the standalone
+        // `translate` property, not `transform`.
         interactive
-          ? "transition-[background-color,border-color,transform,box-shadow] duration-[350ms] ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgba(18,37,54,0.10)] active:translate-y-0 active:shadow-none dark:hover:shadow-[0_6px_20px_rgba(0,0,0,0.4)]"
+          ? "transition-[background-color,border-color,translate,box-shadow] duration-[350ms] ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgba(18,37,54,0.10)] active:translate-y-0 active:shadow-none dark:hover:shadow-[0_6px_20px_rgba(0,0,0,0.4)]"
           : "transition-colors duration-300",
         tone === "surface-warm" ? "bg-surface-warm" : "bg-surface",
         topRule && cn("border-t-[3px]", topRuleClasses[topRule]),

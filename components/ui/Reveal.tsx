@@ -71,7 +71,11 @@ export function Reveal({ children, index = 0, className }: RevealProps) {
     <div
       ref={ref}
       className={cn(
-        "transition-[opacity,transform] duration-[400ms] ease-out",
+        // `translate`, not `transform` — Tailwind v4's `translate-y-*`
+        // utilities set the standalone CSS `translate` property, not
+        // `transform`; listing `transform` here silently excluded the
+        // rise from the transition and it snapped instead of easing.
+        "transition-[opacity,translate] duration-[400ms] ease-out",
         visible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
         className,
       )}

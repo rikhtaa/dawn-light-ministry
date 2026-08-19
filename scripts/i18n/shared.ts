@@ -16,6 +16,12 @@ import { sermons as sermonsEn } from "../../content/i18n/en/sermons";
 import { events as eventsEn } from "../../content/i18n/en/events";
 import { resources as resourcesEn } from "../../content/i18n/en/resources";
 import { ministryPages as ministryPagesEn } from "../../content/i18n/en/ministryPages";
+import { prayer as prayerEn } from "../../content/i18n/en/prayer";
+import { support as supportEn } from "../../content/i18n/en/support";
+import { contact as contactEn } from "../../content/i18n/en/contact";
+import { privacy as privacyEn } from "../../content/i18n/en/privacy";
+import { websiteNotice as websiteNoticeEn } from "../../content/i18n/en/websiteNotice";
+import { errors as errorsEn } from "../../content/i18n/en/errors";
 
 export interface TranslatedLeaf {
   value: string;
@@ -82,7 +88,13 @@ type NamespaceName =
   | "sermons"
   | "events"
   | "resources"
-  | "ministryPages";
+  | "ministryPages"
+  | "prayer"
+  | "support"
+  | "contact"
+  | "privacy"
+  | "websiteNotice"
+  | "errors";
 
 interface Namespace {
   name: NamespaceName;
@@ -97,7 +109,13 @@ interface Namespace {
     | "SermonsStrings"
     | "EventsStrings"
     | "ResourcesStrings"
-    | "MinistryPagesStrings";
+    | "MinistryPagesStrings"
+    | "PrayerStrings"
+    | "SupportStrings"
+    | "ContactStrings"
+    | "PrivacyStrings"
+    | "WebsiteNoticeStrings"
+    | "ErrorsStrings";
   english: LeafTree;
   loadExisting(locale: string): Promise<TranslatedTree | Record<string, never>>;
 }
@@ -185,6 +203,42 @@ export const namespaces: Namespace[] = [
     typeName: "MinistryPagesStrings",
     english: ministryPagesEn as unknown as LeafTree,
     loadExisting: (locale) => loadExistingModule("ministryPages", locale),
+  },
+  {
+    name: "prayer",
+    typeName: "PrayerStrings",
+    english: prayerEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("prayer", locale),
+  },
+  {
+    name: "support",
+    typeName: "SupportStrings",
+    english: supportEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("support", locale),
+  },
+  {
+    name: "contact",
+    typeName: "ContactStrings",
+    english: contactEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("contact", locale),
+  },
+  {
+    name: "privacy",
+    typeName: "PrivacyStrings",
+    english: privacyEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("privacy", locale),
+  },
+  {
+    name: "websiteNotice",
+    typeName: "WebsiteNoticeStrings",
+    english: websiteNoticeEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("websiteNotice", locale),
+  },
+  {
+    name: "errors",
+    typeName: "ErrorsStrings",
+    english: errorsEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("errors", locale),
   },
 ];
 
@@ -306,6 +360,54 @@ export const contentTiers: Record<NamespaceName, Map<string, ContentTier>> = {
   // copy or an already-explicit [CONFIRM]/[PSEUDO/PLACEHOLDER] marker, not
   // a stated fact.
   ministryPages: new Map<string, ContentTier>([["church.body.activities.baptism", "sensitive"]]),
+  // No theological claims. Phone number/WhatsApp link text is plain UI
+  // chrome (button labels), not a fact stated mid-sentence, so nothing here
+  // rises to "critical" — every key defaults to "content".
+  prayer: new Map<string, ContentTier>(),
+  // Same reasoning as prayer — no theological or place/phone-embedded
+  // sentence content; everything defaults to "content".
+  support: new Map<string, ContentTier>(),
+  // City names embedded in the "Two cities"/"Getting there" facts are
+  // place data, not full sentences with a phone number woven in — same
+  // tier as Events'/Resources' own city references, which default to
+  // "content" there too. Nothing here defaults differently.
+  contact: new Map<string, ContentTier>(),
+  // Legal drafting text — not theological, but a translation error here has
+  // real-world consequence (data-handling/rights claims), same reasoning as
+  // "critical" place/phone facts elsewhere. Every substantive section is
+  // tagged; short chrome (toc labels, questionsCard) stays "content" or
+  // defaults there — HANDOFF §16 already requires human review of legal
+  // pages regardless of tier, so this only affects review *order*.
+  privacy: new Map<string, ContentTier>([
+    ["whatWeCollect.body1", "critical"],
+    ["whatWeCollect.body2", "critical"],
+    ["prayerRequests.body1", "critical"],
+    ["prayerRequests.body2", "critical"],
+    ["howWeUseIt.body", "critical"],
+    ["whoSeesIt.body1", "critical"],
+    ["whoSeesIt.body2", "critical"],
+    ["howLongWeKeepIt.body", "critical"],
+    ["children.body", "critical"],
+    ["cookiesAndAnalytics.body1", "critical"],
+    ["cookiesAndAnalytics.body2", "critical"],
+    ["contactUs.body", "critical"],
+    ["beforeLaunch.body", "critical"],
+  ]),
+  websiteNotice: new Map<string, ContentTier>([
+    ["whoPublishes.body1", "critical"],
+    ["whoPublishes.body2", "critical"],
+    ["useOfContent.body", "critical"],
+    ["copyright.body", "critical"],
+    ["externalLinks.body", "critical"],
+    ["accuracy.body", "critical"],
+    ["notPastoral.body", "critical"],
+    ["giving.body", "critical"],
+    ["languageVersions.body", "critical"],
+    ["beforeLaunch.body", "critical"],
+  ]),
+  // No theological or legal-drafting content — plain UI/error copy,
+  // defaults to "content".
+  errors: new Map<string, ContentTier>(),
 };
 
 export function tierOf(namespace: NamespaceName, path: string): ContentTier {

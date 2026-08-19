@@ -118,7 +118,8 @@ function SupportRow({
   return (
     <a
       href={href}
-      className="block transition-[background-color,transform,box-shadow] duration-[350ms] ease-out hover:-translate-y-0.5 hover:bg-black/[0.02] hover:shadow-[0_6px_18px_rgba(18,37,54,0.10)] active:translate-y-0 active:shadow-none dark:hover:bg-white/[0.03] dark:hover:shadow-[0_6px_20px_rgba(0,0,0,0.4)]"
+      // `translate`, not `transform` — see components/ui/Button.tsx's own note.
+      className="block transition-[background-color,translate,box-shadow] duration-[350ms] ease-out hover:-translate-y-0.5 hover:bg-black/[0.02] hover:shadow-[0_6px_18px_rgba(18,37,54,0.10)] active:translate-y-0 active:shadow-none dark:hover:bg-white/[0.03] dark:hover:shadow-[0_6px_20px_rgba(0,0,0,0.4)]"
     >
       {content}
     </a>
