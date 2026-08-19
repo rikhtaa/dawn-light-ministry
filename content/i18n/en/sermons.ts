@@ -70,6 +70,56 @@ export const sermons = {
     visitUs: "Visit us",
     contactTheMinistry: "Contact the ministry",
   },
+  /** /sermons/[slug] — Dawn of Light - Detail Templates.dc.html "03 — Sermon detail". */
+  detail: {
+    kicker: "Sermon",
+    meta: {
+      speaker: "Speaker",
+      date: "Date",
+      scripture: "Scripture",
+      series: "Series",
+    },
+    datePlaceholder: "[date]",
+    actions: {
+      watchOnYouTube: "Watch on YouTube",
+      downloadAudio: "Download audio",
+      sermonNotes: "Sermon notes (PDF)",
+    },
+    scripture: {
+      heading: "Scripture reference",
+      note: "Reference only — the passage text isn't reproduced here.",
+    },
+    about: {
+      heading: "About this sermon",
+      fallbackBody:
+        "[PSEUDO/PLACEHOLDER — SUMMARY SUPPLIED WITH THE RECORDING. No summary is written on the ministry's behalf.]",
+    },
+    facts: {
+      heading: "Details",
+      speaker: "Speaker",
+      date: "Date",
+      series: "Series",
+      scripture: "Scripture",
+      length: "Length",
+      language: "Language",
+      seriesPlaceholder: "[series]",
+      lengthPlaceholder: "[mm:ss]",
+      scripturePlaceholder: "[Scripture reference]",
+    },
+    series: {
+      heading: "In this series",
+      empty: "[PSEUDO/PLACEHOLDER — OTHER SERMONS IN THIS SERIES TO BE LINKED ONCE SUPPLIED]",
+    },
+    prayer: {
+      heading: "Need prayer?",
+      body: "The ministry welcomes prayer requests connected to what you've just heard.",
+      cta: "Request prayer",
+    },
+    related: {
+      heading: "More sermons",
+    },
+    backToSermons: "All sermons",
+  },
 } as const;
 
 export type SermonsStrings = typeof sermons;

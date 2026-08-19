@@ -8,6 +8,8 @@ import { about as aboutEn, type AboutStrings } from "@/content/i18n/en/about";
 import { ministries as ministriesEn, type MinistriesStrings } from "@/content/i18n/en/ministries";
 import { seminary as seminaryEn, type SeminaryStrings } from "@/content/i18n/en/seminary";
 import { sermons as sermonsEn, type SermonsStrings } from "@/content/i18n/en/sermons";
+import { events as eventsEn, type EventsStrings } from "@/content/i18n/en/events";
+import { resources as resourcesEn, type ResourcesStrings } from "@/content/i18n/en/resources";
 import { common as commonUr } from "@/content/i18n/ur/common";
 import { home as homeUr } from "@/content/i18n/ur/home";
 import { footer as footerUr } from "@/content/i18n/ur/footer";
@@ -16,6 +18,8 @@ import { about as aboutUr } from "@/content/i18n/ur/about";
 import { ministries as ministriesUr } from "@/content/i18n/ur/ministries";
 import { seminary as seminaryUr } from "@/content/i18n/ur/seminary";
 import { sermons as sermonsUr } from "@/content/i18n/ur/sermons";
+import { events as eventsUr } from "@/content/i18n/ur/events";
+import { resources as resourcesUr } from "@/content/i18n/ur/resources";
 
 /**
  * The single place that maps a locale to its generated translation
@@ -109,5 +113,25 @@ export function getSermonsContent(locale: Locale): SermonsStrings {
       return resolveContent(sermonsEn, sermonsUr);
     default:
       return sermonsEn;
+  }
+}
+
+export function getEventsContent(locale: Locale): EventsStrings {
+  if (locale === defaultLocale) return eventsEn;
+  switch (locale) {
+    case "ur":
+      return resolveContent(eventsEn, eventsUr);
+    default:
+      return eventsEn;
+  }
+}
+
+export function getResourcesContent(locale: Locale): ResourcesStrings {
+  if (locale === defaultLocale) return resourcesEn;
+  switch (locale) {
+    case "ur":
+      return resolveContent(resourcesEn, resourcesUr);
+    default:
+      return resourcesEn;
   }
 }

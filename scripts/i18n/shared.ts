@@ -13,6 +13,8 @@ import { about as aboutEn } from "../../content/i18n/en/about";
 import { ministries as ministriesEn } from "../../content/i18n/en/ministries";
 import { seminary as seminaryEn } from "../../content/i18n/en/seminary";
 import { sermons as sermonsEn } from "../../content/i18n/en/sermons";
+import { events as eventsEn } from "../../content/i18n/en/events";
+import { resources as resourcesEn } from "../../content/i18n/en/resources";
 
 export interface TranslatedLeaf {
   value: string;
@@ -76,7 +78,9 @@ type NamespaceName =
   | "about"
   | "ministries"
   | "seminary"
-  | "sermons";
+  | "sermons"
+  | "events"
+  | "resources";
 
 interface Namespace {
   name: NamespaceName;
@@ -88,7 +92,9 @@ interface Namespace {
     | "AboutStrings"
     | "MinistriesStrings"
     | "SeminaryStrings"
-    | "SermonsStrings";
+    | "SermonsStrings"
+    | "EventsStrings"
+    | "ResourcesStrings";
   english: LeafTree;
   loadExisting(locale: string): Promise<TranslatedTree | Record<string, never>>;
 }
@@ -158,6 +164,18 @@ export const namespaces: Namespace[] = [
     typeName: "SermonsStrings",
     english: sermonsEn as unknown as LeafTree,
     loadExisting: (locale) => loadExistingModule("sermons", locale),
+  },
+  {
+    name: "events",
+    typeName: "EventsStrings",
+    english: eventsEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("events", locale),
+  },
+  {
+    name: "resources",
+    typeName: "ResourcesStrings",
+    english: resourcesEn as unknown as LeafTree,
+    loadExisting: (locale) => loadExistingModule("resources", locale),
   },
 ];
 
@@ -267,6 +285,12 @@ export const contentTiers: Record<NamespaceName, Map<string, ContentTier>> = {
   // (visitCta.locationNote) is already an explicit [CONFIRM] placeholder,
   // not a stated fact — every key here defaults to "content".
   sermons: new Map<string, ContentTier>(),
+  // Detail-page UI chrome only — no theological claims, no place/phone
+  // facts embedded mid-sentence (event addresses/dates are structured
+  // data in lib/events.ts, not translatable strings here).
+  events: new Map<string, ContentTier>(),
+  // Same reasoning as events — every key defaults to "content".
+  resources: new Map<string, ContentTier>(),
 };
 
 export function tierOf(namespace: NamespaceName, path: string): ContentTier {

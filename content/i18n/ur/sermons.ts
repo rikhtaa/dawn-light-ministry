@@ -81,4 +81,52 @@ export const sermons: Translated<SermonsStrings> = {
     visitUs: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "f605f9278e51f5bf" },
     contactTheMinistry: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "e3d5ef30bc7323c9" },
   },
+  detail: {
+    kicker: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "297147cc3b99f084" },
+    meta: {
+      speaker: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a9e0c70585121f5f" },
+      date: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "99c40ab405926cb5" },
+      scripture: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9bfc2da1e0c7827e" },
+      series: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a8295e08ff7a961c" },
+    },
+    datePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "80502bc1a158f94a" },
+    actions: {
+      watchOnYouTube: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "818cd7480430ffb4" },
+      downloadAudio: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "23a715d0aece4d42" },
+      sermonNotes: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "ddbe0b5417aa588e" },
+    },
+    scripture: {
+      heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "d12be6f0c1beae35" },
+      note: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "7978704bd9eebe4c" },
+    },
+    about: {
+      heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9a8bddd784e8112c" },
+      fallbackBody: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "2cdd2607872b74fd" },
+    },
+    facts: {
+      heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "45989de49fb7f66d" },
+      speaker: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a9e0c70585121f5f" },
+      date: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "99c40ab405926cb5" },
+      series: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a8295e08ff7a961c" },
+      scripture: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9bfc2da1e0c7827e" },
+      length: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "adc95605a1b30c73" },
+      language: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a4fe65264ef7dbb3" },
+      seriesPlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "75a7c9302945f3b6" },
+      lengthPlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "4adf5d5f3f4f31ac" },
+      scripturePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "f9af6aa10f506345" },
+    },
+    series: {
+      heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "fef7614002576242" },
+      empty: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "d05061405f3f001a" },
+    },
+    prayer: {
+      heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "361aca69c0be0a9f" },
+      body: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "e924e91b82facd58" },
+      cta: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "f4559c3380c0d748" },
+    },
+    related: {
+      heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "28b499a8c09bf74a" },
+    },
+    backToSermons: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9b20aebb22d0288e" },
+  },
 };

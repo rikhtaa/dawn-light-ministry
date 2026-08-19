@@ -33,6 +33,8 @@ export interface Sermon {
   notesUrl?: string;
   description?: string;
   format: "video" | "audio" | "text";
+  /** mm:ss, e.g. "38:12" — HANDOFF.md §16's `duration` field. Omit when not yet known. */
+  duration?: string;
 }
 
 export const sermons: Sermon[] = [];
@@ -88,3 +90,25 @@ export const placeholderSermons: Sermon[] = [
     format: "text",
   },
 ];
+
+/**
+ * Looks up one sermon by slug for /sermons/[slug] — checks `sermons`
+ * first, falling back to `placeholderSermons` on the same "no fabrication,
+ * design's own placeholder composition" basis as the index page above, so
+ * the index's existing detail links (SermonRow/LatestSermonBand →
+ * `/sermons/${slug}`) resolve to a real page rather than a 404.
+ */
+export function findSermonBySlug(slug: string): Sermon | undefined {
+  return sermons.find((s) => s.slug === slug) ?? placeholderSermons.find((s) => s.slug === slug);
+}
+
+/** Every routable slug, real or placeholder — for generateStaticParams. */
+export function getAllSermonSlugs(): string[] {
+  return (sermons.length > 0 ? sermons : placeholderSermons).map((s) => s.slug);
+}
+
+/** Up to `limit` other sermons from the same pool (Dawn of Light - Detail Templates.dc.html: "related strips … max 3, same type"). */
+export function getRelatedSermons(slug: string, limit = 3): Sermon[] {
+  const pool = sermons.length > 0 ? sermons : placeholderSermons;
+  return pool.filter((s) => s.slug !== slug).slice(0, limit);
+}

@@ -78,7 +78,14 @@ export function FactTable({
             onNavy ? "border-white/10" : "border-border",
           )}
         >
-          <dt className={onNavy ? "text-dark-heading" : "text-ink"}>{fact.label}</dt>
+          {/* `text-foreground`, not the literal `text-ink` — `ink` doesn't
+              remap under `.dark` (it's the fixed navy-band colour), so a
+              default-tone card sitting on the page's own dark background
+              (e.g. a Detail-page rail card) rendered this label the same
+              navy as its background — invisible. `foreground` aliases to
+              `ink` in light mode and `dark-heading` in dark, so light mode
+              is unaffected. */}
+          <dt className={onNavy ? "text-dark-heading" : "text-foreground"}>{fact.label}</dt>
           <dd
             className={cn(
               onNavy ? "text-dark-body" : "text-ink-faint",
