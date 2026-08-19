@@ -21,6 +21,65 @@ import type { EventsStrings } from "@/content/i18n/en/events";
  * whether something publishes. See HANDOFF.md §21.
  */
 export const events: Translated<EventsStrings> = {
+  metadata: {
+    title: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "d2f11617e5a108ba" },
+    description: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "c9cd068788a3dbd5" },
+  },
+  masthead: {
+    eyebrow: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "e8da9e2b1edffc7c" },
+    title: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "8d14f6e72de8f18a" },
+    standfirst: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "bfcbd26a98b6b888" },
+  },
+  emptyState: {
+    kicker: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "61c8091bab4aa222" },
+    heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "0e2d0edf69f73afa" },
+    body: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "15ae811de24a5f62" },
+    primaryCta: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "e3d5ef30bc7323c9" },
+    secondaryCta: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "5be3e085225688b8" },
+  },
+  emptyStateMobile: {
+    heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "fac7756de4730144" },
+    body: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9a5bb9562c7d2b01" },
+  },
+  weeklyRhythm: {
+    heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "ed82f68033ccae30" },
+    note: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "cfd1b860222c1428" },
+    churchServices: {
+      label: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "d689dfc65f73423c" },
+      value: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9271d038d4dfaec3" },
+    },
+    sundaySchool: {
+      label: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "5cf4c50ea2b98000" },
+      value: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "2975132481a7a695" },
+    },
+    seminaryClasses: {
+      label: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "f3e921d9206c90c4" },
+      value: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "b36c2611dcdfa190" },
+    },
+    holyCommunion: {
+      label: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "46097bcaa37d2034" },
+      value: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9b11f6b707d2a03e" },
+    },
+    confirmSuffix: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "14daef77f1896b03" },
+  },
+  filters: {
+    upcoming: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "5f1a2542e4e4ca5e" },
+    past: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "ca1530e8d7017547" },
+    karachi: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "59edcc61af65e1cc" },
+    faisalabad: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "bcb978513decca3e" },
+  },
+  row: {
+    register: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "bb7234ec12451361" },
+    details: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "45989de49fb7f66d" },
+    noLongerTakingPlace: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "5657919ec1c4d990" },
+    dateDayPlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "71545832c4fc4cf8" },
+    dateMonthPlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "b2fbe6f025efa01b" },
+  },
+  pagination: {
+    showing: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "d604310a789a1848" },
+    of: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "28391d3bc64ec15c" },
+    eventsLabel: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "862417b9e7c3720b" },
+  },
   detail: {
     status: {
       open: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "86babcde8afda2a3" },

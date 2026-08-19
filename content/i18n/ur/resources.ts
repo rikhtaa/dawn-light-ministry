@@ -21,6 +21,49 @@ import type { ResourcesStrings } from "@/content/i18n/en/resources";
  * whether something publishes. See HANDOFF.md §21.
  */
 export const resources: Translated<ResourcesStrings> = {
+  metadata: {
+    title: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "631b4b739dac8bf4" },
+    description: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "4e968fe580f74313" },
+  },
+  masthead: {
+    eyebrow: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "dc20b3d5d2cddf82" },
+    title: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "e89b30aa1dc30a6a" },
+    standfirst: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "41645f31d3365e30" },
+  },
+  filters: {
+    all: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a52ace420f2175d0" },
+    sermons: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "37ad9d4c407fd2cd" },
+    articles: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "b14ac78a46e90b71" },
+    bibleStudies: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "fd51e22f54a9327f" },
+    educationalMaterial: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "90a3218579745d61" },
+    books: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9da7f76bc81d2f4e" },
+    english: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "ba118bf7fc9c1aed" },
+    urdu: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "234d81e4dcbe229b" },
+    searchPlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "c24cfde743ee1217" },
+  },
+  row: {
+    watchOnYouTube: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "818cd7480430ffb4" },
+    read: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9b9a8d05a7ec353b" },
+    downloadPdf: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "6183be0883d2a89c" },
+    askForCopy: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "d91f1b519929346a" },
+    articleFallbackDescription: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "1cbfd1f1ac1cd4a8" },
+    bibleStudyFallbackDescription: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "8ac4ac57e0393092" },
+    bookFallbackDescription: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "28e9393be1fab965" },
+    thumbnailPlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "d01f83fe11852c32" },
+    pagesPlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "cf4f25be3620a639" },
+  },
+  pagination: {
+    showing: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "d604310a789a1848" },
+    of: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "28391d3bc64ec15c" },
+    resourcesLabel: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "41d311a605520fc7" },
+    previous: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a57b08a480b822a0" },
+    next: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "1ff57a29d7c9d11b" },
+  },
+  cta: {
+    heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "ee1a8cbaccdc141c" },
+    body: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "c671a9c27249778e" },
+    primaryCta: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "e3d5ef30bc7323c9" },
+  },
   detail: {
     type: {
       article: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "29d94922512b93e8" },
