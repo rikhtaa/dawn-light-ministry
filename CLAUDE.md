@@ -61,7 +61,7 @@ Urdu: نور کی صبح
 
 Short name: DLM
 
-Associated identity: Bethlehem Church, Seminary & Educational Mission
+Associated identity: Baptist Church, Seminary & Educational Mission
 
 Locations: Karachi and Faisalabad, Pakistan
 
@@ -69,7 +69,7 @@ Founded: 1982
 
 Tradition: Baptist Christian tradition
 
-Contact phone / WhatsApp: 03442316634
+Contact phone / WhatsApp: +92 344 2316634
 
 Current contact email: pastornayyer@gmail.com
 

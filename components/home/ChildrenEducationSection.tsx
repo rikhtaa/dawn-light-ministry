@@ -42,7 +42,6 @@ export function ChildrenEducationSection({ strings, isUrdu }: ChildrenEducationS
               {strings.body}
             </p>
             <FactTable facts={list} layout="stacked" isUrdu={isUrdu} className="mt-7" />
-            <p className="text-caption mt-4">{strings.note}</p>
           </Reveal>
         </div>
       </div>

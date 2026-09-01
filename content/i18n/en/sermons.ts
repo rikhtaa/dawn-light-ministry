@@ -11,13 +11,13 @@ export const sermons = {
   metadata: {
     title: "Sermons — Dawn of Light Ministry",
     description:
-      "Preaching from Bethlehem Church, part of Dawn of Light Ministry — recorded when possible and published free, archived by series and Scripture.",
+      "Preaching from Baptist Church, part of Dawn of Light Ministry — recorded when possible and published free, archived by series and Scripture.",
   },
   masthead: {
     eyebrow: "Preaching",
     title: "Sermons",
     standfirst:
-      "Preaching from Bethlehem Church, recorded when possible and published free. Services are held twice weekly; Holy Communion is observed monthly.",
+      "Preaching from Baptist Church, recorded when possible and published free. Services are held twice weekly; Holy Communion is observed monthly.",
   },
   latest: {
     label: "Most recent",
@@ -63,9 +63,9 @@ export const sermons = {
     askForRecording: "Ask for a recording",
   },
   visitCta: {
-    heading: "Hear the preaching in person",
-    bodyPrefix: "Bethlehem Church meets twice weekly in",
-    locationNote: "[PSEUDO/PLACEHOLDER — CITY AND SERVICE TIMES TO BE CONFIRMED]",
+    heading: "Hear the Preaching in Person",
+    bodyPrefix: "Baptist Church meets twice weekly in",
+    locationNote: "Service times: Sunday 9 AM · Friday 8 PM",
     bodySuffix: "Visitors are welcome.",
     visitUs: "Visit us",
     contactTheMinistry: "Contact the ministry",

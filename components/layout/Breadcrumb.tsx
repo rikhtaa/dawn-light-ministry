@@ -11,7 +11,7 @@ interface BreadcrumbProps {
   isUrdu?: boolean;
   /**
    * "on-navy" — light text/hover regardless of the app theme, for a
-   * breadcrumb sitting directly on a dark surface (e.g. Seminary's
+   * breadcrumb sitting directly on a dark surface (e.g. n's
    * masthead — Dawn of Light - Seminary.dc.html — which is a navy fill in
    * light mode and the page's own dark background in dark mode; either
    * way the ambient `text-ink-faint` default reads too dark). Mirrors

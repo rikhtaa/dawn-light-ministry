@@ -59,7 +59,15 @@ export function Reveal({ children, index = 0, className }: RevealProps) {
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+      // `threshold` is a fraction of the TARGET's own height, not the
+      // viewport — found and fixed once already: a long-form article
+      // section (e.g. About's restructured "Our Story", several thousand
+      // px tall) can never cover 15% of itself on an ordinary viewport, so
+      // it silently stayed opacity:0 forever. `0` fires as soon as any
+      // part of the element is inside the (already-inset) root margin,
+      // which is height-independent and correct for both a small card and
+      // a full article body.
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" },
     );
     observer.observe(node);
     return () => observer.disconnect();

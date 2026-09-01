@@ -22,13 +22,13 @@ import type { ResourcesStrings } from "@/content/i18n/en/resources";
  */
 export const resources: Translated<ResourcesStrings> = {
   metadata: {
-    title: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "631b4b739dac8bf4" },
-    description: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "4e968fe580f74313" },
+    title: { value: "وسائل", source: "author", published: true, reviewed: true, sourceHash: "631b4b739dac8bf4" },
+    description: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "3d35e0c3e590f121" },
   },
   masthead: {
-    eyebrow: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "dc20b3d5d2cddf82" },
-    title: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "e89b30aa1dc30a6a" },
-    standfirst: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "41645f31d3365e30" },
+    eyebrow: { value: "لائبریری", source: "author", published: true, reviewed: true, sourceHash: "dc20b3d5d2cddf82" },
+    title: { value: "وسائل", source: "author", published: true, reviewed: true, sourceHash: "e89b30aa1dc30a6a" },
+    standfirst: { value: "خدمت منسٹری کی جانب سے اردو اور انگریزی میں شائع کردہ پیغامات، مسیحی مضامین، بائبل اسٹڈیز، اور تعلیمی مواد۔ یہاں موجود ہر چیز بالکل مفت ہے۔", source: "author", published: true, reviewed: true, sourceHash: "41645f31d3365e30" },
   },
   filters: {
     all: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a52ace420f2175d0" },
@@ -60,26 +60,27 @@ export const resources: Translated<ResourcesStrings> = {
     next: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "1ff57a29d7c9d11b" },
   },
   cta: {
-    heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "ee1a8cbaccdc141c" },
-    body: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "c671a9c27249778e" },
-    primaryCta: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "e3d5ef30bc7323c9" },
+    heading: { value: "کیا آپ کوئی خاص چیز تلاش کر رہے ہیں؟", source: "author", published: true, reviewed: true, sourceHash: "ee1a8cbaccdc141c" },
+    body: { value: "منسٹری آپ کو مطبوعہ مواد بھیج سکتی ہے یا کسی ریکارڈنگ کی نشاندہی کر سکتی ہے۔ براہِ راست پاسٹر سے دریافت کریں۔", source: "author", published: true, reviewed: true, sourceHash: "c671a9c27249778e" },
+    primaryCta: { value: "منسٹری سے رابطہ کریں", source: "author", published: true, reviewed: true, sourceHash: "e3d5ef30bc7323c9" },
   },
   detail: {
     type: {
-      article: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "29d94922512b93e8" },
+      article: { value: "مضمون", source: "author", published: true, reviewed: true, sourceHash: "29d94922512b93e8" },
       study: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "5660b0573fe8e31a" },
       book: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "909cb81127c5e194" },
       pdf: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "1d393b0081b632c5" },
+      video: { value: "ویڈیو", source: "author", published: true, reviewed: true, sourceHash: "d534be829e32196b" },
+      biography: { value: "سوانح حیات", source: "author", published: true, reviewed: true, sourceHash: "942dbeda91719a57" },
     },
     format: {
       download: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "1d393b0081b632c5" },
-      online: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "0d21bd52022ca7f7" },
+      online: { value: "آن لائن", source: "author", published: true, reviewed: true, sourceHash: "0d21bd52022ca7f7" },
     },
     meta: {
-      author: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "d95082a2ee57f3e4" },
+      author: { value: "مصنف", source: "author", published: true, reviewed: true, sourceHash: "d95082a2ee57f3e4" },
       date: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "99c40ab405926cb5" },
       pages: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9046da16aea909ba" },
-      free: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "f411a1fb62758b4c" },
     },
     datePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "80502bc1a158f94a" },
     pagesPlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "cf4f25be3620a639" },
@@ -97,7 +98,7 @@ export const resources: Translated<ResourcesStrings> = {
     },
     facts: {
       heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "45989de49fb7f66d" },
-      author: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "d95082a2ee57f3e4" },
+      author: { value: "مصنف", source: "author", published: true, reviewed: true, sourceHash: "d95082a2ee57f3e4" },
       date: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "99c40ab405926cb5" },
       pages: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9046da16aea909ba" },
       language: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a4fe65264ef7dbb3" },

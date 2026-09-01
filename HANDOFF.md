@@ -29,11 +29,11 @@ functionality · 19. Accessibility · 20. SEO · 21. Bilingual & RTL · 22. Cons
 | Name | Dawn of Light Ministry |
 | Urdu name | نور کی صبح |
 | Short name | DLM |
-| Associated identity | Bethlehem Church, Seminary & Educational Mission |
+| Associated identity | Baptist Church, Seminary & Educational Mission |
 | Locations | Karachi (Sindh) and Faisalabad (Punjab), Pakistan |
 | Founded | 1982 |
 | Tradition | Baptist Christian |
-| Phone / WhatsApp | 03442316634 |
+| Phone / WhatsApp | +92 344 2316634 |
 | Email | pastornayyer@gmail.com |
 | Social | Facebook and YouTube (URLs `[CONFIRM]`) |
 | Rhythm | Church services twice weekly · Sunday School weekly · Seminary classes daily · Holy Communion monthly |
@@ -300,7 +300,7 @@ Never log form contents.
 ## 8. Navigation & footer
 
 **Utility bar** (navy `#122536`, `#B9C6D2`, 12.5px, padding 10×40): left — "Karachi
-& Faisalabad, Pakistan", "Phone / WhatsApp 03442316634", "pastornayyer@gmail.com";
+& Faisalabad, Pakistan", "Phone / WhatsApp +92 344 2316634", "pastornayyer@gmail.com";
 right — English / اردو / divider / Dark mode.
 
 **Header** (white, 1px bottom border, padding 20×40): logo lockup left — 46px brass
@@ -452,7 +452,7 @@ Geometry (frozen): 46×46 square, **1.5px brass `#C89B4A` outline**, Latin cross
 oxblood `#7A2E2E` — vertical bar 3.2×23.5 at top 10.5, crossbar 14.8×3.2 at top 17.4,
 both centred. Lockup: mark, 16px gap, wordmark "Dawn of Light Ministry" in Source
 Serif 4 600/21px, tracking −.01em, `#122536`, line-height 1.25; descriptor
-"Bethlehem Church, Seminary & Educational Mission" at 11.5px, .09em, uppercase,
+"Baptist Church, Seminary & Educational Mission" at 11.5px, .09em, uppercase,
 `#7C7466`.
 
 On dark: outline and cross both `#E0B872`, wordmark `#F0EDE6`, descriptor `#8FA0AE`.
@@ -473,7 +473,7 @@ built from rectangles — reproduce it as SVG, not as a font glyph or emoji.
                                         #statement-of-faith #leadership
 /ministries                      Ministries index (parent landing page)
 /ministries/church               Church
-/ministries/seminary             Bethlehem Seminary
+/ministries/seminary             Bethlehem Theological Seminary
 /ministries/publishing           Publishing & Christian Articles
 /ministries/education            Education & community outreach
 /ministries/childrens-education  Children's Education
@@ -551,7 +551,7 @@ Pastor Rahmat — founder; role and bios placeholder) → footer. Below 1024 the
 becomes a scrolling tab strip.
 
 ### Ministries index
-Masthead → six cards with coloured top rules (Church, Bethlehem Seminary, Children's
+Masthead → six cards with coloured top rules (Church, Bethlehem Theological Seminary, Children's
 education, Publishing & articles, Teaching & lectures → Sermons, Educational
 outreach) → navy band → CTA → footer. Stays the parent landing page.
 

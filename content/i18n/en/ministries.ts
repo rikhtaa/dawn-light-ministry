@@ -13,13 +13,13 @@ export const ministries = {
   metadata: {
     title: "Ministries — Dawn of Light Ministry",
     description:
-      "The six confirmed areas of Dawn of Light Ministry's work — church, Bethlehem Seminary, children's education, Christian publishing, teaching and lectures, and educational outreach — serving Karachi and Faisalabad, Pakistan since 1982.",
+      "The six confirmed areas of Dawn of Light Ministry's work — church, Bethlehem Theological Seminary, children's education, Christian publishing, teaching and lectures, and educational outreach — serving Karachi and Faisalabad, Pakistan since 1982.",
   },
   masthead: {
     eyebrow: "Our work",
     title: "Six ministries, one mission",
     standfirst:
-      "Worship, theological training, children's schooling, publishing, lectures and outreach. Only work the organization has confirmed appears here.",
+      "Dedicated to worship, theological training, children's education, publishing, academic lectures, and community outreach.",
   },
   // Per-row UI chrome for the six ruled rows (Dawn of Light - Ministries.dc.html):
   // a photograph placeholder caption and a short directional-link label
@@ -37,7 +37,7 @@ export const ministries = {
   connect: {
     eyebrow: "How the work connects",
     heading:
-      "The church gathers, the seminary trains, the mission teaches — and children stay in school because of all three.",
+      "The church gathers, the seminary trains, the mission teaches and through all three, children stay in school.",
     primaryCta: "Support the mission",
     secondaryCta: "Request prayer",
   },

@@ -30,7 +30,9 @@ export const home: Translated<HomeStrings> = {
       sourceHash: "1305ee13e41b8e7a",
     },
     headline: {
-      value: "خدا کے کلام کی تعلیم، خادمین کی تربیت، اور بچوں کی تعلیم کے ذریعے روشن مستقبل کی تعمیر۔",
+      value:  `خدا کے کلام میں مضبوط بنیاد،
+کلیسیا کی تربیت،
+اور آنے والی نسلوں کو بااختیار بنانا۔`,
       source: "author",
       published: true,
       reviewed: true,
@@ -44,7 +46,7 @@ export const home: Translated<HomeStrings> = {
       sourceHash: "2fdaf60492fba379",
     },
     standfirst: {
-      value: "ڈان آف لائٹ منسٹری کراچی اور فیصل آباد میں مسیحیوں اور غیر مسیحیوں کے درمیان انجیل کی منادی کرتی ہے، اور بیت اللحم سیمنری کے طلبہ کو تعلیم حاصل کرنے اور ایک روشن مستقبل کی تعمیر میں مدد فراہم کرتی ہے۔",
+      value: "ہمارا مقصد انجیل کی خوشخبری پھیلانا، پاسبانوں اور رہنماؤں کو لیس کرنا، اور کلیسیا کو مضبوط بنانا ہے۔ اس کے ساتھ ساتھ، ہم بچوں اور نوجوانوں کو سیکھنے، آگے بڑھنے اور ایک روشن مستقبل تعمیر کرنے کے بہترین مواقع فراہم کرنے کے لیے پرعزم ہیں۔",
       source: "author",
       published: true,
       reviewed: true,
@@ -155,14 +157,14 @@ export const home: Translated<HomeStrings> = {
       sourceHash: "cf198785f90226dd",
     },
     quote: {
-      value: "مسیحیوں اور غیر مسیحیوں میں خدا کے کلام کی منادی کرنا، اور مسیحی بچوں کو تعلیم حاصل کرنے اور ایک روشن مستقبل کی تعمیر میں مدد دینا۔",
+      value: "مسیحیوں اور غیر مسیحیوں میں خدا کے کلام کی منادی کرنا، اور مسیحی بچوں کو تعلیم کے حصول اور ایک روشن مستقبل بنانے میں مدد فراہم کرنا۔",
       source: "author",
       published: true,
       reviewed: true,
       sourceHash: "00731c101fae7e1a",
     },
     body: {
-      value: "ہماری بصیرت ایسے تعلیم یافتہ بچوں کی پرورش ہے جو قوم کی ترقی میں اپنا کردار ادا کریں۔ ہم علم کی روشنی کے ذریعے غربت کا مقابلہ کرنے اور زندگی کو بہتر بنانے کے لیے ضروری مواقع اور تعلیم فراہم کرنے کے لیے کام کرتے ہیں۔",
+      value: "ہمارا عزم تعلیم کے ذریعے ایسی نسل کی آبیاری کرنا ہے جو ملکی ترقی کی ضامن ہو۔ ہم غربت کی ماری بستیوں میں علم کی کرن لے کر جاتے ہیں، تاکہ انہیں قلیل مدتی امداد کے بجائے خود کفیل اور پائیدار زندگی گزارنے کے قابل بنایا جا سکے۔",
       source: "author",
       published: true,
       reviewed: true,
@@ -282,7 +284,7 @@ export const home: Translated<HomeStrings> = {
           sourceHash: "ccde170aa944696f",
         },
         meta: {
-          value: "خدمت کے اوقات [PSEUDO/PLACEHOLDER — CONFIRM]",
+          value: "خدمت کے اوقات: اتوار صبح 9 بجے · جمعہ رات 8 بجے",
           source: "author",
           published: true,
           reviewed: true,
@@ -306,14 +308,14 @@ export const home: Translated<HomeStrings> = {
           sourceHash: "0ee81d84a2c817e6",
         },
         description: {
-          value: "بائبلی تعلیم، مسیحی عقیدے اور کلیسیائی خدمت میں روزانہ کی کلاسوں کے ذریعے طلبہ کو تربیت دینا، ساتھ ہی عوامی تعلیم و تدریس فراہم کرنا۔",
+          value: "بائبلی تعلیم، عقائد اور پاسبانی خدمات پر کلاسز، جن میں پریزنٹیشنز اور مضامین کے ذریعے جامع رہنمائی فراہم کی جاتی ہے۔",
           source: "author",
           published: true,
           reviewed: true,
           sourceHash: "f0a247421f745fb6",
         },
         meta: {
-          value: "روزانہ کلاسیں · کورس [CONFIRM]",
+          value: "ہر ہفتے تین کلاسیں",
           source: "author",
           published: true,
           reviewed: true,
@@ -337,14 +339,14 @@ export const home: Translated<HomeStrings> = {
           sourceHash: "340c6a743f4566b6",
         },
         description: {
-          value: "ہفتہ وار اتوار اسکول، مفت کتابوں کی فراہمی، اور مسیحی بچوں کے اسکول کے اخراجات میں معاونت کے ذریعے تعلیم تک رسائی میں مدد دینا۔",
+          value: "ہفتہ وار اسکول، مفت کتابوں کی فراہمی، اور مسیحی بچوں کے اسکول کے اخراجات میں معاونت کے ذریعے تعلیم تک رسائی میں مدد دینا۔",
           source: "author",
           published: true,
           reviewed: true,
           sourceHash: "b8b12e2b5cd13794",
         },
         meta: {
-          value: "اتوار اسکول",
+          value: "اتوار",
           source: "author",
           published: true,
           reviewed: true,
@@ -368,7 +370,7 @@ export const home: Translated<HomeStrings> = {
           sourceHash: "7757967b0b658586",
         },
         description: {
-          value: "بائبل کے مطالعے اور مسیحی تعلیمی مواد کی اشاعت و تقسیم کے ذریعے لوگوں کو خدا کے کلام کے مطالعے کی ترغیب دینا۔",
+          value: "مسیحی تعلیمی مواد کی تحریر و تقسیم، جس کا بنیادی مقصد لوگوں کو بائبل کے ذاتی مطالعے اور روحانی ترقی کی ترغیب دینا ہے۔",
           source: "author",
           published: true,
           reviewed: true,
@@ -399,7 +401,7 @@ export const home: Translated<HomeStrings> = {
           sourceHash: "d953c00b4a161106",
         },
         description: {
-          value: "دونوں شہروں میں کلیسیاؤں اور طلبہ کے لیے صحائف اور مسیحی تعلیم کے موضوعات پر تدریس اور لیکچرز فراہم کرنا۔",
+          value: "بائبلی لیکچرز، کلیسیاؤں اور طلبہ کے لیے کتابِ مقدس اور عملی مسیحی زندگی پر جامع تعلیم۔", 
           source: "author",
           published: true,
           reviewed: true,
@@ -456,14 +458,14 @@ export const home: Translated<HomeStrings> = {
       sourceHash: "0ee81d84a2c817e6",
     },
     heading: {
-      value: "بائبلی تعلیم، عملی تربیت، اور اردو زبان میں جامع تیاری۔",
+      value: "کلیسیا کی زبان میں الٰہیاتی تعلیم",
       source: "author",
       published: true,
       reviewed: true,
       sourceHash: "69775454270aad2c",
     },
     body: {
-      value: "بیت لحم سیمنری کے طلبہ صحائف، مسیحی عقائد اور پادریانہ خدمت کا مطالعہ کرتے ہیں تاکہ پاکستان کی کلیسیاؤں میں خدا کے کلام کی وفادار تعلیم اور خدمت کے لیے تیار ہو سکیں۔ تدریس میں اردو بائبل کے مطالعے پر بھی توجہ دی جاتی ہے۔",
+      value: "یت اللحم سیمنری میں طلبہ کتابِ مقدس، مسیحی عقائد اور عملی پاسبانی کا جامع مطالعہ کرتے ہیں۔ ہمارا مقصد پاکستان بھر کے خادمین اور رہنماؤں کو خدا کے کلام کی گہری سمجھ بوجھ سے لیس کرنا ہے، اور اسی لیے ہماری روزمرہ کی تدریس عام استعمال ہونے والے اردو بائبل ترجمے پر استوار ہے۔",
       source: "author",
       published: true,
       reviewed: true,
@@ -549,7 +551,7 @@ export const home: Translated<HomeStrings> = {
           sourceHash: "5b45a02cfd80bdd7",
         },
         value: {
-          value: "[CONFIRM]",
+          value: "کتابِ مقدس کی منظم، کتاب بہ کتاب تعلیم؛ کلاسز روزانہ منعقد ہوتی ہیں۔"  ,
           source: "author",
           published: true,
           reviewed: true,
@@ -633,13 +635,6 @@ export const home: Translated<HomeStrings> = {
       },
     },
 
-    note: {
-      value: "کوئی شماریاتی اثرات کے دعوے شائع نہیں کیے گئے۔ بچوں کی تصاویر صرف تحریری اجازت کے ساتھ ظاہر کی جاتی ہیں۔",
-      source: "author",
-      published: true,
-      reviewed: true,
-      sourceHash: "ef4773c666972c99",
-    },
     imagePlaceholder: {
       value: "بچوں کی تعلیم — لازمی اجازت",
       source: "author",
@@ -983,7 +978,7 @@ export const home: Translated<HomeStrings> = {
         sourceHash: "0253821a7fc67ef3",
       },
       description: {
-        value: "فون یا واٹس ایپ: 03442316634",
+        value: "فون یا واٹس ایپ: +92 344 2316634",
         source: "author",
         published: true,
         reviewed: true,
@@ -1008,14 +1003,14 @@ export const home: Translated<HomeStrings> = {
       sourceHash: "b71bece1783e6910",
     },
     addressPending: {
-      value: "[PSEUDO/PLACEHOLDER — CONFIRM]",
+      value: "اتوار صبح 9 بجے · جمعہ رات 8 بجے",
       source: "author",
       published: true,
       reviewed: true,
       sourceHash: "52293b605e617116",
     },
     serviceTimesPending: {
-      value: "خدمت کے اوقات [CONFIRM]",
+      value: "کلیسیائی عبادات ہفتے میں دو مرتبہ منعقد ہوتی ہیں۔ پاک میز ماہانہ منعقد ہوتی ہے۔",
       source: "author",
       published: true,
       reviewed: true,

@@ -48,7 +48,8 @@ export function LocationsSection({ strings, isUrdu }: LocationsSectionProps) {
                 {strings.cities.faisalabad}
               </p>
               <p className="text-body mt-2.5 leading-[1.7] text-ink-muted">
-                <PlaceholderTag>{strings.addressPending}</PlaceholderTag>
+                {/* <PlaceholderTag>{strings.addressPending}</PlaceholderTag> */}
+                <PlaceholderTag>-</PlaceholderTag>
                 <br />
                 <PlaceholderTag>{strings.serviceTimesPending}</PlaceholderTag>
               </p>

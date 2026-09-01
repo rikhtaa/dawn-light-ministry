@@ -1,7 +1,7 @@
 # Dawn of Light Ministry — Website
 
 Dawn of Light Ministry (DLM) — نور کی صبح — is the website for the
-Bethlehem Church, Seminary & Educational Mission, serving communities in
+Baptist Church, Seminary & Educational Mission, serving communities in
 Karachi and Faisalabad, Pakistan since 1982.
 
 This project is under active development. See [`PRD.md`](./PRD.md) for

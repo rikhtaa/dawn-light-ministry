@@ -1,7 +1,7 @@
 # Dawn of Light Ministry --- Product Requirements Document
 
 **Project:** Dawn of Light Ministry (DLM) --- نور کی صبح\
-**Associated identity:** Bethlehem Church, Seminary & Educational
+**Associated identity:** Baptist Church, Seminary & Educational
 Mission\
 **Primary locations:** Karachi, Sindh and Faisalabad, Punjab, Pakistan\
 **Founded:** 1982\
@@ -131,11 +131,11 @@ The following came directly from the project owner:
 -   Name: Dawn of Light Ministry
 -   Urdu name: نور کی صبح
 -   Short name: DLM
--   Associated identity: Bethlehem Church, Seminary & Educational
+-   Associated identity: Baptist Church, Seminary & Educational
     Mission
 -   Locations: Karachi and Faisalabad
 -   Founded: 1982
--   Contact phone/WhatsApp: 03442316634
+-   Contact phone/WhatsApp: +92 344 2316634
 -   Contact email: pastornayyer@gmail.com
 -   Social presence: Facebook and YouTube
 -   Christian tradition: Baptist
@@ -631,7 +631,7 @@ Fields:
 
 Contact:
 
-Phone/WhatsApp: 03442316634
+Phone/WhatsApp: +92 344 2316634
 
 Email: pastornayyer@gmail.com
 

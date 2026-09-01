@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+    allowedDevOrigins: ['192.168.1.6'],
   async redirects() {
     // HANDOFF.md §13: "/seminary 308 → /ministries/seminary (header link
     // kept)" — the real page lives at /ministries/seminary alongside the

@@ -22,44 +22,44 @@ import type { MinistriesStrings } from "@/content/i18n/en/ministries";
  */
 export const ministries: Translated<MinistriesStrings> = {
   metadata: {
-    title: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "6241acbbe6a55576" },
-    description: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "849f2f863ab610b9" },
+    title: { value: "", source: "author", published: true, reviewed: true, sourceHash: "6241acbbe6a55576" },
+    description: { value: "", source: "author", published: true, reviewed: true, sourceHash: "849f2f863ab610b9" },
   },
   masthead: {
-    eyebrow: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "fc967e87a6e80cd0" },
-    title: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "7bf47f5c97114fc7" },
-    standfirst: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "043dee570bbeacad" },
+    eyebrow: { value: "ہمارا کام", source: "author", published: true, reviewed: true, sourceHash: "fc967e87a6e80cd0" },
+    title: { value: "چھ خدمات، ایک نصب العین", source: "author", published: true, reviewed: true, sourceHash: "7bf47f5c97114fc7" },
+    standfirst: { value: "عبادت، دینی تربیت، بچوں کی تعلیم، اشاعت، علمی خطابات اور عوامی فلاح و رابطہ۔", source: "author", published: true, reviewed: true, sourceHash: "043dee570bbeacad" },
   },
   rows: {
     church: {
-      imagePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "195beac897414922" },
-      linkLabel: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "837aa0d985b27908" },
+      imagePlaceholder: { value: "", source: "author", published: true, reviewed: true, sourceHash: "195beac897414922" },
+      linkLabel: { value: "چرچ", source: "author", published: true, reviewed: true, sourceHash: "837aa0d985b27908" },
     },
     seminary: {
-      imagePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "63eca384093d33f4" },
-      linkLabel: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "72be8da89808691c" },
+      imagePlaceholder: { value: "", source: "author", published: true, reviewed: true, sourceHash: "63eca384093d33f4" },
+      linkLabel: { value: "سیمنری", source: "author", published: true, reviewed: true, sourceHash: "72be8da89808691c" },
     },
     childrensEducation: {
-      imagePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "6a8731515f45a78d" },
-      linkLabel: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "3583a358a585b13b" },
+      imagePlaceholder: { value: "", source: "author", published: true, reviewed: true, sourceHash: "6a8731515f45a78d" },
+      linkLabel: { value: "بچے", source: "author", published: true, reviewed: true, sourceHash: "3583a358a585b13b" },
     },
     publishing: {
-      imagePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "ba6c040fb33a13d9" },
-      linkLabel: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "26c81739396ded64" },
+      imagePlaceholder: { value: "", source: "author", published: true, reviewed: true, sourceHash: "ba6c040fb33a13d9" },
+      linkLabel: { value: "اشاعت", source: "author", published: true, reviewed: true, sourceHash: "26c81739396ded64" },
     },
     teachingLectures: {
-      imagePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "5728d0443e77e8c7" },
-      linkLabel: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "d953c00b4a161106" },
+      imagePlaceholder: { value: "", source: "author", published: true, reviewed: true, sourceHash: "5728d0443e77e8c7" },
+      linkLabel: { value: "لیکچرز", source: "author", published: true, reviewed: true, sourceHash: "d953c00b4a161106" },
     },
     outreach: {
-      imagePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "80e7ac336c741b5d" },
-      linkLabel: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a5803fdf10e57e66" },
+      imagePlaceholder: { value: "", source: "author", published: true, reviewed: true, sourceHash: "80e7ac336c741b5d" },
+      linkLabel: { value: "خدمت", source: "author", published: true, reviewed: true, sourceHash: "a5803fdf10e57e66" },
     },
   },
   connect: {
-    eyebrow: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "118e6465f3274709" },
-    heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "48c04bda44f1eab3" },
-    primaryCta: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "49b50063628cfcd3" },
-    secondaryCta: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "f4559c3380c0d748" },
+    eyebrow: { value: "کام کیسے ایک دوسرے سے جڑتے ہیں", source: "author", published: true, reviewed: true, sourceHash: "118e6465f3274709" },
+    heading: { value: "کلیسیا جمع ہوتی ہے، سیمنری تربیت دیتی ہے، مشن تعلیم دیتا ہے اور اِن تینوں کی بدولت، بچوں کی تعلیم جاری رہتی ہے۔", source: "author", published: true, reviewed: true, sourceHash: "48c04bda44f1eab3" },
+    primaryCta: { value: "مشن کا ساتھ دیں", source: "author", published: true, reviewed: true, sourceHash: "49b50063628cfcd3" },
+    secondaryCta: { value: "دعا کی درخواست دیں", source: "author", published: true, reviewed: true, sourceHash: "f4559c3380c0d748" },
   },
 };

@@ -20,7 +20,7 @@ interface LogoLockupProps {
    */
   tone?: "auto" | "on-dark";
   /**
-   * Default size only. The descriptor line ("Bethlehem Church, Seminary
+   * Default size only. The descriptor line ("Baptist Church, Seminary
    * & Educational Mission") measures ~140px wider than the wordmark
    * alone — inside SiteHeader's fixed 1160px content width, showing it
    * alongside a nine-item nav plus the Support CTA overflows the
@@ -98,7 +98,7 @@ export function LogoLockup({
                   onDark ? "text-[#8FA0AE]" : "text-ink-faint dark:text-[#8FA0AE]",
                 )}
               >
-                Bethlehem Church, Seminary &amp; Educational Mission
+                Baptist Church, Seminary &amp; Educational Mission
               </span>
             ) : null}
           </>

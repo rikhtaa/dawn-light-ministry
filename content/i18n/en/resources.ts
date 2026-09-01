@@ -25,7 +25,7 @@ export const resources = {
   metadata: {
     title: "Resources — Dawn of Light Ministry",
     description:
-      "Sermons, Christian articles, Bible studies and educational material published by Dawn of Light Ministry, in Urdu and English — everything free.",
+      "Sermons, Christian articles, Bible studies, and educational material published by Dawn of Light Ministry, in Urdu and English — everything free.",
   },
   masthead: {
     eyebrow: "Library",
@@ -73,6 +73,8 @@ export const resources = {
       study: "Bible study",
       book: "Book",
       pdf: "PDF",
+      video: "Video",
+      biography: "Biography",
     },
     format: {
       download: "PDF",
@@ -82,7 +84,6 @@ export const resources = {
       author: "Author",
       date: "Date",
       pages: "Pages",
-      free: "Free",
     },
     datePlaceholder: "[date]",
     pagesPlaceholder: "[pages]",

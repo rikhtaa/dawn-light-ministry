@@ -8,10 +8,10 @@
 export const home = {
   hero: {
     eyebrow: "A Baptist church, seminary and educational mission · since 1982",
-    headline: "God's Word taught, pastors trained, children sent to school.",
+    headline: "Rooted in God’s Word, Equipping the Church, Empowering the Next Generation.",
     urduName: "نور کی صبح",
     standfirst:
-      "[PSEUDO/PLACEHOLDER — FINAL HERO COPY TO BE APPROVED] Dawn of Light Ministry serves Karachi and Faisalabad: preaching among Christians and non-Christians, training students at Bethlehem Seminary, and helping Christian children receive an education and build a brighter future.",
+      "Our mission is to proclaim the Gospel, equip spiritual leaders, and strengthen the Church. We are committed to empowering children and youth by providing them with opportunities to learn, grow, and build a brighter tomorrow.",
     primaryCta: "Learn about our mission",
     secondaryCta: "Request prayer",
     facts: {
@@ -26,8 +26,8 @@ export const home = {
   mission: {
     eyebrow: "Our mission",
     quote:
-      "To preach God's Word among Christians and non-Christians, and to help Christian children receive an education and build a brighter future.",
-    body: "Our vision is educated children who contribute to the advancement of the nation. We work to take the light of knowledge into communities facing poverty, and to teach sustainable ways of improving life rather than relying on short-term assistance alone.",
+      "Preaching the Word of God to all communities, while equipping Christian youth with the education to build a brighter tomorrow.",
+    body: "Empowering children through education to advance our nation. We deliver knowledge to underserved communities, teaching sustainable life skills for long-term transformation instead of temporary relief.",
     // A keyed object, not an array — lib/i18n/types.ts's `Translated<T>`
     // maps `[K in keyof T]`, which for an array type would also try to
     // map built-in methods like `length`/`push`, not just its indices.
@@ -53,14 +53,14 @@ export const home = {
         title: "Church",
         description:
           "Services twice weekly, Holy Communion monthly, worship, preaching and teaching in the Baptist tradition.",
-        meta: "Service times [PSEUDO/PLACEHOLDER — CONFIRM]",
+        meta: "Service times: Sunday 9 AM · Friday 8 PM",
       },
       seminary: {
         kicker: "02 · Education",
-        title: "Bethlehem Seminary",
+        title: "Bethlehem Theological Seminary",
         description:
-          "Daily classes in biblical education, doctrine and pastoral practice, with public lectures.",
-        meta: "Classes daily · course list [CONFIRM]",
+          "Daily classes in biblical education, doctrine and pastoral practice, with presentations and articles.",
+        meta: "Three classes each week",
       },
       childrensEducation: {
         kicker: "03 · Children",
@@ -73,14 +73,14 @@ export const home = {
         kicker: "04 · Publishing",
         title: "Christian articles",
         description:
-          "Writing and distributing Christian educational material, encouraging people to read the Bible themselves.",
+          "Writing and distributing biblical educational material to inspire personal Bible study and spiritual growth.",
         meta: "Free books distributed",
       },
       teachingLectures: {
         kicker: "05 · Teaching",
         title: "Lectures",
         description:
-          "Public teaching on Scripture and Christian living for congregations and students in both cities.",
+          "Public teaching on Scripture and practical Christian living for congregations and students.",
         meta: "Karachi & Faisalabad",
       },
       outreach: {
@@ -93,9 +93,9 @@ export const home = {
     },
   },
   seminary: {
-    eyebrow: "Bethlehem Seminary",
-    heading: "Theological education, taught daily, in the language of the church.",
-    body: "Students at Bethlehem Seminary study Scripture, doctrine and pastoral practice so that congregations in Pakistan are led by people trained in God's Word. Teaching draws on the commonly used Urdu Bible translation.",
+    eyebrow: "Bethlehem Theological Seminary",
+    heading: "Theological Education in the language of the church.",
+    body: "At Bethlehem Theological Seminary, students engage in a comprehensive study of Scripture, doctrine, and pastoral practice. Our mission is to equip leaders across Pakistan with a profound understanding of God's Word, providing daily instruction rooted in the widely used Urdu Bible translation.",
     primaryCta: "About the seminary",
     secondaryCta: "Enquire about classes",
     imageCaption: "Seminary classroom",
@@ -103,7 +103,7 @@ export const home = {
       classes: { label: "Classes", value: "Daily" },
       instruction: { label: "Instruction", value: "Urdu & English" },
       statementOfFaith: { label: "Statement of faith", value: "Christian Trinity" },
-      coursesSchedule: { label: "Courses & schedule", value: "[CONFIRM]" },
+      coursesSchedule: { label: "Courses & schedule", value: "Systematic, book-by-book Bible study; classes held daily." },
     },
   },
   childrenEducation: {
@@ -115,7 +115,6 @@ export const home = {
       freeBooks: { label: "Free books", value: "Provided" },
       feeAssistance: { label: "School-fee assistance", value: "By request" },
     },
-    note: "No numerical impact claims are published. Photographs of identifiable children appear only with written permission.",
     imagePlaceholder: "Children's education — permission required",
   },
   prayerCta: {
@@ -181,14 +180,14 @@ export const home = {
     },
     speak: {
       title: "Speak with the pastor",
-      description: "Phone or WhatsApp 03442316634",
+      description: "Phone or WhatsApp +92 344 2316634",
     },
   },
   contact: {
     eyebrow: "Visit or contact us",
     heading: "Two cities, one ministry",
-    addressPending: "[PSEUDO/PLACEHOLDER — CONFIRM]",
-    serviceTimesPending: "Service times [CONFIRM]",
+    addressPending: "Service times: Sunday 9 AM · Friday 8 PM",
+    serviceTimesPending: "Church services are held twice a week. Holy Communion is observed monthly.",
     reachHeading: "Reach the ministry",
     phoneLabel: "Phone / WhatsApp",
     emailLabel: "Email",

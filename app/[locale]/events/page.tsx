@@ -185,7 +185,6 @@ export default async function EventsPage({ params }: PageProps<"/[locale]/events
               >
                 {strings.weeklyRhythm.heading}
               </h2>
-              <span className="hidden text-caption text-ink-faint sm:inline">{strings.weeklyRhythm.note}</span>
             </div>
             <FactTable facts={weeklyRhythmFacts} layout="row" columns={4} isUrdu={isUrdu} className="mt-2" />
           </Reveal>

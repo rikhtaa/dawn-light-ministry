@@ -14,7 +14,7 @@ export const footer = {
   ministriesHeading: "Ministries",
   ministriesLinks: {
     church: "Church",
-    seminary: "Bethlehem Seminary",
+    seminary: "Bethlehem Theological Seminary",
     childrensEducation: "Children's education",
     christianArticles: "Christian articles",
     // Not a distinct route — links to /sermons, same as the ministries

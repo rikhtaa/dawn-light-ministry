@@ -1,4 +1,4 @@
-import { resolveContent } from "@/lib/i18n/resolve";
+import { resolveContent, resolveBlocksStrict } from "@/lib/i18n/resolve";
 import { defaultLocale, type Locale } from "@/lib/i18n/types";
 import { common as commonEn, type CommonStrings } from "@/content/i18n/en/common";
 import { home as homeEn, type HomeStrings } from "@/content/i18n/en/home";
@@ -93,8 +93,23 @@ export function getMetadataContent(locale: Locale): MetadataStrings {
 export function getAboutContent(locale: Locale): AboutStrings {
   if (locale === defaultLocale) return aboutEn;
   switch (locale) {
-    case "ur":
-      return resolveContent(aboutEn, aboutUr);
+    case "ur": {
+      const resolved = resolveContent(aboutEn, aboutUr);
+      // Long-form article blocks (ArticleBody) never fall back to English —
+      // see resolveBlocksStrict's doc comment (lib/i18n/resolve.ts).
+      return {
+        ...resolved,
+        ourStory: {
+          ...resolved.ourStory,
+          blocks: resolveBlocksStrict(aboutEn.ourStory.blocks, aboutUr.ourStory.blocks),
+        },
+        missionVision: {
+          ...resolved.missionVision,
+          missionBlocks: resolveBlocksStrict(aboutEn.missionVision.missionBlocks, aboutUr.missionVision.missionBlocks),
+          visionBlocks: resolveBlocksStrict(aboutEn.missionVision.visionBlocks, aboutUr.missionVision.visionBlocks),
+        },
+      };
+    }
     default:
       return aboutEn;
   }
@@ -113,8 +128,18 @@ export function getMinistriesContent(locale: Locale): MinistriesStrings {
 export function getSeminaryContent(locale: Locale): SeminaryStrings {
   if (locale === defaultLocale) return seminaryEn;
   switch (locale) {
-    case "ur":
-      return resolveContent(seminaryEn, seminaryUr);
+    case "ur": {
+      const resolved = resolveContent(seminaryEn, seminaryUr);
+      // Long-form article blocks (ArticleBody) never fall back to English —
+      // see resolveBlocksStrict's doc comment (lib/i18n/resolve.ts).
+      return {
+        ...resolved,
+        programme: {
+          ...resolved.programme,
+          blocks: resolveBlocksStrict(seminaryEn.programme.blocks, seminaryUr.programme.blocks),
+        },
+      };
+    }
     default:
       return seminaryEn;
   }
@@ -153,8 +178,33 @@ export function getResourcesContent(locale: Locale): ResourcesStrings {
 export function getMinistryPagesContent(locale: Locale): MinistryPagesStrings {
   if (locale === defaultLocale) return ministryPagesEn;
   switch (locale) {
-    case "ur":
-      return resolveContent(ministryPagesEn, ministryPagesUr);
+    case "ur": {
+      const resolved = resolveContent(ministryPagesEn, ministryPagesUr);
+      // Long-form article blocks (ArticleBody) never fall back to English —
+      // see resolveBlocksStrict's doc comment (lib/i18n/resolve.ts).
+      return {
+        ...resolved,
+        church: {
+          ...resolved.church,
+          body: { ...resolved.church.body, blocks: resolveBlocksStrict(ministryPagesEn.church.body.blocks, ministryPagesUr.church.body.blocks) },
+        },
+        publishing: {
+          ...resolved.publishing,
+          body: { ...resolved.publishing.body, blocks: resolveBlocksStrict(ministryPagesEn.publishing.body.blocks, ministryPagesUr.publishing.body.blocks) },
+        },
+        education: {
+          ...resolved.education,
+          body: { ...resolved.education.body, blocks: resolveBlocksStrict(ministryPagesEn.education.body.blocks, ministryPagesUr.education.body.blocks) },
+        },
+        childrensEducation: {
+          ...resolved.childrensEducation,
+          body: {
+            ...resolved.childrensEducation.body,
+            blocks: resolveBlocksStrict(ministryPagesEn.childrensEducation.body.blocks, ministryPagesUr.childrensEducation.body.blocks),
+          },
+        },
+      };
+    }
     default:
       return ministryPagesEn;
   }

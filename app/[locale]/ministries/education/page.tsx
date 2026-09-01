@@ -9,6 +9,8 @@ import { NavyBand } from "@/components/layout/NavyBand";
 import { Reveal } from "@/components/ui/Reveal";
 import { MinistryMasthead } from "@/components/ministries/MinistryMasthead";
 import { MinistrySiblingsAndCta } from "@/components/ministries/MinistrySiblingsAndCta";
+import { ArticleBody } from "@/components/ui/ArticleBody";
+import { educationBodyBlocks } from "@/lib/ministries";
 import { getMinistryPagesContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -57,7 +59,7 @@ export default async function EducationPage({
   const facts = [
     d.facts.approach,
     d.facts.cities,
-    { ...d.facts.programmesAndReach, unconfirmed: true },
+    d.facts.programmesAndReach,
   ];
 
   const activities = [
@@ -106,10 +108,7 @@ export default async function EducationPage({
             <h2 className={cn("text-h2 mt-3 max-w-[26ch] text-foreground", isUrdu && "font-urdu-display")}>
               {d.body.heading}
             </h2>
-            <p className={cn("text-body measure mt-5 text-ink-body", isUrdu && "font-urdu-body")}>{d.body.intro}</p>
-            <p className={cn("text-body measure mt-5 text-ink-body", isUrdu && "font-urdu-body")}>
-              {d.body.placeholder}
-            </p>
+            <ArticleBody blocks={educationBodyBlocks} content={d.body.blocks} isUrdu={isUrdu} className="mt-5" />
             <h3 className={cn("text-h3 mt-8 text-[1.375rem] font-semibold text-foreground", isUrdu && "font-urdu-display")}>
               {s.activitiesHeading}
             </h3>
@@ -165,9 +164,6 @@ export default async function EducationPage({
           <div>
             <p className={cn("text-eyebrow text-dark-accent", isUrdu && "font-urdu-body text-base normal-case tracking-normal")}>
               {d.detailBand.eyebrow}
-            </p>
-            <p className={cn("text-small mt-3 text-dark-body", isUrdu && "font-urdu-body text-base")}>
-              {d.detailBand.note}
             </p>
           </div>
           <div>

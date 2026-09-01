@@ -15,46 +15,46 @@ export const prayer = {
   breadcrumbLabel: "Prayer",
   masthead: {
     eyebrow: "Prayer",
-    title: "Need prayer?",
+    title: "Need Prayer?",
     standfirst:
-      "Write to the pastor. Requests are read by the ministry and prayed for. They are never displayed on this website and never shared with anyone else.",
+      "Write to the pastor. All requests are securely received, read, and prayed for by the ministry. They are kept strictly confidential and are never displayed or shared.",
   },
   howThisWorks: {
     heading: "How this works",
     steps: {
       write: {
         number: "01",
-        title: "You write",
+        title: "You Write",
         body: "In Urdu or English. Your name and email are optional — a request may be sent anonymously.",
       },
       receive: {
         number: "02",
-        title: "The ministry receives it privately",
-        body: "It reaches the pastor directly. It is not published, not listed, and not passed on.",
+        title: "The Ministry Receives It Privately",
+        body: "It reaches the pastor directly. It is not published, listed, or passed on to anyone else.",
       },
       pray: {
         number: "03",
-        title: "We pray",
-        body: "If you ask for follow-up and leave an email, someone from the ministry may reply.",
+        title: "We Pray",
+        body: "If you request a follow-up and provide your email, a ministry representative may reply to you.",
       },
     },
   },
   urgentNotice:
     "If your situation is urgent or dangerous, please contact local emergency services. This website is not an emergency service and requests may not be read immediately.",
   speakToSomeone: {
-    heading: "Prefer to speak to someone?",
+    heading: "Prefer to Speak to Someone?",
     body: "Phone or WhatsApp",
   },
   form: {
-    heading: "Request prayer",
-    subheading: "Only the request itself is required.",
+    heading: "Request Prayer",
+    subheading: "Only the prayer request is required.",
     nameLabel: "Name",
-    nameOptional: "(optional)",
+    nameOptional: "(Optional)",
     namePlaceholder: "Your name",
     emailLabel: "Email",
     emailOptional: "(optional — only if you would like a reply)",
     emailPlaceholder: "you@example.com",
-    requestLabel: "Your prayer request",
+    requestLabel: "Your Prayer Request",
     requestPlaceholder: "Write here — Urdu or English",
     requestErrorEmpty: "Please write your request before sending.",
     followUpLabel: "You may follow up with me about this request.",

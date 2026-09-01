@@ -9,7 +9,8 @@ import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { Reveal } from "@/components/ui/Reveal";
 import { RuledList, RuledRow } from "@/components/ui/RuledRow";
 import { DetailLayout } from "@/components/detail/DetailLayout";
-import { findResourceBySlug, getRelatedResources } from "@/lib/resources";
+import { ArticleBody } from "@/components/ui/ArticleBody";
+import { findResourceBySlug, getRelatedResources, resourceTitle, resourceAuthor } from "@/lib/resources";
 import { organization } from "@/lib/organization";
 import { getResourcesContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
@@ -28,7 +29,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: resource.title,
+    title: resourceTitle(resource, locale),
     description: resource.standfirst ?? resource.description,
     alternates: {
       canonical: `/${locale}/resources/${slug}`,
@@ -71,34 +72,51 @@ export default async function ResourceDetailPage({
   const common = getCommonContent(locale);
   const path = (segment: string) => localizePath(locale, segment);
   const d = strings.detail;
-  const related = getRelatedResources(resource.slug, 3);
+  const title = resourceTitle(resource, locale);
+  const author = resourceAuthor(resource, locale);
+  // A leadership biography (lib/resources.ts's `leadershipResources`) is a
+  // distinct content type from a downloadable/watchable resource — see
+  // the ResourceType doc comment. It reuses this template's typography and
+  // article rendering, but has no action/rail content: no "Get this
+  // resource" card, no Details/Related rail (Author is already shown in
+  // the header below, per the content-type-specific exception this file
+  // implements — the generic Resource Detail behaviour for every other
+  // `type` is unchanged).
+  const isBiography = resource.type === "biography";
+  const related = resource.bodyBlockDefs ? [] : getRelatedResources(resource.slug, 3);
   const formatLabel = resource.downloadUrl ? d.format.download : d.format.online;
 
   const facts = [
-    { label: d.facts.author, value: resource.author ?? "[author]", unconfirmed: !resource.author },
-    {
-      label: d.facts.date,
-      value: resource.date ?? d.datePlaceholder,
-      unconfirmed: !resource.date,
-    },
-    {
-      label: d.facts.pages,
-      value: resource.pages ? String(resource.pages) : d.pagesPlaceholder,
-      unconfirmed: !resource.pages,
-    },
+    { label: d.facts.author, value: author ?? "[author]", unconfirmed: !author },
+    // A full-length biography article (bodyBlockDefs) has no page count or
+    // publish date to speak of — showing "[date]"/"[pages]" bracket
+    // placeholders there would misleadingly read as missing info on an
+    // otherwise-finished page, rather than genuinely not applicable.
+    ...(resource.bodyBlockDefs
+      ? []
+      : [
+          { label: d.facts.date, value: resource.date ?? d.datePlaceholder, unconfirmed: !resource.date },
+          {
+            label: d.facts.pages,
+            value: resource.pages ? String(resource.pages) : d.pagesPlaceholder,
+            unconfirmed: !resource.pages,
+          },
+        ]),
     { label: d.facts.language, value: languageLabel(locale, resource.language) },
     ...(resource.scriptureReference
       ? [{ label: d.facts.scripture, value: resource.scriptureReference }]
       : []),
   ];
 
-  const actionCard = (
+  // A biography has nothing to "get" — no download, no printed copy to
+  // request — so it has no action card at all (not even a disabled one).
+  const actionCard = isBiography ? undefined : (
     <Card topRule="navy" tone="surface-warm">
       <p className={cn("text-card-title font-semibold text-foreground", isUrdu && "font-urdu-display")}>
         {d.action.heading}
       </p>
       <div className="mt-4 flex flex-col gap-2.5">
-        {resource.downloadUrl ? (
+        {resource.bodyBlockDefs ? null : resource.downloadUrl ? (
           <Button href={resource.downloadUrl} variant="primary" isUrdu={isUrdu}>
             {d.action.download}
           </Button>
@@ -111,7 +129,7 @@ export default async function ResourceDetailPage({
           href={organization.whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          variant="secondary"
+          variant={resource.bodyBlockDefs ? "primary" : "secondary"}
           isUrdu={isUrdu}
         >
           {d.action.askForCopy}
@@ -120,16 +138,26 @@ export default async function ResourceDetailPage({
     </Card>
   );
 
+  const articleContent = resource.bodyBlockDefs
+    ? (isUrdu ? resource.bodyBlocksUr : resource.bodyBlocksEn) ?? resource.bodyBlocksEn ?? resource.bodyBlocksUr
+    : undefined;
+
   const body = (
     <div className="flex flex-col gap-8">
-      {resource.standfirst ? (
-        <p className={cn("text-standfirst measure text-ink-body", isUrdu && "font-urdu-display text-xl")}>
-          {resource.standfirst}
-        </p>
-      ) : null}
-      <p className={cn("text-body measure text-ink-body", isUrdu && "font-urdu-body")}>
-        {resource.description ?? "[PSEUDO/PLACEHOLDER — BODY TEXT SUPPLIED WITH THE RESOURCE]"}
-      </p>
+      {resource.bodyBlockDefs && articleContent ? (
+        <ArticleBody blocks={resource.bodyBlockDefs} content={articleContent} isUrdu={isUrdu} />
+      ) : (
+        <>
+          {resource.standfirst ? (
+            <p className={cn("text-standfirst measure text-ink-body", isUrdu && "font-urdu-display text-xl")}>
+              {resource.standfirst}
+            </p>
+          ) : null}
+          <p className={cn("text-body measure text-ink-body", isUrdu && "font-urdu-body")}>
+            {resource.description ?? "[PSEUDO/PLACEHOLDER — BODY TEXT SUPPLIED WITH THE RESOURCE]"}
+          </p>
+        </>
+      )}
 
       {resource.covers && resource.covers.length > 0 ? (
         <div>
@@ -151,18 +179,26 @@ export default async function ResourceDetailPage({
         </div>
       ) : null}
 
-      <div className="border-s-[3px] border-s-accent bg-surface-warm p-6 dark:border-s-dark-accent">
-        <p className={cn("text-card-title font-semibold text-foreground", isUrdu && "font-urdu-display")}>
-          {d.printedNotice.heading}
-        </p>
-        <p className={cn("text-small mt-2 text-ink-muted", isUrdu && "font-urdu-body text-base")}>
-          {d.printedNotice.body}
-        </p>
-      </div>
+      {resource.bodyBlockDefs ? null : (
+        <div className="border-s-[3px] border-s-accent bg-surface-warm p-6 dark:border-s-dark-accent">
+          <p className={cn("text-card-title font-semibold text-foreground", isUrdu && "font-urdu-display")}>
+            {d.printedNotice.heading}
+          </p>
+          <p className={cn("text-small mt-2 text-ink-muted", isUrdu && "font-urdu-body text-base")}>
+            {d.printedNotice.body}
+          </p>
+        </div>
+      )}
     </div>
   );
 
-  const rail = (
+  // A biography's Author is already shown in the header meta line below
+  // (and Language in the eyebrow above it), so the Details card would only
+  // duplicate them — and there's no genuinely related content to list
+  // (see `related` above), so the placeholder Related card would be
+  // showing a permanent "nothing here yet" note rather than real content.
+  // Both are omitted outright for this content type instead.
+  const rail = isBiography ? undefined : (
     <>
       <Card topRule="navy" tone="surface-warm">
         <p className={cn("text-card-title font-semibold text-foreground", isUrdu && "font-urdu-display")}>
@@ -190,7 +226,7 @@ export default async function ResourceDetailPage({
             items={[
               { label: common.nav.home, href: path("/") },
               { label: common.nav.resources, href: path("/resources") },
-              { label: resource.title },
+              { label: title },
             ]}
             isUrdu={isUrdu}
             className="mb-6"
@@ -209,7 +245,7 @@ export default async function ResourceDetailPage({
               isUrdu && "font-urdu-display",
             )}
           >
-            {resource.title}
+            {title}
           </h1>
           <div
             className={cn(
@@ -218,15 +254,18 @@ export default async function ResourceDetailPage({
             )}
           >
             <span>
-              {d.meta.author}: {resource.author ?? "[author]"}
+              {d.meta.author}: {author ?? "[author]"}
             </span>
-            <span>
-              {d.meta.date}: {resource.date ?? d.datePlaceholder}
-            </span>
-            <span>
-              {d.meta.pages}: {resource.pages ? String(resource.pages) : d.pagesPlaceholder}
-            </span>
-            <span>{d.meta.free}</span>
+            {resource.bodyBlockDefs ? null : (
+              <>
+                <span>
+                  {d.meta.date}: {resource.date ?? d.datePlaceholder}
+                </span>
+                <span>
+                  {d.meta.pages}: {resource.pages ? String(resource.pages) : d.pagesPlaceholder}
+                </span>
+              </>
+            )}
           </div>
         </Container>
       </div>

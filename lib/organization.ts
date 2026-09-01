@@ -3,7 +3,7 @@
  * translated content, so this lives outside the i18n content system.
  */
 export const organization = {
-  phone: "03442316634",
+  phone: "+92 344 2316634",
   whatsappUrl: "https://wa.me/923442316634",
   email: "pastornayyer@gmail.com",
 } as const;

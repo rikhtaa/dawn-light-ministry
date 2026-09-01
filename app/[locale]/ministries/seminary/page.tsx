@@ -8,7 +8,8 @@ import { FactTable } from "@/components/ui/FactTable";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { Reveal } from "@/components/ui/Reveal";
-import { subjectKeys, subjectMetaUnconfirmedByKey } from "@/lib/seminary";
+import { ArticleBody } from "@/components/ui/ArticleBody";
+import { subjectKeys, subjectMetaUnconfirmedByKey, programmeBodyBlocks, prospectusPdfPath } from "@/lib/seminary";
 import { organization } from "@/lib/organization";
 import { getSeminaryContent, getCommonContent, getHomeContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
@@ -55,8 +56,8 @@ export default async function SeminaryPage({ params }: PageProps<"/[locale]/mini
     strings.facts.bible,
     strings.facts.tradition,
     strings.facts.cities,
-    { ...strings.facts.duration, unconfirmed: true },
-    { ...strings.facts.fees, unconfirmed: true },
+    strings.facts.duration,
+    strings.facts.fees,
   ];
 
   const studyRows = [
@@ -158,18 +159,12 @@ export default async function SeminaryPage({ params }: PageProps<"/[locale]/mini
             <h2 className={cn("text-h2 mt-3 text-foreground", isUrdu && "font-urdu-display")}>
               {strings.programme.heading}
             </h2>
-            <p
-              className={cn(
-                "text-body measure mt-5 text-ink-body",
-                isUrdu && "font-urdu-body",
-              )}
-            >
-              {strings.programme.body}
-            </p>
-            <div className="measure mt-6 border-s-[3px] border-accent ps-5 dark:border-dark-accent">
-              <PlaceholderTag>{strings.programme.disclosure}</PlaceholderTag>
-            </div>
-
+            <ArticleBody
+              blocks={programmeBodyBlocks}
+              content={strings.programme.blocks}
+              isUrdu={isUrdu}
+              className="mt-5"
+            />
             <div className="mt-9 border-t-2 border-ink dark:border-dark-accent">
               {subjectKeys.map((key, i) => {
                 const subject = strings.programme.subjects[key];
@@ -200,9 +195,6 @@ export default async function SeminaryPage({ params }: PageProps<"/[locale]/mini
                         {subject.description}
                       </p>
                     </div>
-                    <span className="shrink-0 text-caption text-ink-faint sm:pt-1">
-                      {unconfirmed ? <PlaceholderTag>{subject.meta}</PlaceholderTag> : subject.meta}
-                    </span>
                   </div>
                 );
               })}
@@ -245,7 +237,7 @@ export default async function SeminaryPage({ params }: PageProps<"/[locale]/mini
               </div>
             </Card>
 
-            <div className="border border-dashed border-border-strong bg-surface-warm p-6">
+            <Card tone="surface-warm">
               <p className={cn("text-card-title font-semibold text-foreground", isUrdu && "font-urdu-display")}>
                 {strings.prospectus.heading}
               </p>
@@ -257,7 +249,10 @@ export default async function SeminaryPage({ params }: PageProps<"/[locale]/mini
               >
                 {strings.prospectus.body}
               </p>
-            </div>
+              <Button href={prospectusPdfPath} target="_blank" rel="noopener noreferrer" variant="secondary" isUrdu={isUrdu} className="mt-3.5">
+                {strings.prospectus.downloadLabel}
+              </Button>
+            </Card>
           </Reveal>
         </Container>
       </section>

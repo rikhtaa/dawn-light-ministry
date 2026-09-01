@@ -38,13 +38,12 @@ export const events = {
     body: "Services and classes continue as usual.",
   },
   weeklyRhythm: {
-    heading: "The weekly rhythm",
-    note: "Times to be confirmed by the ministry",
+    heading: "The Weekly Schedule",
     churchServices: { label: "Church services", value: "Twice weekly" },
     sundaySchool: { label: "Sunday School", value: "Weekly" },
-    seminaryClasses: { label: "Seminary classes", value: "Daily" },
+    seminaryClasses: { label: "Seminary classes", value: "Three times weekly" },
     holyCommunion: { label: "Holy Communion", value: "Monthly" },
-    confirmSuffix: "[CONFIRM]",
+    confirmSuffix: "",
   },
   filters: {
     upcoming: "Upcoming",

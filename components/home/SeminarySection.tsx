@@ -23,7 +23,7 @@ export function SeminarySection({
     strings.facts.classes,
     strings.facts.instruction,
     strings.facts.statementOfFaith,
-    { ...strings.facts.coursesSchedule, unconfirmed: true },
+    strings.facts.coursesSchedule,
   ];
 
   return (

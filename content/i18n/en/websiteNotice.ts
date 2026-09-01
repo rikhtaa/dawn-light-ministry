@@ -32,9 +32,9 @@ export const websiteNotice = {
   whoPublishes: {
     heading: "Who publishes this site",
     body1:
-      "Dawn of Light Ministry — نور کی صبح — associated with Bethlehem Church, Seminary & Educational Mission, serving Karachi and Faisalabad in the Baptist Christian tradition since 1982.",
+      "Dawn of Light Ministry — نور کی صبح — associated with Baptist Church, Seminary & Educational Mission, serving Karachi and Faisalabad in the Baptist Christian tradition since 1982.",
     body2:
-      "Contact: pastornayyer@gmail.com · 03442316634. Registered name, legal status and registered address: [PSEUDO/PLACEHOLDER — TO BE CONFIRMED. No legal or registration status is claimed on this website until the organization supplies it.]",
+      "Contact: pastornayyer@gmail.com · +92 344 2316634. Registered name, legal status and registered address: [PSEUDO/PLACEHOLDER — TO BE CONFIRMED. No legal or registration status is claimed on this website until the organization supplies it.]",
   },
   useOfContent: {
     heading: "Use of the content",
@@ -58,7 +58,7 @@ export const websiteNotice = {
   },
   giving: {
     heading: "Giving & donations",
-    body: "No payment is taken through this website until the organization's payment arrangements and accounting are approved. Any giving instructions published here will name the ministry's own approved provider or account. Treat any other request for money in the ministry's name as unverified, and confirm it by calling 03442316634.",
+    body: "No payment is taken through this website until the organization's payment arrangements and accounting are approved. Any giving instructions published here will name the ministry's own approved provider or account. Treat any other request for money in the ministry's name as unverified, and confirm it by calling +92 344 2316634.",
   },
   languageVersions: {
     heading: "Language versions",

@@ -40,7 +40,7 @@ export const errors = {
       },
       talk: {
         heading: "Talk to someone",
-        body: "WhatsApp 03442316634.",
+        body: "WhatsApp +92 344 2316634.",
         linkLabel: "Contact",
       },
     },

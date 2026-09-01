@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/Button";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { Reveal } from "@/components/ui/Reveal";
+import { ArticleBody } from "@/components/ui/ArticleBody";
+import { ourStoryBlocks, missionBlocks, visionBlocks, leadershipSlugs } from "@/lib/about";
 import { getAboutContent, getCommonContent, getHomeContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -88,14 +90,12 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
                 heading={strings.ourStory.heading}
                 isUrdu={isUrdu}
               />
-              <p
-                className={cn(
-                  "text-standfirst measure mt-5 text-ink-muted",
-                  isUrdu && "font-urdu-display",
-                )}
-              >
-                {strings.ourStory.standfirst}
-              </p>
+              <ArticleBody
+                blocks={ourStoryBlocks}
+                content={strings.ourStory.blocks}
+                isUrdu={isUrdu}
+                className="mt-5"
+              />
               <ul className="measure mt-7 flex flex-col gap-3 border-t border-border-soft pt-6">
                 {Object.values(strings.ourStory.points).map((point) => (
                   <li
@@ -142,14 +142,12 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
                 >
                   {strings.missionVision.missionLabel}
                 </p>
-                <p
-                  className={cn(
-                    "text-standfirst measure mt-2 text-foreground",
-                    isUrdu && "font-urdu-display",
-                  )}
-                >
-                  {strings.missionVision.mission}
-                </p>
+                <ArticleBody
+                  blocks={missionBlocks}
+                  content={strings.missionVision.missionBlocks}
+                  isUrdu={isUrdu}
+                  className="mt-2"
+                />
               </div>
               <div className="mt-6">
                 <p
@@ -160,14 +158,12 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
                 >
                   {strings.missionVision.visionLabel}
                 </p>
-                <p
-                  className={cn(
-                    "text-body measure mt-2 text-ink-body",
-                    isUrdu && "font-urdu-body",
-                  )}
-                >
-                  {strings.missionVision.vision}
-                </p>
+                <ArticleBody
+                  blocks={visionBlocks}
+                  content={strings.missionVision.visionBlocks}
+                  isUrdu={isUrdu}
+                  className="mt-2"
+                />
               </div>
               <p
                 className={cn(
@@ -259,9 +255,6 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
                 {strings.statementOfFaith.doctrine}
               </p>
             </div>
-            <p className="mt-5">
-              <PlaceholderTag>{strings.statementOfFaith.note}</PlaceholderTag>
-            </p>
           </div>
 
           <div className="hidden border border-dark-border bg-dark-surface p-6 lg:block">
@@ -295,7 +288,10 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
             />
           </Reveal>
           <div className="mt-9 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {[strings.leadership.nayyer, strings.leadership.rahmat].map((person, i) => (
+            {[
+              { person: strings.leadership.nayyer, slug: leadershipSlugs.nayyer },
+              { person: strings.leadership.rahmat, slug: leadershipSlugs.rahmat },
+            ].map(({ person, slug }, i) => (
               <Reveal key={person.name} index={i} className="h-full">
                 <div className="flex h-full flex-col border border-border bg-surface-warm">
                   <ImagePlaceholder ratio="3:2" caption={person.imagePlaceholder} />
@@ -308,10 +304,15 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
                     >
                       {person.name}
                     </p>
-                    <PlaceholderTag>{person.role}</PlaceholderTag>
-                    <p className="mt-2">
-                      <PlaceholderTag>{person.bio}</PlaceholderTag>
+                    <p className={cn("text-small text-ink-muted", isUrdu && "font-urdu-body text-base")}>
+                      {person.role}
                     </p>
+                    <p className={cn("mt-2 text-body text-ink-body", isUrdu && "font-urdu-body")}>
+                      {person.bio}
+                    </p>
+                    <Button href={path(`/resources/${slug}`)} variant="tertiary" showArrow isUrdu={isUrdu} className="mt-auto self-start pt-2">
+                      {person.readMoreLabel}
+                    </Button>
                   </div>
                 </div>
               </Reveal>

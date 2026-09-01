@@ -33,7 +33,7 @@ export const privacy = {
   },
   questionsCard: {
     heading: "Questions?",
-    body: "Write to pastornayyer@gmail.com or message 03442316634.",
+    body: "Write to pastornayyer@gmail.com or message +92 344 2316634.",
   },
   lead: "The ministry collects as little as possible, uses it only to reply, and never publishes what you send.",
   whatWeCollect: {
@@ -75,7 +75,7 @@ export const privacy = {
   },
   contactUs: {
     heading: "Contact us about your data",
-    body: "To ask what the ministry holds about you, to correct it, or to have it deleted, write to pastornayyer@gmail.com or message 03442316634. The ministry will respond within [PERIOD — CONFIRM].",
+    body: "To ask what the ministry holds about you, to correct it, or to have it deleted, write to pastornayyer@gmail.com or message +92 344 2316634. The ministry will respond within [PERIOD — CONFIRM].",
   },
   beforeLaunch: {
     kicker: "Before launch",

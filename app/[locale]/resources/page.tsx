@@ -187,11 +187,13 @@ export default async function ResourcesPage({ params }: PageProps<"/[locale]/res
                   resource.date ?? strings.detail.datePlaceholder,
                 ].filter((v): v is string => Boolean(v));
                 const actionLabel =
-                  resource.type === "article"
-                    ? strings.row.read
-                    : resource.downloadUrl
-                      ? strings.row.downloadPdf
-                      : strings.row.askForCopy;
+                  resource.type === "video"
+                    ? strings.row.watchOnYouTube
+                    : resource.type === "article"
+                      ? strings.row.read
+                      : resource.downloadUrl
+                        ? strings.row.downloadPdf
+                        : strings.row.askForCopy;
                 const href = resource.externalUrl ?? resource.downloadUrl ?? path(`/resources/${resource.slug}`);
 
                 return (

@@ -7,7 +7,7 @@
 export const metadata = {
   title: "Dawn of Light Ministry",
   description:
-    "Dawn of Light Ministry — Bethlehem Church, Seminary & Educational Mission, serving Karachi and Faisalabad, Pakistan since 1982.",
+    "Dawn of Light Ministry — Baptist Church, Seminary & Educational Mission, serving Karachi and Faisalabad, Pakistan since 1982.",
 } as const;
 
 export type MetadataStrings = typeof metadata;
