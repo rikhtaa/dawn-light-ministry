@@ -10,6 +10,9 @@ interface HeroProps {
   primaryCtaHref: string;
   secondaryCtaHref: string;
   isUrdu: boolean;
+  imageSrc?: string;
+  imageAlt?: string;
+  imageObjectPosition?: string;
 }
 
 /**
@@ -20,7 +23,7 @@ interface HeroProps {
  * AuroraBackground/LayoutTextFlip (Aceternity) are no longer used here —
  * the files themselves are untouched, this is the consumer being adapted.
  */
-export function Hero({ strings, primaryCtaHref, secondaryCtaHref, isUrdu }: HeroProps) {
+export function Hero({ strings, primaryCtaHref, secondaryCtaHref, isUrdu, imageSrc, imageAlt, imageObjectPosition }: HeroProps) {
   const facts = [strings.facts.founded, strings.facts.cities, strings.facts.seminary, strings.facts.tradition];
 
   return (
@@ -106,6 +109,9 @@ export function Hero({ strings, primaryCtaHref, secondaryCtaHref, isUrdu }: Hero
             caption={strings.imagePlaceholder}
             photoCaption={strings.imageCaption}
             className="min-h-[420px] min-w-0"
+            src={imageSrc}
+            alt={imageAlt}
+            objectPosition={imageObjectPosition}
           />
         </div>
       </Container>

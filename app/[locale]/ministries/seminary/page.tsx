@@ -143,6 +143,8 @@ export default async function SeminaryPage({ params }: PageProps<"/[locale]/mini
         ratio="21:9"
         caption={strings.masthead.imagePlaceholder}
         photoCaption={strings.masthead.imageCaption}
+        src="/images/ministries/seminary.png"
+        alt="A teacher addressing seated students in a seminary classroom"
       />
 
       <section className="bg-surface py-16 lg:py-24">

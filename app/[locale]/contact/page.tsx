@@ -58,7 +58,27 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
   const common = getCommonContent(locale);
   const path = (segment: string) => localizePath(locale, segment);
 
-  const cities = [t.cities.karachi, t.cities.faisalabad];
+  // Karachi has a real, organization-supplied photograph, so its panel uses
+  // that. Faisalabad has neither a photo nor a verified exact address
+  // (CLAUDE.md §32 — never an invented pin/coordinate/address), so its panel
+  // uses a city-level map instead — the verified fact is the city itself
+  // ("Faisalabad, Punjab" is already published content), not a street
+  // address. The map's own caption below makes clear this shows the city,
+  // not an exact church location.
+  const cities = [
+    {
+      ...t.cities.karachi,
+      imageSrc: "/images/contact/karachi_church.png",
+      imageAlt: "Congregation seated for a service, viewed from the back of the room",
+      mapQuery: undefined as string | undefined,
+    },
+    {
+      ...t.cities.faisalabad,
+      imageSrc: undefined as string | undefined,
+      imageAlt: undefined as string | undefined,
+      mapQuery: "Faisalabad, Punjab, Pakistan",
+    },
+  ];
   const directionCities = [t.gettingThere.karachi, t.gettingThere.faisalabad];
 
   return (
@@ -151,7 +171,28 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
               <div className="flex flex-col gap-4">
                 {cities.map((city) => (
                   <div key={city.name} className="border border-border">
-                    <ImagePlaceholder caption={t.cities.imagePlaceholder} ratio="16:9" bordered={false} />
+                    {city.mapQuery ? (
+                      <div className="relative aspect-video border-b border-border-soft">
+                        <iframe
+                          src={`https://www.google.com/maps?q=${encodeURIComponent(city.mapQuery)}&z=11&output=embed`}
+                          title={`Map showing the general area of ${city.name}`}
+                          loading="lazy"
+                          referrerPolicy="no-referrer-when-downgrade"
+                          className="absolute inset-0 h-full w-full border-0"
+                        />
+                        <span className="absolute inset-x-0 bottom-0 max-w-[85%] bg-ink px-4 py-2.5 text-[0.78125rem] leading-[1.4] text-dark-body">
+                          {t.cities.mapDisclaimer}
+                        </span>
+                      </div>
+                    ) : (
+                      <ImagePlaceholder
+                        caption={t.cities.imagePlaceholder}
+                        ratio="16:9"
+                        bordered={false}
+                        src={city.imageSrc}
+                        alt={city.imageAlt}
+                      />
+                    )}
                     <div className="p-6">
                       <p className={cn("text-card-title mb-2.5 text-foreground", isUrdu && "font-urdu-display")}>
                         {city.name}
@@ -172,7 +213,6 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
                   </div>
                 ))}
               </div>
-              <p className={cn("text-small mt-3.5 text-ink-faint", isUrdu && "font-urdu-body text-base")}>{t.cities.note}</p>
             </Reveal>
 
             <Reveal className="min-w-0 border border-border bg-surface-warm p-7.5 sm:p-9">

@@ -29,6 +29,11 @@ interface MinistryRowProps {
   accent: MinistryTopRule;
   isUrdu?: boolean;
   className?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  /** "contain" for a source image (e.g. a portrait book cover) where cropping would cut off real content. */
+  imageObjectFit?: "cover" | "contain";
+  imageObjectPosition?: string;
 }
 
 /**
@@ -62,6 +67,10 @@ export function MinistryRow({
   accent,
   isUrdu = false,
   className,
+  imageSrc,
+  imageAlt,
+  imageObjectFit,
+  imageObjectPosition,
 }: MinistryRowProps) {
   return (
     <div
@@ -72,7 +81,15 @@ export function MinistryRow({
     >
       <div className="flex flex-col sm:flex-row sm:items-start sm:gap-7">
         <div className="w-full shrink-0 sm:w-[180px] lg:w-[240px]">
-          <ImagePlaceholder caption={imagePlaceholder} ratio="3:2" bordered={false} />
+          <ImagePlaceholder
+            caption={imagePlaceholder}
+            ratio="3:2"
+            bordered={false}
+            src={imageSrc}
+            alt={imageAlt}
+            objectFit={imageObjectFit}
+            objectPosition={imageObjectPosition}
+          />
         </div>
 
         <div

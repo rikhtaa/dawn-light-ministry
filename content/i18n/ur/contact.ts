@@ -54,7 +54,7 @@ export const contact: Translated<ContactStrings> = {
     eyebrow: { value: "ہم کہاں ہیں", source: "author", published: true, reviewed: true, sourceHash: "1ba88b77ba0f6e0d" },
     heading: { value: "دو شہر", source: "author", published: true, reviewed: true, sourceHash: "5ce83724ce33299b" },
     imagePlaceholder: { value: "", source: "author", published: true, reviewed: true, sourceHash: "6d01691f5df72383" },
-    note: { value: "", source: "author", published: true, reviewed: true, sourceHash: "39ef5d7851d2d22c" },
+    mapDisclaimer: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "96f08c8a73f55a95" },
     karachi: {
       name: { value: "کراچی، سندھ", source: "author", published: true, reviewed: true, sourceHash: "1716b042913b57f3" },
       addressLabel: { value: "پتہ", source: "author", published: true, reviewed: true, sourceHash: "56ef8f20955f2564" },

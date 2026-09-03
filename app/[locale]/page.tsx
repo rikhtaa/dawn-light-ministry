@@ -31,6 +31,9 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         primaryCtaHref={path("/about#mission-vision")}
         secondaryCtaHref={path("/prayer")}
         isUrdu={isUrdu}
+        imageSrc="/images/home/hero.png"
+        imageAlt="Congregation processing through a street carrying palm branches, with two children among the group"
+        imageObjectPosition="center 60%"
       />
 
       <MissionSection strings={strings.mission} ctaHref={path("/about#mission-vision")} isUrdu={isUrdu} />
@@ -47,6 +50,8 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         primaryCtaHref={path("/ministries/seminary")}
         secondaryCtaHref={path("/contact")}
         isUrdu={isUrdu}
+        imageSrc="/images/ministries/seminary.png"
+        imageAlt="A teacher addressing seated students in a seminary classroom"
       />
 
       <ChildrenEducationSection strings={strings.childrenEducation} isUrdu={isUrdu} />

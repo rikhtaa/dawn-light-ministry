@@ -10,7 +10,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { MinistryMasthead } from "@/components/ministries/MinistryMasthead";
 import { MinistrySiblingsAndCta } from "@/components/ministries/MinistrySiblingsAndCta";
 import { ArticleBody } from "@/components/ui/ArticleBody";
-import { churchBodyBlocks } from "@/lib/ministries";
+import { churchBodyBlocks, ministryPageImageByKey } from "@/lib/ministries";
 import { organization } from "@/lib/organization";
 import { getMinistryPagesContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
@@ -107,7 +107,13 @@ export default async function ChurchPage({
         </Container>
       </div>
 
-      <ImagePlaceholder ratio="21:9" caption={d.photoCaption} bordered={false} />
+      <ImagePlaceholder
+        ratio="21:9"
+        caption={d.photoCaption}
+        bordered={false}
+        src={ministryPageImageByKey.church?.src}
+        alt={ministryPageImageByKey.church?.alt}
+      />
 
       <section className="bg-surface py-16 lg:py-24">
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_380px] lg:gap-16">

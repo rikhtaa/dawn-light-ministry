@@ -118,6 +118,9 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
                   ratio="16:9"
                   caption={strings.ourStory.imagePlaceholder}
                   bordered={false}
+                  src="/images/about/ourstory/early_ministry.jpg"
+                  alt="A speaker addressing an indoor gathering decorated for Christmas, with a seated congregation and a nativity mural"
+                  objectPosition="center 60%"
                 />
                 <p className="border-t border-border px-4 py-3 text-caption text-ink-faint">
                   {strings.ourStory.imageCaption}
@@ -289,12 +292,43 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
           </Reveal>
           <div className="mt-9 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {[
-              { person: strings.leadership.nayyer, slug: leadershipSlugs.nayyer },
-              { person: strings.leadership.rahmat, slug: leadershipSlugs.rahmat },
-            ].map(({ person, slug }, i) => (
+              {
+                person: strings.leadership.nayyer,
+                slug: leadershipSlugs.nayyer,
+                imageSrc: "/images/about/leadership/pastor_nayyergul.jpeg",
+                imageAlt: "Pastor Nayyer Gull speaking at a lectern",
+                photoCaption: undefined as string | undefined,
+                objectPosition: "center 20%",
+              },
+              {
+                // The only supplied photo of Pastor Rahmat is an old,
+                // hand-annotated group snapshot (paper-tape labels, a circle
+                // drawn around his face, an arrow, and other unnamed people
+                // in frame). Its own aspect ratio is close enough to this
+                // card's 3:2 box that almost the entire photo shows
+                // regardless of objectPosition — there is no crop-only fix
+                // here; a dedicated cropped asset would be needed to isolate
+                // just him. Presented explicitly as an archival group
+                // photograph (photoCaption below) rather than passed off as
+                // a studio portrait.
+                person: strings.leadership.rahmat,
+                slug: leadershipSlugs.rahmat,
+                imageSrc: "/images/about/leadership/pastor_rahmat.png",
+                imageAlt: "An early ministry-era group photograph; Pastor Rahmat is circled in the original",
+                photoCaption: "Archival photograph, circled in the original",
+                objectPosition: "center 45%",
+              },
+            ].map(({ person, slug, imageSrc, imageAlt, photoCaption, objectPosition }, i) => (
               <Reveal key={person.name} index={i} className="h-full">
                 <div className="flex h-full flex-col border border-border bg-surface-warm">
-                  <ImagePlaceholder ratio="3:2" caption={person.imagePlaceholder} />
+                  <ImagePlaceholder
+                    ratio="3:2"
+                    caption={person.imagePlaceholder}
+                    src={imageSrc}
+                    alt={imageAlt}
+                    photoCaption={photoCaption}
+                    objectPosition={objectPosition}
+                  />
                   <div className="flex flex-1 flex-col gap-2 p-6">
                     <p
                       className={cn(

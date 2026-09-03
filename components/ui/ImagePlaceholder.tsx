@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 type Ratio = "3:2" | "16:9" | "21:9" | "4:3" | "4:5";
@@ -42,12 +43,34 @@ interface ImagePlaceholderProps {
    */
   tone?: "default" | "on-navy";
   className?: string;
+  /**
+   * A real, organization-supplied photograph (`public/images/...`). When
+   * given, this renders the actual photo instead of the diagonal-stripe
+   * fill — `caption` then only backs the `alt`-less accessible name for a
+   * decorative-adjacent container and is otherwise unused. Omit to keep
+   * today's "photograph pending" placeholder behaviour unchanged.
+   */
+  src?: string;
+  /** Required alongside `src` — a neutral, factual description (never an invented identity). */
+  alt?: string;
+  /**
+   * "cover" (default) fills the frame, cropping to match `ratio` — right
+   * for photographs. "contain" letterboxes instead, for source images
+   * (e.g. a portrait book cover) where cropping would cut off the actual
+   * content rather than just tightening a photographic crop.
+   */
+  objectFit?: "cover" | "contain";
+  /** CSS `object-position`, e.g. "center 30%" — keep faces/subjects in frame on a tighter crop. */
+  objectPosition?: string;
 }
 
 /**
  * HANDOFF.md §6: ships wherever an approved photograph is missing — a
  * marked diagonal-stripe fill, never a decorative gradient, with a mono
  * caption naming what belongs there. §9 darkens the stripe under `.dark`.
+ * When `src` is supplied (a real, organization-provided photograph), this
+ * renders that photo instead, in the same aspect-ratio/border/photoCaption
+ * shape every call site already relies on.
  */
 export function ImagePlaceholder({
   caption,
@@ -56,8 +79,39 @@ export function ImagePlaceholder({
   bordered = true,
   tone = "default",
   className,
+  src,
+  alt,
+  objectFit = "cover",
+  objectPosition,
 }: ImagePlaceholderProps) {
   const onNavy = tone === "on-navy";
+
+  if (src) {
+    return (
+      <div
+        className={cn(
+          "relative overflow-hidden",
+          bordered && (onNavy ? "border border-dark-border" : "border border-border"),
+          ratioClasses[ratio],
+          className,
+        )}
+      >
+        <Image
+          src={src}
+          alt={alt ?? caption}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 720px"
+          className={objectFit === "contain" ? "object-contain" : "object-cover"}
+          style={objectPosition ? { objectPosition } : undefined}
+        />
+        {photoCaption ? (
+          <span className="absolute inset-x-0 bottom-0 max-w-[80%] bg-ink px-5 py-3 text-[0.78125rem] leading-[1.4] text-dark-body">
+            {photoCaption}
+          </span>
+        ) : null}
+      </div>
+    );
+  }
 
   return (
     <div

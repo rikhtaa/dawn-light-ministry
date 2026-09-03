@@ -29,7 +29,7 @@ export const contact = {
     eyebrow: "Where we are",
     heading: "Two cities",
     imagePlaceholder: "church photograph or map",
-    note: "Maps appear only once the organization confirms exact addresses. Until then the panels state plainly that the address is to be confirmed rather than showing an approximate pin.",
+    mapDisclaimer: "This map shows the general area of the city, not an exact church address.",
     karachi: {
       name: "Karachi, Sindh",
       addressLabel: "Address",

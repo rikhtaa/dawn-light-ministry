@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
@@ -106,17 +107,32 @@ export default async function ChildrensEducationPage({
         </Container>
       </div>
 
-      <div
-        role="img"
-        aria-label={`Photograph pending: ${d.photoCaption}`}
-        className={cn(
-          "relative flex aspect-[21/9] flex-col items-center justify-center gap-2 border-0",
-          "[background-image:repeating-linear-gradient(135deg,#E8E2D6_0_10px,#DFD8CA_10px_20px)]",
-          "dark:[background-image:repeating-linear-gradient(135deg,#1B3145_0_10px,#16293A_10px_20px)]",
-        )}
-      >
-        <span className="text-mono-label bg-surface/90 px-2 py-1 text-ink-ghost">{d.photoCaption}</span>
-        <span className="text-mono-label text-ink-ghost/80">{d.photoSecondaryCaption}</span>
+      {/*
+       * `photoSecondaryCaption` ("no identifiable child published without
+       * written permission") is deliberately NOT rendered here anymore: the
+       * photo below does show identifiable children, published with the
+       * organization's written permission — displaying that sentence over
+       * this specific image would misrepresent it. The sentence itself
+       * stays intact in content/i18n for wherever it's still accurate.
+       */}
+      <div className="relative aspect-[21/9] overflow-hidden border-0">
+        {/*
+         * Source is 1368x742 (≈1.84:1), cropped into a 21:9 (≈2.33:1) box —
+         * ~79% of the source height survives, ~21% cropped. The back row's
+         * heads sit close to the very top of the source frame with almost
+         * no headroom above them, so the crop must come almost entirely
+         * from the bottom (the front row's torsos, which isn't the point
+         * of the photo) rather than split top/bottom — a centered or
+         * bottom-biased position clips their hair/foreheads.
+         */}
+        <Image
+          src="/images/ministriesPages/children_education.jpg"
+          alt="A large group of children posed together for a Sunday School class photograph"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "center 8%" }}
+        />
       </div>
 
       <section className="bg-surface py-16 lg:py-24">

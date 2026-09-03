@@ -11,6 +11,8 @@ interface SeminarySectionProps {
   primaryCtaHref: string;
   secondaryCtaHref: string;
   isUrdu: boolean;
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
 export function SeminarySection({
@@ -18,6 +20,8 @@ export function SeminarySection({
   primaryCtaHref,
   secondaryCtaHref,
   isUrdu,
+  imageSrc,
+  imageAlt,
 }: SeminarySectionProps) {
   const facts = [
     strings.facts.classes,
@@ -64,7 +68,13 @@ export function SeminarySection({
           </div>
         </div>
         <div className="min-w-0">
-          <ImagePlaceholder ratio="16:9" caption={strings.imageCaption} className="mb-6" />
+          <ImagePlaceholder
+            ratio="16:9"
+            caption={strings.imageCaption}
+            className="mb-6"
+            src={imageSrc}
+            alt={imageAlt}
+          />
           <FactTable facts={facts} layout="stacked" tone="on-navy" isUrdu={isUrdu} />
         </div>
       </Reveal>

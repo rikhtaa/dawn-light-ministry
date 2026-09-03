@@ -19,6 +19,8 @@ export function ChildrenEducationSection({ strings, isUrdu }: ChildrenEducationS
           ratio="4:3"
           caption={strings.imagePlaceholder}
           className="min-h-[320px] min-w-0 border-0"
+          src="/images/home/sunday_school.jpg"
+          alt="A ministry worker giving a small gift to a child"
         />
         <div className="min-w-0 px-(--container-gutter) py-16 lg:py-26 lg:pe-16 lg:ps-16">
           <Reveal index={1}>

@@ -10,7 +10,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { MinistryMasthead } from "@/components/ministries/MinistryMasthead";
 import { MinistrySiblingsAndCta } from "@/components/ministries/MinistrySiblingsAndCta";
 import { ArticleBody } from "@/components/ui/ArticleBody";
-import { educationBodyBlocks } from "@/lib/ministries";
+import { educationBodyBlocks, ministryPageImageByKey } from "@/lib/ministries";
 import { getMinistryPagesContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -97,7 +97,13 @@ export default async function EducationPage({
         </Container>
       </div>
 
-      <ImagePlaceholder ratio="21:9" caption={d.photoCaption} bordered={false} />
+      <ImagePlaceholder
+        ratio="21:9"
+        caption={d.photoCaption}
+        bordered={false}
+        src={ministryPageImageByKey.education?.src}
+        alt={ministryPageImageByKey.education?.alt}
+      />
 
       <section className="bg-surface py-16 lg:py-24">
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_380px] lg:gap-16">

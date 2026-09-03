@@ -59,6 +59,80 @@ export const ministryMetaUnconfirmedByKey: Record<MinistryKey, boolean> = {
 };
 
 /**
+ * Real, organization-supplied photographs for the ministries-index row
+ * thumbnails (public/images/, structural — not translatable, so it lives
+ * here rather than content/i18n). Every row's source photo has a different
+ * native aspect ratio than the row's fixed 3:2 box, so `objectPosition` is
+ * set per entry to keep the actual subject (not empty ceiling/floor) in
+ * frame after the browser's own object-fit: cover crop — no pre-cropped
+ * derivative files are used here, per instruction.
+ */
+export const ministryRowImageByKey: Partial<Record<MinistryKey, { src: string; alt: string; objectFit?: "cover" | "contain"; objectPosition?: string }>> = {
+  church: {
+    // Reuses the same new photo as the inner Church page's own hero.
+    src: "/images/ministriesPages/church.png",
+    alt: "A congregation gathered for a Christmas celebration",
+  },
+  seminary: {
+    src: "/images/ministries/seminary.png",
+    alt: "A teacher addressing seated students in a seminary classroom",
+  },
+  publishing: {
+    src: "/images/ministries/christian_article.png",
+    alt: "Cover of an Urdu Christian book by Pastor Nayyer Gul",
+    objectFit: "contain",
+  },
+  teachingLectures: {
+    src: "/images/ministries/lectures.jpg",
+    alt: "Two people speaking during a recorded interview",
+  },
+  outreach: {
+    src: "/images/ministries/givings_hinuds.jpg",
+    alt: "Children receiving snacks and small gifts from a ministry worker",
+    objectPosition: "center 65%",
+  },
+  childrensEducation: {
+    src: "/images/ministries/sunday_school.jpg",
+    alt: "Children in white costumes performing during a Sunday School event",
+  },
+};
+
+/**
+ * Real photographs for each ministry detail page's own 21:9 masthead photo
+ * band — keyed by content/i18n's ministryPages.ts namespace keys
+ * (church/publishing/education), not `MinistryKey` (the index/home card
+ * vocabulary, which maps "outreach" to this same `/ministries/education`
+ * route via a different key — see HANDOFF.md's Resource/Event vocabulary
+ * note; not reconciled here, just not reused as a mismatched key set).
+ * `childrensEducation` is deliberately absent — that page hand-composes its
+ * own photo band (see app/[locale]/ministries/childrens-education/page.tsx).
+ * The 21:9 band is far wider than any of these photos' native ratio, so
+ * `objectPosition` carries real weight here — each is set to keep the
+ * actual subject (not cropped-off ceiling/floor) in frame.
+ */
+export const ministryPageImageByKey: Partial<Record<"church" | "publishing" | "education", { src: string; alt: string; objectFit?: "cover" | "contain"; objectPosition?: string }>> = {
+  church: {
+    src: "/images/ministriesPages/church.png",
+    alt: "A congregation gathered for a Christmas celebration",
+  },
+  publishing: {
+    src: "/images/ministries/christian_article.png",
+    alt: "Cover of an Urdu Christian book by Pastor Nayyer Gul",
+    objectFit: "contain",
+  },
+  education: {
+    // A severe 4:3-into-21:9 crop (~57% of the source height survives) —
+    // still requires a dedicated cropped asset to frame properly; see the
+    // audit report. This objectPosition is a best-effort mitigation, biased
+    // toward the top so the standing teacher and the title text aren't
+    // cropped out.
+    src: "/images/ministriesPages/education_outreach.png",
+    alt: "A teacher addressing a seated group in a community setting, captioned \"Preaching in Hindus\"",
+    objectPosition: "center 20%",
+  },
+};
+
+/**
  * Block order/kind for `content/i18n/en|ur/ministryPages.ts`'s
  * `church.body.blocks` — restructured from the ARTICLES source document's
  * "Church Ministry" article (lib/article.ts). Structural fact, not

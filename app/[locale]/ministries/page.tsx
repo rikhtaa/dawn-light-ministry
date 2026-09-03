@@ -6,7 +6,7 @@ import { NavyBand } from "@/components/layout/NavyBand";
 import { Button } from "@/components/ui/Button";
 import { MinistryRow } from "@/components/ui/MinistryRow";
 import { Reveal } from "@/components/ui/Reveal";
-import { ministryItems, ministryMetaUnconfirmedByKey, ministryTopRuleByKey } from "@/lib/ministries";
+import { ministryItems, ministryMetaUnconfirmedByKey, ministryTopRuleByKey, ministryRowImageByKey } from "@/lib/ministries";
 import { getMinistriesContent, getCommonContent, getHomeContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -100,22 +100,29 @@ export default async function MinistriesPage({ params }: PageProps<"/[locale]/mi
       <section className="bg-paper">
         <Container>
           <div className="py-2 lg:py-6">
-            {ministryItems.map((item, i) => (
-              <Reveal key={item.key} index={i}>
-                <MinistryRow
-                  kicker={ministriesStrings.items[item.key].kicker}
-                  title={ministriesStrings.items[item.key].title}
-                  description={ministriesStrings.items[item.key].description}
-                  meta={ministriesStrings.items[item.key].meta}
-                  metaUnconfirmed={ministryMetaUnconfirmedByKey[item.key]}
-                  imagePlaceholder={strings.rows[item.key].imagePlaceholder}
-                  href={path(item.href)}
-                  linkLabel={strings.rows[item.key].linkLabel}
-                  accent={ministryTopRuleByKey[item.key]}
-                  isUrdu={isUrdu}
-                />
-              </Reveal>
-            ))}
+            {ministryItems.map((item, i) => {
+              const image = ministryRowImageByKey[item.key];
+              return (
+                <Reveal key={item.key} index={i}>
+                  <MinistryRow
+                    kicker={ministriesStrings.items[item.key].kicker}
+                    title={ministriesStrings.items[item.key].title}
+                    description={ministriesStrings.items[item.key].description}
+                    meta={ministriesStrings.items[item.key].meta}
+                    metaUnconfirmed={ministryMetaUnconfirmedByKey[item.key]}
+                    imagePlaceholder={strings.rows[item.key].imagePlaceholder}
+                    href={path(item.href)}
+                    linkLabel={strings.rows[item.key].linkLabel}
+                    accent={ministryTopRuleByKey[item.key]}
+                    isUrdu={isUrdu}
+                    imageSrc={image?.src}
+                    imageAlt={image?.alt}
+                    imageObjectFit={image?.objectFit}
+                    imageObjectPosition={image?.objectPosition}
+                  />
+                </Reveal>
+              );
+            })}
           </div>
         </Container>
       </section>
