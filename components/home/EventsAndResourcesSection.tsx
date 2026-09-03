@@ -10,8 +10,12 @@ interface EventsAndResourcesSectionProps {
   eventsStrings: HomeStrings["events"];
   eventsCtaHref: string;
   eventsAllHref: string;
+  /** Real published events (up to 3) — empty renders the existing designed empty state instead. */
+  events: { title: string; meta?: string }[];
   resourcesStrings: HomeStrings["resources"];
   resourcesAllHref: string;
+  /** Real resource/sermon teasers (kicker labels stay translated UI copy; title/meta are real data). */
+  resourceItems: { kicker: string; title: string; meta: string }[];
   isUrdu: boolean;
 }
 
@@ -51,12 +55,12 @@ export function EventsAndResourcesSection({
   eventsStrings,
   eventsCtaHref,
   eventsAllHref,
+  events,
   resourcesStrings,
   resourcesAllHref,
+  resourceItems,
   isUrdu,
 }: EventsAndResourcesSectionProps) {
-  const resourceItems = Object.values(resourcesStrings.items);
-
   return (
     <section className="border-t border-border bg-surface py-16 lg:py-26">
       <Container>
@@ -68,22 +72,46 @@ export function EventsAndResourcesSection({
               href={eventsAllHref}
               isUrdu={isUrdu}
             />
-            <div className="mt-4 border border-dashed border-input-border bg-surface-warm px-7 py-10 text-center">
-              <p className={cn("font-serif text-[1.1875rem] text-foreground", isUrdu && "font-urdu-display")}>
-                {eventsStrings.emptyHeading}
-              </p>
-              <p
-                className={cn(
-                  "measure mx-auto mt-2 text-small text-ink-muted",
-                  isUrdu && "font-urdu-body text-base",
-                )}
-              >
-                {eventsStrings.emptyState}
-              </p>
-              <Button href={eventsCtaHref} variant="secondary" size="compact" isUrdu={isUrdu} className="mt-4">
-                {eventsStrings.emptyCta}
-              </Button>
-            </div>
+            {events.length > 0 ? (
+              <RuledList className="mt-4">
+                {events.map((event) => (
+                  <RuledRow key={event.title} align="start">
+                    <div className="min-w-0">
+                      <p className={cn("font-serif text-[1.1875rem] text-foreground", isUrdu && "font-urdu-display")}>
+                        {event.title}
+                      </p>
+                      {event.meta ? (
+                        <p
+                          className={cn(
+                            "text-small mt-0.5 text-ink-faint",
+                            isUrdu && "font-urdu-body text-base",
+                          )}
+                        >
+                          {event.meta}
+                        </p>
+                      ) : null}
+                    </div>
+                  </RuledRow>
+                ))}
+              </RuledList>
+            ) : (
+              <div className="mt-4 border border-dashed border-input-border bg-surface-warm px-7 py-10 text-center">
+                <p className={cn("font-serif text-[1.1875rem] text-foreground", isUrdu && "font-urdu-display")}>
+                  {eventsStrings.emptyHeading}
+                </p>
+                <p
+                  className={cn(
+                    "measure mx-auto mt-2 text-small text-ink-muted",
+                    isUrdu && "font-urdu-body text-base",
+                  )}
+                >
+                  {eventsStrings.emptyState}
+                </p>
+                <Button href={eventsCtaHref} variant="secondary" size="compact" isUrdu={isUrdu} className="mt-4">
+                  {eventsStrings.emptyCta}
+                </Button>
+              </div>
+            )}
           </Reveal>
 
           <Reveal index={1} className="min-w-0">

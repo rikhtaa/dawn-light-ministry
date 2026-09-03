@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/Button";
 import { RuledList } from "@/components/ui/RuledRow";
 import { Reveal } from "@/components/ui/Reveal";
 import { ResourceRow } from "@/components/resources/ResourceRow";
-import { resources, placeholderResources } from "@/lib/resources";
-import { sermons, placeholderSermons } from "@/lib/sermons";
+import { publishedResources } from "@/lib/resources";
+import { publishedSermons } from "@/lib/sermons";
 import { getResourcesContent, getSermonsContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -32,10 +32,7 @@ export async function generateMetadata({
 }
 
 /**
- * Dawn of Light - Resources.dc.html. Draws one populated frame only (no
- * empty-state composition of its own, unlike Events) — so, matching
- * Sermons' precedent, this falls back to `placeholderResources` when
- * `resources` is empty rather than showing nothing.
+ * Dawn of Light - Resources.dc.html.
  *
  * HANDOFF.md §13 conflict, reported not silently resolved: HANDOFF says
  * "Resources keeps a 'Sermons' filter chip that links to /sermons rather
@@ -59,17 +56,18 @@ export default async function ResourcesPage({ params }: PageProps<"/[locale]/res
   const common = getCommonContent(locale);
   const path = (segment: string) => localizePath(locale, segment);
 
-  const displayResources = resources.length > 0 ? resources : placeholderResources;
-  const [latestSermon] = sermons.length > 0 ? sermons : placeholderSermons;
+  const displayResources = publishedResources;
+  const [latestSermon] = publishedSermons;
 
   const languageLabel = (lang: "en" | "ur") =>
     lang === "ur" ? sermonsStrings.filters.urdu : sermonsStrings.filters.english;
-  const sermonFormatLabel =
-    latestSermon.format === "video"
+  const sermonFormatLabel = latestSermon
+    ? latestSermon.format === "video"
       ? sermonsStrings.row.formatVideo
       : latestSermon.format === "audio"
         ? sermonsStrings.row.formatAudio
-        : sermonsStrings.row.formatText;
+        : sermonsStrings.row.formatText
+    : undefined;
 
   const typeLabel = strings.detail.type;
   const totalCount = displayResources.length + (latestSermon ? 1 : 0);
@@ -155,7 +153,7 @@ export default async function ResourcesPage({ params }: PageProps<"/[locale]/res
             <RuledList className="mt-2">
               {latestSermon ? (
                 <ResourceRow
-                  kicker={`${sermonsStrings.row.kicker.toUpperCase()} · ${languageLabel(latestSermon.language)} · ${sermonFormatLabel.toUpperCase()}`}
+                  kicker={`${sermonsStrings.row.kicker.toUpperCase()} · ${languageLabel(latestSermon.language)} · ${(sermonFormatLabel ?? "").toUpperCase()}`}
                   title={latestSermon.title}
                   description={latestSermon.description}
                   meta={[latestSermon.speaker, latestSermon.date ?? sermonsStrings.latest.datePlaceholder, latestSermon.scriptureReference ?? ""].filter(Boolean)}

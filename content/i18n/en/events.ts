@@ -9,9 +9,9 @@
  * explicit that "the page ships empty by default, because inventing
  * events would be worse than having none" and labels the empty state
  * "the launch state" — unlike Sermons/Resources, whose designs show no
- * separate empty composition. So /events reads `events` only (no
- * `placeholderEvents` fallback): empty today, and the empty state is the
- * intended shipped behaviour, not a placeholder for missing content.
+ * separate empty composition. `events` now holds real, organization-
+ * supplied entries; the empty-state composition stays in the code for a
+ * genuinely empty list, not as a stand-in for missing content.
  */
 export const events = {
   metadata: {

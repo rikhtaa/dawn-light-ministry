@@ -7,10 +7,8 @@
  * Sermons/Events are modelled.
  *
  * Resources.dc.html draws no separate empty-state composition — its one
- * populated frame is the only frame given — so, like Sermons (and unlike
- * Events, whose own design explicitly frames an empty state as "the
- * launch state"), /resources falls back to `placeholderResources` when
- * `resources` is empty, rather than showing nothing.
+ * populated frame is the only frame given. `resources` now holds real,
+ * organization-supplied entries.
  *
  * HANDOFF.md §13 conflict (reported, not silently resolved — see the
  * implementation's final report): HANDOFF states "Resources keeps a

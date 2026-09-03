@@ -1,18 +1,13 @@
 import type { Locale } from "@/lib/i18n/types";
+import { isPublished, warnOnDuplicateSlugs, type Publishable } from "@/lib/content-status";
 
 /**
  * Event records — structured data, not translatable UI copy (HANDOFF.md
- * §16's content/data model, mirroring lib/sermons.ts exactly). `events` is
- * empty: no event has been supplied yet. Neither an Events index page nor
- * real event data exists in this codebase yet — this file exists so
- * /events/[slug] (Dawn of Light - Detail Templates.dc.html "02 — Event
- * detail") has something real to route to, on the same "design's own
- * placeholder composition, not fabricated content" basis established for
- * Sermons (see lib/sermons.ts).
+ * §16's content/data model, mirroring lib/sermons.ts exactly).
  */
 export type EventStatus = "open" | "closed" | "cancelled" | "completed";
 
-export interface Event {
+export interface Event extends Publishable {
   id: string;
   title: string;
   slug: string;
@@ -36,68 +31,57 @@ export interface Event {
   language?: Locale;
 }
 
-export const events: Event[] = [];
-
 /**
- * The connected design's own four status-variant demo cards, transcribed
- * as bracket-placeholder events rather than invented ones — CLAUDE.md §32
- * forbids fabricating event facts/dates, so every field here is either
- * absent or the design's own generic bracket text. Exercises all four
- * `EventStatusBadge`/action-card variants the template must support.
+ * Real event data, transcribed from the organization-supplied events
+ * document. All three are retrospective summaries of completed ministry
+ * activity (status: "completed"), not upcoming/attendable events — the
+ * source gives no specific date, time, address, or registration details
+ * for any of them, only a year and a description, so those fields stay
+ * absent rather than invented. `title` is not supplied by the source
+ * (each entry is only labeled "event 1"/"event 2"/"event 3"); the titles
+ * below are a minimal, factual summary of each entry's own description,
+ * not an added fact — flagged in the Step 5 report as a judgment call.
  */
-export const placeholderEvents: Event[] = [
+export const events: Event[] = [
   {
-    id: "placeholder-open",
-    title: "[EVENT TITLE — TO BE SUPPLIED]",
-    slug: "placeholder-open",
+    id: "teaching-and-educational-support-2023",
+    title: "Teaching a Friend About Christianity and Supporting His Education",
+    slug: "teaching-and-educational-support-2023",
     description:
-      "[PSEUDO/PLACEHOLDER — EVENT DESCRIPTION SUPPLIED WHEN THE EVENT IS CONFIRMED. No summary is written on the ministry's behalf.]",
-    location: "[venue]",
-    city: "[city]",
-    address: "[PSEUDO/PLACEHOLDER — ADDRESS TO BE CONFIRMED]",
-    status: "open",
-    programme: [
-      { time: "[time]", session: "[session]" },
-      { time: "[time]", session: "[session]" },
-    ],
+      "In 2023, Pastor Nayyer Gull taught a non-Christian about Christianity, helped him financially, supported his education, and provided books.",
+    status: "completed",
   },
   {
-    id: "placeholder-closed",
-    title: "[Event title — to be supplied]",
-    slug: "placeholder-closed",
-    location: "[venue]",
-    city: "[city]",
-    status: "closed",
-    closedReason: "[PSEUDO/PLACEHOLDER — REASON REGISTRATION IS CLOSED TO BE SUPPLIED]",
+    id: "outreach-to-kotri-sindh-2025",
+    title: "Outreach to Hindu Communities in Kotri, Sindh",
+    slug: "outreach-to-kotri-sindh-2025",
+    description:
+      "In 2025, Pastor Nayyer Gul preached about Christianity to Hindus in Kotri, Sindh, helped them financially, supported their education, and provided books.",
+    city: "Kotri, Sindh",
+    status: "completed",
   },
   {
-    id: "placeholder-cancelled",
-    title: "[Event title — to be supplied]",
-    slug: "placeholder-cancelled",
-    location: "[venue]",
-    city: "[city]",
-    status: "cancelled",
-    cancelledNote: "[PSEUDO/PLACEHOLDER — CANCELLATION NOTICE TO BE SUPPLIED]",
-  },
-  {
-    id: "placeholder-completed",
-    title: "[Event title — to be supplied]",
-    slug: "placeholder-completed",
-    location: "[venue]",
-    city: "[city]",
+    id: "ministry-partnership-with-shakeel-nasir-2025",
+    title: "Ministry Partnership with Pastor Shakeel Nasir",
+    slug: "ministry-partnership-with-shakeel-nasir-2025",
+    description:
+      "In 2025, Pastor Nayyer Gull worked with Pastor Jameel Nasir's brother, Shakeel Nasir, in their ministry, preaching and giving sermons.",
     status: "completed",
   },
 ];
+warnOnDuplicateSlugs(events, "lib/events.ts events");
+
+/** `events`, filtered to entries that are actually publishable (see lib/content-status.ts). Every page/lookup below reads this, never the raw array. */
+export const publishedEvents: Event[] = events.filter(isPublished);
 
 export function findEventBySlug(slug: string): Event | undefined {
-  return events.find((e) => e.slug === slug) ?? placeholderEvents.find((e) => e.slug === slug);
+  return publishedEvents.find((e) => e.slug === slug);
 }
 
 export function getAllEventSlugs(): string[] {
-  return (events.length > 0 ? events : placeholderEvents).map((e) => e.slug);
+  return publishedEvents.map((e) => e.slug);
 }
 
 export function getRelatedEvents(slug: string, limit = 3): Event[] {
-  const pool = events.length > 0 ? events : placeholderEvents;
-  return pool.filter((e) => e.slug !== slug).slice(0, limit);
+  return publishedEvents.filter((e) => e.slug !== slug).slice(0, limit);
 }

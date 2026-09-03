@@ -7,7 +7,7 @@ import { FactTable } from "@/components/ui/FactTable";
 import { RuledList } from "@/components/ui/RuledRow";
 import { Reveal } from "@/components/ui/Reveal";
 import { EventRow } from "@/components/events/EventRow";
-import { events } from "@/lib/events";
+import { publishedEvents } from "@/lib/events";
 import { getEventsContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -34,8 +34,8 @@ export async function generateMetadata({
  * Dawn of Light - Events.dc.html. Two real states, both reproduced: the
  * design's own text is explicit that "the page ships empty by default,
  * because inventing events would be worse than having none" and labels
- * the empty composition "the launch state" — so this reads `events`
- * (lib/events.ts) only, with no placeholder fallback (unlike Sermons/
+ * the empty composition "the launch state" — so this reads
+ * `publishedEvents` (lib/events.ts) only, with no placeholder fallback (unlike Sermons/
  * Resources, whose designs draw no empty state of their own). The weekly
  * rhythm strip renders in both states per the design's own stated rule:
  * "shown either way, so the page is never useless."
@@ -51,7 +51,11 @@ export default async function EventsPage({ params }: PageProps<"/[locale]/events
   const strings = getEventsContent(locale);
   const common = getCommonContent(locale);
   const path = (segment: string) => localizePath(locale, segment);
-  const hasEvents = events.length > 0;
+  const hasEvents = publishedEvents.length > 0;
+  // The filter chips aren't functionally wired (both always show the same
+  // full list) — this only decides which one is highlighted as active, so
+  // it doesn't silently claim "Upcoming" when every real event is past.
+  const hasUpcomingEvent = publishedEvents.some((event) => event.status === "open");
 
   // Design shows "[CONFIRM]" here as plain muted text, not the warning-
   // amber PlaceholderTag treatment used elsewhere — the literal bracket
@@ -104,10 +108,20 @@ export default async function EventsPage({ params }: PageProps<"/[locale]/events
           {hasEvents ? (
             <>
               <Reveal className="flex flex-nowrap items-center gap-3 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
-                <span className="bg-ink px-4 py-2.5 text-[0.84375rem] whitespace-nowrap text-dark-heading">
+                <span
+                  className={cn(
+                    "px-4 py-2.5 text-[0.84375rem] whitespace-nowrap",
+                    hasUpcomingEvent ? "bg-ink text-dark-heading" : "border border-border text-ink-muted",
+                  )}
+                >
                   {strings.filters.upcoming}
                 </span>
-                <span className="border border-border px-4 py-2 text-[0.84375rem] whitespace-nowrap text-ink-muted">
+                <span
+                  className={cn(
+                    "px-4 py-2.5 text-[0.84375rem] whitespace-nowrap",
+                    hasUpcomingEvent ? "border border-border text-ink-muted" : "bg-ink text-dark-heading",
+                  )}
+                >
                   {strings.filters.past}
                 </span>
                 <span className="border border-border px-4 py-2 text-[0.84375rem] whitespace-nowrap text-ink-muted">
@@ -119,7 +133,7 @@ export default async function EventsPage({ params }: PageProps<"/[locale]/events
               </Reveal>
               <Reveal>
                 <RuledList className="mt-6">
-                  {events.map((event) => (
+                  {publishedEvents.map((event) => (
                     <EventRow
                       key={event.slug}
                       event={event}
@@ -134,7 +148,7 @@ export default async function EventsPage({ params }: PageProps<"/[locale]/events
               </Reveal>
               <Reveal className="mt-6 flex flex-wrap items-center justify-between gap-4">
                 <p className="text-small text-ink-faint">
-                  {strings.pagination.showing} {events.length} {strings.pagination.of} {events.length}{" "}
+                  {strings.pagination.showing} {publishedEvents.length} {strings.pagination.of} {publishedEvents.length}{" "}
                   {strings.pagination.eventsLabel}
                 </p>
               </Reveal>

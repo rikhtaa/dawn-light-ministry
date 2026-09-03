@@ -3,9 +3,8 @@
  * Claude Design mockup (Dawn of Light - Sermons.dc.html). This file holds
  * only page-level UI copy; actual sermon records are structured data
  * (lib/sermons.ts's `Sermon[]`), not translatable strings, matching how
- * Event/Resource are modelled. No sermon has been supplied yet, so the
- * page currently renders lib/sermons.ts's `placeholderSermons` — the
- * design's own bracket-placeholder composition, not fabricated content.
+ * Event/Resource are modelled. `sermons` now holds real, organization-
+ * supplied entries.
  */
 export const sermons = {
   metadata: {

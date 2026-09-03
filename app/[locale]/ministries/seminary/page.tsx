@@ -11,6 +11,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ArticleBody } from "@/components/ui/ArticleBody";
 import { subjectKeys, subjectMetaUnconfirmedByKey, programmeBodyBlocks, prospectusPdfPath } from "@/lib/seminary";
 import { organization } from "@/lib/organization";
+import { publishedResources, resourceTitle, resourceAuthor } from "@/lib/resources";
 import { getSeminaryContent, getCommonContent, getHomeContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -43,10 +44,15 @@ export default async function SeminaryPage({ params }: PageProps<"/[locale]/mini
   const isUrdu = locale === "ur";
   const strings = getSeminaryContent(locale);
   const common = getCommonContent(locale);
-  // "study" and "article" are the same authoritative resource teasers
-  // Home's own resources section reads (content/i18n/en/home.ts) — reused
-  // here rather than duplicated. "lecture" has no Home equivalent.
+  // Kicker labels reuse Home's own translated resource-teaser copy
+  // (content/i18n/en/home.ts) so the two listings can't drift apart; the
+  // title/meta values themselves are real data, not that content's own
+  // (still-bracketed) placeholder text — there is no real "study"-type
+  // resource yet, so that row is simply omitted rather than shown with
+  // invented content.
   const resourcesItems = getHomeContent(locale).resources.items;
+  const sampleArticle = publishedResources.find((r) => r.type === "article");
+  const sampleLecture = publishedResources.find((r) => r.type === "video");
 
   const path = (segment: string) => localizePath(locale, segment);
 
@@ -60,23 +66,18 @@ export default async function SeminaryPage({ params }: PageProps<"/[locale]/mini
     strings.facts.fees,
   ];
 
-  const studyRows = [
-    {
-      kicker: resourcesItems.study.kicker,
-      title: resourcesItems.study.title,
-      meta: resourcesItems.study.meta,
+  const studyRows: { kicker: string; title: string; meta: string }[] = [
+    sampleArticle && {
+      kicker: resourcesItems.article.kicker as string,
+      title: resourceTitle(sampleArticle, locale),
+      meta: resourceAuthor(sampleArticle, locale) ?? "",
     },
-    {
-      kicker: resourcesItems.article.kicker,
-      title: resourcesItems.article.title,
-      meta: resourcesItems.article.meta,
+    sampleLecture && {
+      kicker: strings.studyAlongside.lecture.kicker as string,
+      title: resourceTitle(sampleLecture, locale),
+      meta: resourceAuthor(sampleLecture, locale) ?? "",
     },
-    {
-      kicker: strings.studyAlongside.lecture.kicker,
-      title: strings.studyAlongside.lecture.title,
-      meta: strings.studyAlongside.lecture.meta,
-    },
-  ];
+  ].filter((row): row is { kicker: string; title: string; meta: string } => Boolean(row));
 
   return (
     <main className="flex flex-1 flex-col">

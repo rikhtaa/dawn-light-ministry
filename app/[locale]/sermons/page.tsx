@@ -9,7 +9,7 @@ import { RuledList } from "@/components/ui/RuledRow";
 import { Reveal } from "@/components/ui/Reveal";
 import { LatestSermonBand } from "@/components/sermons/LatestSermonBand";
 import { SermonRow } from "@/components/sermons/SermonRow";
-import { sermons, placeholderSermons } from "@/lib/sermons";
+import { publishedSermons } from "@/lib/sermons";
 import { getSermonsContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -45,15 +45,9 @@ export default async function SermonsPage({ params }: PageProps<"/[locale]/sermo
   const path = (segment: string) => localizePath(locale, segment);
   const languageLabel = (lang: "en" | "ur") => (lang === "ur" ? strings.filters.urdu : strings.filters.english);
 
-  // No sermon has been supplied yet, so this falls back to
-  // placeholderSermons — the connected design's own bracket-placeholder
-  // composition (lib/sermons.ts), not fabricated content. Once `sermons`
-  // holds real entries this uses those instead. The empty-state branch
-  // below stays reachable for a genuinely empty list (e.g. a future
-  // filtered view with zero results) — it isn't what an empty `sermons`
-  // array triggers on its own anymore.
-  const displaySermons = sermons.length > 0 ? sermons : placeholderSermons;
-  const [latest, ...archive] = displaySermons;
+  // The empty-state branch below stays reachable for a genuinely empty
+  // list (e.g. a future filtered view with zero results).
+  const [latest, ...archive] = publishedSermons;
 
   return (
     <main className="flex flex-1 flex-col">

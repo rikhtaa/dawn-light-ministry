@@ -8,9 +8,12 @@ import { PrayerSection } from "@/components/home/PrayerSection";
 import { EventsAndResourcesSection } from "@/components/home/EventsAndResourcesSection";
 import { SupportSection } from "@/components/home/SupportSection";
 import { LocationsSection } from "@/components/home/LocationsSection";
-import { getHomeContent } from "@/lib/i18n/content-registry";
+import { getHomeContent, getEventsContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
+import { publishedEvents } from "@/lib/events";
+import { publishedSermons } from "@/lib/sermons";
+import { publishedResources, resourceTitle, resourceAuthor } from "@/lib/resources";
 
 export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -21,8 +24,46 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
 
   const isUrdu = locale === "ur";
   const strings = getHomeContent(locale);
+  const eventStatusLabels = getEventsContent(locale).detail.status;
 
   const path = (segment: string) => localizePath(locale, segment);
+
+  // `strings.events.heading` ("Upcoming events") is a fixed label — every
+  // real event is currently `status: "completed"`, so each row's own
+  // status label (reusing the same translated word the Events page shows)
+  // is appended to `meta` rather than leaving the heading's "Upcoming"
+  // unqualified next to events that already happened.
+  const homeEvents = publishedEvents.slice(0, 3).map((event) => ({
+    title: event.title,
+    meta: [event.city, eventStatusLabels[event.status] as string].filter(Boolean).join(" · "),
+  }));
+
+  const latestSermon = publishedSermons[0];
+  const sampleArticle = publishedResources.find((r) => r.type === "article");
+  const sampleStudy = publishedResources.find((r) => r.type === "study");
+  const sampleBook = publishedResources.find((r) => r.type === "book");
+  const resourceItems: { kicker: string; title: string; meta: string }[] = [
+    latestSermon && {
+      kicker: strings.resources.items.sermon.kicker as string,
+      title: latestSermon.title,
+      meta: latestSermon.speaker,
+    },
+    sampleArticle && {
+      kicker: strings.resources.items.article.kicker as string,
+      title: resourceTitle(sampleArticle, locale),
+      meta: resourceAuthor(sampleArticle, locale) ?? "",
+    },
+    sampleStudy && {
+      kicker: strings.resources.items.study.kicker as string,
+      title: resourceTitle(sampleStudy, locale),
+      meta: resourceAuthor(sampleStudy, locale) ?? "",
+    },
+    sampleBook && {
+      kicker: strings.resources.items.book.kicker as string,
+      title: resourceTitle(sampleBook, locale),
+      meta: resourceAuthor(sampleBook, locale) ?? "",
+    },
+  ].filter((item): item is { kicker: string; title: string; meta: string } => Boolean(item));
 
   return (
     <main className="flex flex-1 flex-col">
@@ -62,8 +103,10 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         eventsStrings={strings.events}
         eventsCtaHref={path("/contact")}
         eventsAllHref={path("/events")}
+        events={homeEvents}
         resourcesStrings={strings.resources}
         resourcesAllHref={path("/resources")}
+        resourceItems={resourceItems}
         isUrdu={isUrdu}
       />
 

@@ -1,14 +1,14 @@
 import type { Locale } from "@/lib/i18n/types";
 import type { ArticleBlockDef } from "@/lib/article";
+import { isPublished, warnOnDuplicateSlugs, type Publishable } from "@/lib/content-status";
 
 /**
  * Resource records — structured data, not translatable UI copy
  * (HANDOFF.md §16, mirroring lib/sermons.ts / lib/events.ts). `resources`
- * is empty: no resource has been supplied yet. Neither a Resources index
- * page nor real resource data exists in this codebase yet — this file
- * exists so /resources/[slug] (Dawn of Light - Detail Templates.dc.html
- * "04 — Resource detail") has something real to route to, on the same
- * placeholder-composition basis as Sermons/Events.
+ * holds real, ministry-supplied external videos/articles plus the
+ * long-form "Lectures & Biblical Teaching" article; `leadershipResources`
+ * holds the two leadership biographies (kept out of the public index —
+ * see its own doc comment below).
  */
 /**
  * "biography" is a distinct content type from the other five — a
@@ -22,7 +22,7 @@ import type { ArticleBlockDef } from "@/lib/article";
  */
 export type ResourceType = "article" | "study" | "book" | "pdf" | "video" | "biography";
 
-export interface Resource {
+export interface Resource extends Publishable {
   title: string;
   /**
    * Urdu translation of `title`. Optional because most entries below are
@@ -179,6 +179,14 @@ const lecturesBiblicalTeachingBlockDefs: ArticleBlockDef[] = [
  * explicit "Urdu Debate" in the title) — not from verifying the actual
  * audio/article language — so treat it as a first-pass tag, not a
  * ministry-confirmed classification.
+ *
+ * The same document's "Sermons:" section (14 videos) is deliberately NOT
+ * duplicated here — those live in lib/sermons.ts's `sermons` array
+ * instead, per HANDOFF.md §13's own rule that Resources keeps a
+ * "Sermons" filter chip linking to /sermons rather than duplicating the
+ * archive. Only the document's other five videos (missionary visit,
+ * seminary exposition, the intro video, and two debates) and six
+ * Medium articles stay here as genuinely distinct Resource entries.
  */
 export const resources: Resource[] = [
   {
@@ -220,118 +228,6 @@ export const resources: Resource[] = [
     author: "Pastor Nayyer Gull",
     language: "en",
     externalUrl: "https://youtu.be/2H7WMnYntUg?si=X1aPt6oRgkamxwh1",
-  },
-  {
-    title: "Can people dance during worship according to the Bible?",
-    slug: "dance-during-worship-bible",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/PE21HTZCfdQ?si=fXL-TpJ7O810w6RY",
-  },
-  {
-    title: "Fasting in Islam & Christianity",
-    slug: "fasting-islam-christianity",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/wikX72SsgQY?si=cXU801YgHa7EdBaK",
-  },
-  {
-    title: "Scripture About Fasting",
-    slug: "scripture-about-fasting",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/9jX1YncygNk?si=LadHAr5mTSRBtOnq",
-  },
-  {
-    title: "What Is the Truth of Rosary?",
-    slug: "truth-of-rosary",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/UAfdpS4vEWM?si=9cOgvyabHWKh-37R",
-  },
-  {
-    title: "Are Evangelical Events About Jesus Reliable?",
-    slug: "evangelical-events-about-jesus-reliable",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/ncfoc5Q92yI?si=o-d5RPAQsjLvFkEA",
-  },
-  {
-    title: "Quran and the Prophet of Islam Confirm the Bible?",
-    slug: "quran-prophet-confirm-bible",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/y3sZCa-Scq8?si=TrPlfy8wZtFtOGB0",
-  },
-  {
-    title: "Conclusive Evidence for the Existence of God?",
-    slug: "evidence-existence-of-god",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/EQRt-DkLRwQ?si=_UIaL7E3PNDdGcvg",
-  },
-  {
-    title: "The Bible About Dinosaurs",
-    slug: "bible-about-dinosaurs",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/zckVTBmyYS8?si=7g8yFPisEcEpX1Xw",
-  },
-  {
-    title: "Science and God",
-    slug: "science-and-god",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/rmkl7YpDyvY?si=UoK9ASbdhGAE7Fy0",
-  },
-  {
-    title: "Historical Evidence of the Existence of the Holy Jesus Christ?",
-    slug: "historical-evidence-jesus-christ",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/dfkbuVMUFSI?si=UjRak8uf6-TbCdBb",
-  },
-  {
-    title: "Who Is Jesus?",
-    slug: "who-is-jesus",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/PYb3SVGA32Q?si=M8oyfJhm4PS5upkr",
-  },
-  {
-    title: "Fake Gospel of Barnabas",
-    slug: "fake-gospel-of-barnabas",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/KL70OBWjS_8?si=V9n5sYsH188Xvsus",
-  },
-  {
-    title: "How Can I Understand the Book of Revelation?",
-    slug: "understanding-book-of-revelation",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/3yAYfzIJwqs?si=VbxdJA1QpQaYB7oZ",
-  },
-  {
-    title: "What Happened to the Ark of the Covenant?",
-    slug: "ark-of-the-covenant",
-    type: "video",
-    author: "Pastor Nayyer Gull",
-    language: "en",
-    externalUrl: "https://youtu.be/SdrPnu4q0PQ?si=v0jCJrhpcjE9R0yj",
   },
   {
     title: "Has the Bible Been Changed? Episode №1",
@@ -590,6 +486,10 @@ export const resources: Resource[] = [
     },
   },
 ];
+warnOnDuplicateSlugs(resources, "lib/resources.ts resources");
+
+/** `resources`, filtered to entries that are actually publishable (see lib/content-status.ts). The index page and lookup functions below read this, never the raw array. */
+export const publishedResources: Resource[] = resources.filter(isPublished);
 
 const nayyerGullBlockDefs: ArticleBlockDef[] = [
   { key: "dek", kind: "subheading" },
@@ -673,10 +573,7 @@ const rahmatMasihBlockDefs: ArticleBlockDef[] = [
  * Deliberately kept OUT of `resources` (the public Resources-library
  * array) — these are About/leadership content that reuses the
  * /resources/[slug] detail *template*, not items that belong in the
- * Resources index's sermon/article/study listing. Keeping them separate
- * means adding them doesn't flip the index page's "empty → show
- * placeholders" fallback (`resources.length > 0 ? resources :
- * placeholderResources`) into showing just these two entries instead.
+ * Resources index's sermon/article/study listing.
  */
 export const leadershipResources: Resource[] = [
   {
@@ -894,57 +791,24 @@ export const leadershipResources: Resource[] = [
     },
   },
 ];
+warnOnDuplicateSlugs(leadershipResources, "lib/resources.ts leadershipResources");
 
-/**
- * The design's own bracket-placeholder resource, transcribed verbatim —
- * not invented content. "Pastor Nayyer Gull" reused only where already an
- * approved org fact (CLAUDE.md §3), exactly as lib/sermons.ts does.
- */
-export const placeholderResources: Resource[] = [
-  {
-    title: "[RESOURCE TITLE — TO BE SUPPLIED]",
-    slug: "placeholder-study",
-    type: "study",
-    author: "Pastor Nayyer Gull",
-    language: "ur",
-    standfirst: "[PSEUDO/PLACEHOLDER — STANDFIRST TO BE SUPPLIED]",
-    description:
-      "[PSEUDO/PLACEHOLDER — BODY TEXT SUPPLIED WITH THE RESOURCE. No summary is written on the ministry's behalf.]",
-    covers: ["[topic]", "[topic]", "[topic]"],
-  },
-  {
-    title: "[Resource title — to be supplied]",
-    slug: "placeholder-article",
-    type: "article",
-    author: "[author]",
-    language: "en",
-  },
-  {
-    title: "[Resource title — to be supplied]",
-    slug: "placeholder-book",
-    type: "book",
-    author: "[author]",
-    language: "ur",
-  },
-];
+/** `leadershipResources`, filtered to entries that are actually publishable (see lib/content-status.ts). */
+export const publishedLeadershipResources: Resource[] = leadershipResources.filter(isPublished);
 
 export function findResourceBySlug(slug: string): Resource | undefined {
   return (
-    resources.find((r) => r.slug === slug) ??
-    placeholderResources.find((r) => r.slug === slug) ??
-    leadershipResources.find((r) => r.slug === slug)
+    publishedResources.find((r) => r.slug === slug) ??
+    publishedLeadershipResources.find((r) => r.slug === slug)
   );
 }
 
 export function getAllResourceSlugs(): string[] {
-  return [...(resources.length > 0 ? resources : placeholderResources), ...leadershipResources].map(
-    (r) => r.slug,
-  );
+  return [...publishedResources, ...publishedLeadershipResources].map((r) => r.slug);
 }
 
 export function getRelatedResources(slug: string, limit = 3): Resource[] {
-  const pool = resources.length > 0 ? resources : placeholderResources;
-  return pool.filter((r) => r.slug !== slug).slice(0, limit);
+  return publishedResources.filter((r) => r.slug !== slug).slice(0, limit);
 }
 
 /**
