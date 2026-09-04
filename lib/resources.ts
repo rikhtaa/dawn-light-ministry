@@ -206,7 +206,8 @@ export const resources: Resource[] = [
     externalUrl: "https://youtu.be/FXE23ydBGmk?si=ytgxV289ZV3ncKMl",
   },
   {
-    title: "دروازۂ درحیات | New Official Intro 2026",
+    title: "New Official Intro 2026",
+    titleUr: "دروازۂ درحیات",
     slug: "darwaza-dar-e-hayat-intro-2026",
     type: "video",
     author: "Pastor Nayyer Gull",
@@ -819,14 +820,15 @@ export function getRelatedResources(slug: string, limit = 3): Resource[] {
 
 /**
  * Locale-aware display title for a Resource: `titleUr` on the Urdu route
- * when supplied, `title` (English) otherwise — same fallback shape as
- * `bodyBlocksUr`/`bodyBlocksEn`. The single place that should ever read
- * `resource.title`/`resource.titleUr` for display, so every future
- * resource with a `titleUr` gets locale-correct rendering automatically,
- * with no per-resource special-casing in page components.
+ * when the ministry's own source document actually supplied one — shown
+ * verbatim, never modified — `title` (English) otherwise, on either
+ * locale. The single place that should ever read `resource.title`/
+ * `resource.titleUr` for display, so every future resource with a
+ * `titleUr` gets locale-correct rendering automatically, with no
+ * per-resource special-casing in page components.
  */
 export function resourceTitle(resource: Resource, locale: Locale): string {
-  return locale === "ur" ? (resource.titleUr ?? resource.title) : resource.title;
+  return locale === "ur" && resource.titleUr ? resource.titleUr : resource.title;
 }
 
 /**

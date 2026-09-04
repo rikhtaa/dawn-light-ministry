@@ -6,4 +6,6 @@ export const organization = {
   phone: "+92 344 2316634",
   whatsappUrl: "https://wa.me/923442316634",
   email: "pastornayyer@gmail.com",
+  facebookUrl: "https://www.facebook.com/share/1DWWD1SvDz/",
+  youtubeUrl: "https://youtube.com/@pastornayyergull?si=sovA1YQ3ali90bZr",
 } as const;

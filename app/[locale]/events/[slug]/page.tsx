@@ -11,7 +11,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { RuledList, RuledRow } from "@/components/ui/RuledRow";
 import { DetailLayout } from "@/components/detail/DetailLayout";
 import { EventStatusBadge } from "@/components/detail/EventStatusBadge";
-import { findEventBySlug, getRelatedEvents, type Event } from "@/lib/events";
+import { findEventBySlug, getRelatedEvents, eventTitle, eventDescription, type Event } from "@/lib/events";
 import { organization } from "@/lib/organization";
 import { getEventsContent, getCommonContent } from "@/lib/i18n/content-registry";
 import type { EventsStrings } from "@/content/i18n/en/events";
@@ -31,8 +31,8 @@ export async function generateMetadata({
   }
 
   return {
-    title: event.title,
-    description: event.description,
+    title: eventTitle(event, locale),
+    description: eventDescription(event, locale),
     alternates: {
       canonical: `/${locale}/events/${slug}`,
       languages: { en: `/en/events/${slug}`, ur: `/ur/events/${slug}` },
@@ -144,6 +144,8 @@ export default async function EventDetailPage({
   const path = (segment: string) => localizePath(locale, segment);
   const d = strings.detail;
   const related = getRelatedEvents(event.slug, 3);
+  const title = eventTitle(event, locale);
+  const description = eventDescription(event, locale);
 
   // Date/time/location/city rows are omitted entirely (not shown as an
   // "unconfirmed" [venue]/[city] placeholder) when the source document
@@ -168,7 +170,8 @@ export default async function EventDetailPage({
         ratio="16:9"
         caption="Event photograph"
         src={event.image}
-        alt={event.image ? event.title : undefined}
+        alt={event.image ? title : undefined}
+        objectPosition={event.imageObjectPosition}
       />
       <div>
         <h2
@@ -180,7 +183,7 @@ export default async function EventDetailPage({
           {d.about.heading}
         </h2>
         <p className={cn("text-body measure mt-4 text-ink-body", isUrdu && "font-urdu-body")}>
-          {event.description ?? d.about.fallbackBody}
+          {description ?? d.about.fallbackBody}
         </p>
       </div>
       {event.programme && event.programme.length > 0 ? (
@@ -244,7 +247,7 @@ export default async function EventDetailPage({
             items={[
               { label: common.nav.home, href: path("/") },
               { label: common.nav.events, href: path("/events") },
-              { label: event.title },
+              { label: title },
             ]}
             isUrdu={isUrdu}
             className="mb-6"
@@ -256,7 +259,7 @@ export default async function EventDetailPage({
               isUrdu && "font-urdu-display",
             )}
           >
-            {event.title}
+            {title}
           </h1>
           <div
             className={cn(
@@ -321,7 +324,7 @@ export default async function EventDetailPage({
                         isUrdu && "font-urdu-display",
                       )}
                     >
-                      {related.title}
+                      {eventTitle(related, locale)}
                     </span>
                     {related.date ? (
                       <span className="text-caption text-ink-faint">{related.date}</span>

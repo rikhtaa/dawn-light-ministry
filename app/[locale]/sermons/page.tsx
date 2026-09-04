@@ -8,7 +8,7 @@ import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { Reveal } from "@/components/ui/Reveal";
 import { LatestSermonBand } from "@/components/sermons/LatestSermonBand";
 import { SermonsFilterableList } from "@/components/sermons/SermonsFilterableList";
-import { publishedSermons } from "@/lib/sermons";
+import { publishedSermons, sermonTitle, type Sermon } from "@/lib/sermons";
 import { getSermonsContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -44,9 +44,17 @@ export default async function SermonsPage({ params }: PageProps<"/[locale]/sermo
   const path = (segment: string) => localizePath(locale, segment);
   const languageLabel = (lang: "en" | "ur") => (lang === "ur" ? strings.filters.urdu : strings.filters.english);
 
+  // `sermonTitle()` resolves each sermon's locale-correct display title
+  // (real `titleUr` on /ur where the ministry supplied one, `title`
+  // otherwise) without touching the stored record.
+  const displaySermons: Sermon[] = publishedSermons.map((sermon) => ({
+    ...sermon,
+    title: sermonTitle(sermon, locale),
+  }));
+
   // The empty-state branch below stays reachable for a genuinely empty
   // list (e.g. a future filtered view with zero results).
-  const [latest, ...archive] = publishedSermons;
+  const [latest, ...archive] = displaySermons;
 
   return (
     <main className="flex flex-1 flex-col">

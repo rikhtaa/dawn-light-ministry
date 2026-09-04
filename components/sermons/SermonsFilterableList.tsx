@@ -16,47 +16,25 @@ interface SermonsFilterableListProps {
   isUrdu: boolean;
 }
 
-function chipClasses(active: boolean, extra?: string) {
-  return cn(
-    "text-[0.84375rem] whitespace-nowrap transition-colors duration-300",
-    active
-      ? "bg-ink px-4 py-2.5 text-dark-heading"
-      : "border border-border px-4 py-2 text-ink-muted hover:border-border-strong",
-    extra,
-  );
-}
-
 /**
  * Dawn of Light - Sermons.dc.html's filter row + search, made functional.
- * Only `language` and free-text search are backed by real data across the
- * 14 sermon records — every sermon shares the same `speaker`, and none has
- * a `series` or `scriptureReference` set, so "By series"/"By Scripture"/
- * "By speaker" (the design's other three chips) would never narrow the
- * list and were removed rather than left as dead controls (see the
- * cleanup report for the audit).
+ * Free-text search is the only filter left — every sermon shares the same
+ * `speaker`, and none has a `series` or `scriptureReference` set, so "By
+ * series"/"By Scripture"/"By speaker" (the design's other three chips)
+ * would never narrow the list and were removed rather than left as dead
+ * controls (see the cleanup report for the audit); the English/Urdu
+ * language filter chips were removed separately, by explicit request.
+ * `languageLabel()` below is unrelated to filtering — it's the per-row
+ * "Sermon · English · Video" kicker label, still shown on every row.
  */
 export function SermonsFilterableList({ sermons, strings, isUrdu }: SermonsFilterableListProps) {
-  const [languages, setLanguages] = useState<Set<"en" | "ur">>(new Set());
   const [query, setQuery] = useState("");
 
   const languageLabel = (lang: "en" | "ur") => (lang === "ur" ? strings.filters.urdu : strings.filters.english);
 
-  const toggleLanguage = (lang: "en" | "ur") => {
-    setLanguages((prev) => {
-      const next = new Set(prev);
-      if (next.has(lang)) {
-        next.delete(lang);
-      } else {
-        next.add(lang);
-      }
-      return next;
-    });
-  };
-
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return sermons.filter((sermon) => {
-      if (languages.size > 0 && !languages.has(sermon.language)) return false;
       if (q) {
         const haystack = [sermon.title, sermon.speaker, sermon.scriptureReference]
           .filter(Boolean)
@@ -66,38 +44,12 @@ export function SermonsFilterableList({ sermons, strings, isUrdu }: SermonsFilte
       }
       return true;
     });
-  }, [sermons, languages, query]);
+  }, [sermons, query]);
 
   return (
     <>
       <div className="border-b border-border bg-surface py-5">
         <Container className="flex flex-nowrap items-center gap-3 overflow-x-auto sm:flex-wrap sm:overflow-visible">
-          <button
-            type="button"
-            onClick={() => setLanguages(new Set())}
-            className={chipClasses(languages.size === 0)}
-          >
-            {strings.filters.all}
-          </button>
-          <button
-            type="button"
-            onClick={() => toggleLanguage("en")}
-            className={chipClasses(languages.has("en"), "hidden sm:inline-block")}
-          >
-            {strings.filters.english}
-          </button>
-          <button
-            type="button"
-            onClick={() => toggleLanguage("ur")}
-            className={cn(
-              "font-urdu-body text-sm whitespace-nowrap transition-colors duration-300",
-              languages.has("ur")
-                ? "bg-ink px-4 py-2 text-dark-heading"
-                : "border border-border px-4 py-1.5 text-ink-muted hover:border-border-strong",
-            )}
-          >
-            {strings.filters.urdu}
-          </button>
           <input
             type="search"
             value={query}

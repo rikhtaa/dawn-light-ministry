@@ -308,7 +308,7 @@ export default async function ResourceDetailPage({
                         isUrdu && "font-urdu-display",
                       )}
                     >
-                      {related.title}
+                      {resourceTitle(related, locale)}
                     </span>
                     <span className="text-caption text-ink-faint">{d.type[related.type]}</span>
                   </RuledRow>

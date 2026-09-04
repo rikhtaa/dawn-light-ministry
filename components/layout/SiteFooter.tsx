@@ -69,20 +69,22 @@ export function SiteFooter({ locale }: SiteFooterProps) {
               {footer.missionStatement}
             </p>
             <div className="flex gap-2.5">
-              <span
-                aria-disabled="true"
-                title={footer.socialPending}
+              <a
+                href={organization.facebookUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-small border border-dark-border-button px-3.5 py-2 text-dark-heading"
               >
                 Facebook
-              </span>
-              <span
-                aria-disabled="true"
-                title={footer.socialPending}
+              </a>
+              <a
+                href={organization.youtubeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-small border border-dark-border-button px-3.5 py-2 text-dark-heading"
               >
                 YouTube
-              </span>
+              </a>
             </div>
           </div>
 

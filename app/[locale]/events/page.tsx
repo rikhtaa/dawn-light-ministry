@@ -7,7 +7,7 @@ import { FactTable } from "@/components/ui/FactTable";
 import { RuledList } from "@/components/ui/RuledRow";
 import { Reveal } from "@/components/ui/Reveal";
 import { EventRow } from "@/components/events/EventRow";
-import { publishedEvents } from "@/lib/events";
+import { publishedEvents, eventTitle, eventDescription, type Event } from "@/lib/events";
 import { getEventsContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -56,6 +56,16 @@ export default async function EventsPage({ params }: PageProps<"/[locale]/events
   // full list) — this only decides which one is highlighted as active, so
   // it doesn't silently claim "Upcoming" when every real event is past.
   const hasUpcomingEvent = publishedEvents.some((event) => event.status === "open");
+  // `eventTitle()`/`eventDescription()` resolve each event's locale-correct
+  // display text (real `titleUr`/`descriptionUr` on /ur where the ministry
+  // supplied them, English otherwise) without touching the stored records
+  // — EventRow itself stays unchanged, reading `event.title`/`.description`
+  // from this pre-resolved copy exactly as it already did.
+  const displayEvents: Event[] = publishedEvents.map((event) => ({
+    ...event,
+    title: eventTitle(event, locale),
+    description: eventDescription(event, locale),
+  }));
 
   // Design shows "[CONFIRM]" here as plain muted text, not the warning-
   // amber PlaceholderTag treatment used elsewhere — the literal bracket
@@ -127,7 +137,7 @@ export default async function EventsPage({ params }: PageProps<"/[locale]/events
               </Reveal>
               <Reveal>
                 <RuledList className="mt-6">
-                  {publishedEvents.map((event) => (
+                  {displayEvents.map((event) => (
                     <EventRow
                       key={event.slug}
                       event={event}

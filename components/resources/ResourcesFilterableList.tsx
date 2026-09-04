@@ -54,33 +54,21 @@ function chipClasses(active: boolean, extra?: string) {
 
 /**
  * Dawn of Light - Resources.dc.html's filter row + search, made functional
- * (category + language + text search, combined with AND logic, no page
- * reload) while preserving the exact chip markup/responsive behavior the
- * static version already had — see app/[locale]/resources/page.tsx for the
- * server-resolved `items` this receives.
+ * (category + text search, combined with AND logic, no page reload) while
+ * preserving the exact chip markup/responsive behavior the static version
+ * already had — see app/[locale]/resources/page.tsx for the server-resolved
+ * `items` this receives. The English/Urdu language filter chips were
+ * removed by explicit request; `FilterableResourceItem.language` is kept on
+ * the type (still populated by callers) but no longer read here.
  */
 export function ResourcesFilterableList({ items, strings, isUrdu }: ResourcesFilterableListProps) {
   const [category, setCategory] = useState<CategoryFilter>("all");
-  const [languages, setLanguages] = useState<Set<"en" | "ur">>(new Set());
   const [query, setQuery] = useState("");
-
-  const toggleLanguage = (lang: "en" | "ur") => {
-    setLanguages((prev) => {
-      const next = new Set(prev);
-      if (next.has(lang)) {
-        next.delete(lang);
-      } else {
-        next.add(lang);
-      }
-      return next;
-    });
-  };
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return items.filter((item) => {
       if (category !== "all" && item.category !== category) return false;
-      if (languages.size > 0 && !languages.has(item.language)) return false;
       if (q) {
         const haystack = [item.rowProps.title, item.speaker, item.scriptureReference]
           .filter(Boolean)
@@ -90,7 +78,7 @@ export function ResourcesFilterableList({ items, strings, isUrdu }: ResourcesFil
       }
       return true;
     });
-  }, [items, category, languages, query]);
+  }, [items, category, query]);
 
   return (
     <>
@@ -140,26 +128,6 @@ export function ResourcesFilterableList({ items, strings, isUrdu }: ResourcesFil
             className={chipClasses(category === "books", "hidden sm:inline-block")}
           >
             {strings.filters.books}
-          </button>
-          <span className="mx-1 hidden h-6 w-px bg-border sm:block" aria-hidden="true" />
-          <button
-            type="button"
-            onClick={() => toggleLanguage("en")}
-            className={chipClasses(languages.has("en"), "hidden sm:inline-block")}
-          >
-            {strings.filters.english}
-          </button>
-          <button
-            type="button"
-            onClick={() => toggleLanguage("ur")}
-            className={cn(
-              "hidden font-urdu-body text-sm whitespace-nowrap transition-colors duration-300 sm:inline-block",
-              languages.has("ur")
-                ? "bg-ink px-4 py-2 text-dark-heading"
-                : "border border-border px-4 py-1.5 text-ink-muted hover:border-border-strong",
-            )}
-          >
-            {strings.filters.urdu}
           </button>
           <input
             type="search"

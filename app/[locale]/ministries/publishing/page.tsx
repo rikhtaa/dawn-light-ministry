@@ -11,7 +11,7 @@ import { MinistryMasthead } from "@/components/ministries/MinistryMasthead";
 import { MinistrySiblingsAndCta } from "@/components/ministries/MinistrySiblingsAndCta";
 import { ArticleBody } from "@/components/ui/ArticleBody";
 import { publishingBodyBlocks, ministryPageImageByKey } from "@/lib/ministries";
-import { publishedResources } from "@/lib/resources";
+import { publishedResources, resourceTitle } from "@/lib/resources";
 import { getMinistryPagesContent, getCommonContent, getResourcesContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -75,7 +75,7 @@ export default async function PublishingPage({
   const detailBandRows = publishedResources
     .filter((resource) => resource.type === "article")
     .slice(0, 3)
-    .map((resource) => ({ label: resource.title, value: resourcesStrings.detail.type.article }));
+    .map((resource) => ({ label: resourceTitle(resource, locale), value: resourcesStrings.detail.type.article }));
 
   const siblingKeys = ["church", "seminary", "education", "childrensEducation"] as const;
   const siblingHrefs: Record<(typeof siblingKeys)[number], string> = {

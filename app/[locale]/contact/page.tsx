@@ -33,18 +33,16 @@ export async function generateMetadata({
 }
 
 /**
- * Dawn of Light - Contact.dc.html. Two design deviations, both deliberate
- * and flagged in the checkpoint report rather than silently resolved:
- * (1) the "Mobile 390 · WhatsApp first" frame's Send-a-message card omits
+ * Dawn of Light - Contact.dc.html. One design deviation, deliberate and
+ * flagged in the checkpoint report rather than silently resolved: the
+ * "Mobile 390 · WhatsApp first" frame's Send-a-message card omits
  * phone/subject/consent and shows only one city — read as an illustrative,
  * space-cropped preview of the same functional form HANDOFF.md §7
  * explicitly requires (Name, Email, Phone (optional), Subject, Message,
  * consent) rather than a genuinely different mobile field set, so mobile
  * keeps the full ContactForm and both city cards, just single-column.
- * (2) the Follow/Facebook & YouTube channel has no organization-supplied
- * URL (lib/organization.ts has no social links) — CLAUDE.md §32 forbids
- * inventing one, so it renders as non-interactive text rather than a
- * fabricated href.
+ * The Follow/Facebook & YouTube channel links to the organization's real
+ * social URLs (lib/organization.ts).
  */
 export default async function ContactPage({ params }: PageProps<"/[locale]/contact">) {
   const { locale } = await params;
@@ -152,12 +150,22 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
                 {t.channels.follow.heading}
               </p>
               <div className="flex gap-2.5">
-                <span className="border border-border-strong px-5 py-3 text-[0.9375rem] text-ink-faint">
+                <a
+                  href={organization.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-border-strong px-5 py-3 text-[0.9375rem] text-ink-faint"
+                >
                   {t.channels.follow.facebook}
-                </span>
-                <span className="border border-border-strong px-5 py-3 text-[0.9375rem] text-ink-faint">
+                </a>
+                <a
+                  href={organization.youtubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-border-strong px-5 py-3 text-[0.9375rem] text-ink-faint"
+                >
                   {t.channels.follow.youtube}
-                </span>
+                </a>
               </div>
             </div>
           </Reveal>

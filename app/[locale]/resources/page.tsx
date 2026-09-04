@@ -9,8 +9,8 @@ import {
   type FilterableResourceItem,
   type ResourceCategory,
 } from "@/components/resources/ResourcesFilterableList";
-import { publishedResources, type ResourceType } from "@/lib/resources";
-import { publishedSermons, getYouTubeThumbnailUrl } from "@/lib/sermons";
+import { publishedResources, resourceTitle, type ResourceType } from "@/lib/resources";
+import { publishedSermons, sermonTitle, getYouTubeThumbnailUrl } from "@/lib/sermons";
 import { getResourcesContent, getSermonsContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
@@ -100,14 +100,14 @@ export default async function ResourcesPage({ params }: PageProps<"/[locale]/res
       scriptureReference: latestSermon.scriptureReference,
       rowProps: {
         kicker: `${sermonsStrings.row.kicker.toUpperCase()} · ${languageLabel(latestSermon.language)} · ${(sermonFormatLabel ?? "").toUpperCase()}`,
-        title: latestSermon.title,
+        title: sermonTitle(latestSermon, locale),
         description: latestSermon.description,
         meta: [latestSermon.speaker, latestSermon.date ?? sermonsStrings.latest.datePlaceholder, latestSermon.scriptureReference ?? ""].filter(Boolean),
         actionLabel: sermonsStrings.latest.watchOnYouTube,
         href: latestSermon.externalUrl,
         external: true,
         imageSrc: latestSermonThumbnail,
-        imageAlt: latestSermon.title,
+        imageAlt: sermonTitle(latestSermon, locale),
         imageUnoptimized: true,
       },
     });
@@ -163,14 +163,14 @@ export default async function ResourcesPage({ params }: PageProps<"/[locale]/res
       scriptureReference: resource.scriptureReference,
       rowProps: {
         kicker,
-        title: resource.title,
+        title: resourceTitle(resource, locale),
         description,
         meta,
         actionLabel,
         href,
         external: Boolean(resource.externalUrl),
         imageSrc,
-        imageAlt: imageSrc ? resource.title : undefined,
+        imageAlt: imageSrc ? resourceTitle(resource, locale) : undefined,
         imageUnoptimized: Boolean(youtubeThumbnail),
       },
     });

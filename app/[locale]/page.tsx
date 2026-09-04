@@ -12,7 +12,7 @@ import { getHomeContent, getEventsContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
 import { publishedEvents } from "@/lib/events";
-import { publishedSermons } from "@/lib/sermons";
+import { publishedSermons, sermonTitle } from "@/lib/sermons";
 import { publishedResources, resourceTitle, resourceAuthor } from "@/lib/resources";
 
 export default async function Home({ params }: PageProps<"/[locale]">) {
@@ -45,7 +45,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   const resourceItems: { kicker: string; title: string; meta: string }[] = [
     latestSermon && {
       kicker: strings.resources.items.sermon.kicker as string,
-      title: latestSermon.title,
+      title: sermonTitle(latestSermon, locale),
       meta: latestSermon.speaker,
     },
     sampleArticle && {
