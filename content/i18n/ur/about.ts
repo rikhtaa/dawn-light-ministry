@@ -28,8 +28,7 @@ export const about: Translated<AboutStrings> = {
   masthead: {
     eyebrow: { value: "تعارف", source: "author", published: true, reviewed: true, sourceHash: "4efca0d10c5feb8e" },
     title: { value: "1982 سے ایک بپٹسٹ کلیسیا، سیمنری اور تعلیمی مشن کے طور پر خدمت۔", source: "author", published: true, reviewed: true, sourceHash: "34702a6b159b4734" },
-    standfirst: { value:
-        "ڈان آف لائٹ منسٹری — بیت لحم چرچ، سیمنری اور تعلیمی مشن — کراچی اور فیصل آباد میں مسیحیوں اور غیر مسیحیوں کے درمیان خدا کے کلام کی منادی، بیت لحم سیمنری میں طلبہ کی تربیت، اور مسیحی بچوں کو تعلیم حاصل کرنے میں مدد فراہم کرنے کے ذریعے خدمت کر رہی ہے۔", source: "author", published: true, reviewed: true, sourceHash: "83e6f1f70eabf74c" },
+    standfirst: { value: "ڈان آف لائٹ منسٹری — بیت لحم چرچ، سیمنری اور تعلیمی مشن — کراچی اور فیصل آباد میں مسیحیوں اور غیر مسیحیوں کے درمیان خدا کے کلام کی منادی، بیت لحم سیمنری میں طلبہ کی تربیت، اور مسیحی بچوں کو تعلیم حاصل کرنے میں مدد فراہم کرنے کے ذریعے خدمت کر رہی ہے۔", source: "author", published: true, reviewed: true, sourceHash: "83e6f1f70eabf74c" },
   },
   rail: {
     label: { value: "اس صفحے پر", source: "author", published: true, reviewed: true, sourceHash: "b5658fc8edda24f9" },
@@ -98,9 +97,8 @@ export const about: Translated<AboutStrings> = {
       outreach: { value: "مختلف مشنریوں کے ساتھ مل کر پاکستان کے مختلف علاقوں اور صوبوں میں انجیل کی منادی اور کلیسیائی خدمت میں حصہ لیا گیا، جبکہ کراچی اور اس سے باہر کلیسیا کی خدمت جاری رہی۔", source: "author", published: true, reviewed: true, sourceHash: "7135967226ee37dc" },
       ongoing: { value: "آج بھی کراچی اور اس سے باہر خدا کے کلام کی تعلیم، کلیسیا کی تعمیر، شاگرد سازی، تربیت، بچوں کی تعلیم اور انجیل کی خدمت جاری ہے۔", source: "author", published: true, reviewed: true, sourceHash: "e45d76877d84fe95" },
     },
-    note: { value: "یہ سفر ابھی مکمل نہیں ہوا۔ ہماری خواہش ہے کہ دعا، خدمت، تعلیم اور وفاداری کے اس سفر کو آنے والی نسلوں تک پہنچایا جائے اور اُس روشنی کو آگے بڑھایا جائے جو ہمیں مسیح میں عطا ہوئی ہے۔", source: "author", published: true, reviewed: true, sourceHash: "1b2052f7b3617355" },
     imagePlaceholder: { value: "قدیم تصویر — ابتدائی خدمت یا کلیسیا کی عمارت", source: "author", published: true, reviewed: true, sourceHash: "cf78207d626481a6" },
-    imageCaption: { value: "[تصویر کا عنوان فراہم کیا جائے — شخصیت، مقام، سال]", source: "author", published: true, reviewed: true, sourceHash: "4fe4bb405ba7114a" },
+    imageCaption: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "59665ff69bcff5f1" },
   },
   missionVision: {
     eyebrow: { value: "مشن اور وژن", source: "author", published: true, reviewed: true, sourceHash: "43166268ac9a5224" },
@@ -229,11 +227,9 @@ export const about: Translated<AboutStrings> = {
     eyebrow: { value: "اعتقاد کا بیان", source: "author", published: true, reviewed: true, sourceHash: "b3d1e1960612b1e1" },
     heading: { value: "اعتقاد کا بیان", source: "author", published: true, reviewed: true, sourceHash: "0e1aadb565a5fdf9" },
     trinityLabel: { value: "ہم کیا ایمان رکھتے ہیں", source: "author", published: true, reviewed: true, sourceHash: "9f6326a7489f0665" },
-    trinity: { value:
-        "ڈان آف لائٹ منسٹری ایک سچے خدا پر ایمان رکھتی ہے جو ازل سے ابد تک تین متمایز اقانیم میں موجود ہے: خدا باپ، خدا بیٹا اور خدا روح القدس۔ ہم تثلیث کے مسیحی عقیدے کو تسلیم کرتے ہیں اور اقرار کرتے ہیں کہ باپ، بیٹا اور روح القدس ایک ہی خدا ہیں۔", source: "author", published: true, reviewed: true, sourceHash: "3c9dcb69d6f2906f" },
+    trinity: { value: "ڈان آف لائٹ منسٹری ایک سچے خدا پر ایمان رکھتی ہے جو ازل سے ابد تک تین متمایز اقانیم میں موجود ہے: خدا باپ، خدا بیٹا اور خدا روح القدس۔ ہم تثلیث کے مسیحی عقیدے کو تسلیم کرتے ہیں اور اقرار کرتے ہیں کہ باپ، بیٹا اور روح القدس ایک ہی خدا ہیں۔", source: "author", published: true, reviewed: true, sourceHash: "3c9dcb69d6f2906f" },
     doctrineLabel: { value: "بپتسمہ", source: "author", published: true, reviewed: true, sourceHash: "718cffa9f8e1ed36" },
-    doctrine: { value:
-        "ہم یسوع مسیح کے حکم کی فرمانبرداری میں مسیحی بپتسمہ دیتے ہیں، اور بپتسمہ باپ، بیٹے اور روح القدس کے نام میں دیا جاتا ہے", source: "author", published: true, reviewed: true, sourceHash: "b3c318baf1575583" },
+    doctrine: { value: "ہم یسوع مسیح کے حکم کی فرمانبرداری میں مسیحی بپتسمہ دیتے ہیں، اور بپتسمہ باپ، بیٹے اور روح القدس کے نام میں دیا جاتا ہے", source: "author", published: true, reviewed: true, sourceHash: "b3c318baf1575583" },
   },
   leadership: {
     eyebrow: { value: "قیادت", source: "author", published: true, reviewed: true, sourceHash: "ec75f79040af1755" },

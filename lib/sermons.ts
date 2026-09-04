@@ -181,18 +181,24 @@ warnOnDuplicateSlugs(sermons, "lib/sermons.ts sermons");
 export const publishedSermons: Sermon[] = sermons.filter(isPublished);
 
 /**
- * Looks up one sermon by slug for /sermons/[slug].
+ * The thumbnail YouTube auto-generates for every uploaded video, at a
+ * fixed, always-available URL — no API call or key needed. Used in place
+ * of the sermon-thumbnail placeholder wherever a sermon has a YouTube
+ * `externalUrl`. Returns undefined for a non-YouTube URL or no URL at
+ * all, rather than guessing.
  */
-export function findSermonBySlug(slug: string): Sermon | undefined {
-  return publishedSermons.find((s) => s.slug === slug);
-}
-
-/** Every routable slug — for generateStaticParams. */
-export function getAllSermonSlugs(): string[] {
-  return publishedSermons.map((s) => s.slug);
-}
-
-/** Up to `limit` other sermons (Dawn of Light - Detail Templates.dc.html: "related strips … max 3, same type"). */
-export function getRelatedSermons(slug: string, limit = 3): Sermon[] {
-  return publishedSermons.filter((s) => s.slug !== slug).slice(0, limit);
+export function getYouTubeThumbnailUrl(url?: string): string | undefined {
+  if (!url) return undefined;
+  let videoId: string | null = null;
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname === "youtu.be") {
+      videoId = parsed.pathname.slice(1);
+    } else if (parsed.hostname.endsWith("youtube.com")) {
+      videoId = parsed.searchParams.get("v");
+    }
+  } catch {
+    return undefined;
+  }
+  return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : undefined;
 }

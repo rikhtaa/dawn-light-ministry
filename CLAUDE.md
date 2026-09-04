@@ -969,6 +969,56 @@ rendered `disabled`, matching the design's own muted treatment, rather
 than building search), or a new npm dependency — unless the PRD/HANDOFF
 and the current task explicitly require it.
 
+**"Backend," defined for this project:** in V1, "backend" means the
+Next.js application's own server-side functionality — Server Actions,
+server-side validation, honeypot anti-spam, email delivery, and secure
+environment-variable handling (§13/§14) — not a database. Do not read the
+word "backend" as authorization to add one; the two are not synonyms
+here.
+
+**V1 is database-free by explicit, frozen decision — this is not an
+oversight to "fix."** Sermons, YouTube videos, resources, books, PDFs,
+articles, Bible studies, and events all stay as typed static content in
+`lib/{sermons,resources,events,ministries,seminary}.ts` (§8), edited via
+Git and deployed through GitHub → Vercel (§29) — the presence of dozens or
+even hundreds of such records is not, by itself, a reason to add one. Do
+not install or configure PostgreSQL, MySQL, MongoDB, Supabase, Firebase,
+Prisma, Drizzle, or any other database/ORM; do not create `lib/db.ts` (or
+equivalent) or any database schema/migration; do not build `/admin`,
+`/dashboard`, `/login`, `/manage`, `/cms`, or any authenticated
+content-management surface. A YouTube video is stored as an `externalUrl`
+(or `youtubeVideoId` if ever needed) on the existing `Sermon`/`Resource`
+record — never downloaded or self-hosted, always behind the existing
+click-to-play facade (§18/§27). A book/PDF's file lives in
+`public/documents/`, referenced by `downloadUrl`; an external one uses
+`externalUrl` — same pattern, no new architecture. Requirement A ("show
+100 YouTube videos") is satisfied by the existing typed-content
+architecture; Requirement B ("let the pastor add videos through a login
+without touching code") would need a CMS/database and is explicitly out
+of V1 scope. If a task genuinely seems to need a database, stop and
+explain — per this section's own rule — the specific requirement the
+typed-content architecture can't satisfy, what it would cost
+(dependencies, infra, maintenance, recurring cost), and wait for explicit
+approval before installing or configuring anything. Never make that call
+unilaterally.
+
+**V2 — future only, not implemented, not authorized.** V2 does not exist
+today in any form — no schema, no client, no scaffolding, nothing
+half-built "in case." It becomes relevant only if the ministry later
+needs authorized non-developer staff to log into a management interface
+and create/edit/publish content without touching source code. Only *if
+and when that is explicitly approved* would V2 introduce: authentication,
+a protected admin/content-management UI, database-backed CRUD, persistent
+content storage, and dynamic (rather than typed-static) sermons/
+resources/books/events, with database security appropriate to that
+design. At that point, evaluate a managed Postgres solution first
+(Supabase Postgres is a candidate, not a commitment) — do not assume
+Prisma or Drizzle; choose the simplest reliable database-access approach
+for the actual requirements discovered at that time, not in advance. Do
+not start any part of V2 — including "just the schema" or "just the
+types" — without that explicit approval; a V1 task is never an occasion
+to lay V2 groundwork.
+
 ------------------------------------------------------------------------
 
 ## 34. Do Not Destroy Existing Work

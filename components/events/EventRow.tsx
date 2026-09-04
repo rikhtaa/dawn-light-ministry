@@ -46,9 +46,9 @@ const dateBoxTopRule: Record<Event["status"], string> = {
  * "No longer taking place" text, never a button, for cancelled.
  */
 export function EventRow({ event, statusLabel, cityLabel, strings, detailHref, isUrdu = false }: EventRowProps) {
-  const { day, month } = event.date
-    ? formatDateBox(event.date)
-    : { day: strings.row.dateDayPlaceholder, month: strings.row.dateMonthPlaceholder };
+  // No fake "[00]/[MON]" box when the source gives no date — the box is
+  // omitted entirely rather than showing a placeholder date.
+  const dateBox = event.date ? formatDateBox(event.date) : null;
 
   const dateRangeLabel = [
     event.startTime && event.endTime ? `${event.startTime}–${event.endTime}` : event.date,
@@ -60,15 +60,17 @@ export function EventRow({ event, statusLabel, cityLabel, strings, detailHref, i
   return (
     <RuledRow align="between" className={cn(event.status === "cancelled" && "opacity-70")}>
       <div className="flex min-w-0 flex-1 items-center gap-6">
-        <div
-          className={cn(
-            "flex h-24 w-24 shrink-0 flex-col items-center justify-center border border-border border-t-[3px]",
-            dateBoxTopRule[event.status],
-          )}
-        >
-          <p className="font-serif text-[1.625rem] leading-none text-foreground">{day}</p>
-          <p className="text-mono-label mt-1 text-ink-ghost">{month}</p>
-        </div>
+        {dateBox ? (
+          <div
+            className={cn(
+              "flex h-24 w-24 shrink-0 flex-col items-center justify-center border border-border border-t-[3px]",
+              dateBoxTopRule[event.status],
+            )}
+          >
+            <p className="font-serif text-[1.625rem] leading-none text-foreground">{dateBox.day}</p>
+            <p className="text-mono-label mt-1 text-ink-ghost">{dateBox.month}</p>
+          </div>
+        ) : null}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2.5">
             <EventStatusBadge status={event.status} label={statusLabel} variant="outlined" />

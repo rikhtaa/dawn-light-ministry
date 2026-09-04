@@ -62,6 +62,13 @@ interface ImagePlaceholderProps {
   objectFit?: "cover" | "contain";
   /** CSS `object-position`, e.g. "center 30%" — keep faces/subjects in frame on a tighter crop. */
   objectPosition?: string;
+  /**
+   * Bypasses next/image's domain-allowlist check for this instance only —
+   * needed for an external host not in next.config.ts's remotePatterns
+   * (e.g. YouTube's own thumbnail CDN, img.youtube.com), without adding
+   * that host site-wide.
+   */
+  unoptimized?: boolean;
 }
 
 /**
@@ -83,6 +90,7 @@ export function ImagePlaceholder({
   alt,
   objectFit = "cover",
   objectPosition,
+  unoptimized,
 }: ImagePlaceholderProps) {
   const onNavy = tone === "on-navy";
 
@@ -103,6 +111,7 @@ export function ImagePlaceholder({
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 720px"
           className={objectFit === "contain" ? "object-contain" : "object-cover"}
           style={objectPosition ? { objectPosition } : undefined}
+          unoptimized={unoptimized}
         />
         {photoCaption ? (
           <span className="absolute inset-x-0 bottom-0 max-w-[80%] bg-ink px-5 py-3 text-[0.78125rem] leading-[1.4] text-dark-body">

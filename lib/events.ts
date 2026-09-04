@@ -40,7 +40,13 @@ export interface Event extends Publishable {
  * absent rather than invented. `title` is not supplied by the source
  * (each entry is only labeled "event 1"/"event 2"/"event 3"); the titles
  * below are a minimal, factual summary of each entry's own description,
- * not an added fact — flagged in the Step 5 report as a judgment call.
+ * not an added fact. The third event's title previously said "Ministry
+ * Partnership" — corrected: the source says Pastor Nayyer Gull "worked
+ * with ... in their ministry, preaching and giving sermons," which is
+ * preaching in someone else's ministry, not a stated partnership; the
+ * word "partnership" never appears in the source and has been removed.
+ * `image` paths are the organization-supplied photographs in
+ * public/images/events/, matched by their own subject to each event.
  */
 export const events: Event[] = [
   {
@@ -49,6 +55,7 @@ export const events: Event[] = [
     slug: "teaching-and-educational-support-2023",
     description:
       "In 2023, Pastor Nayyer Gull taught a non-Christian about Christianity, helped him financially, supported his education, and provided books.",
+    image: "/images/events/event1.png",
     status: "completed",
   },
   {
@@ -58,14 +65,16 @@ export const events: Event[] = [
     description:
       "In 2025, Pastor Nayyer Gul preached about Christianity to Hindus in Kotri, Sindh, helped them financially, supported their education, and provided books.",
     city: "Kotri, Sindh",
+    image: "/images/events/event2.png",
     status: "completed",
   },
   {
-    id: "ministry-partnership-with-shakeel-nasir-2025",
-    title: "Ministry Partnership with Pastor Shakeel Nasir",
-    slug: "ministry-partnership-with-shakeel-nasir-2025",
+    id: "preaching-in-shakeel-nasir-ministry-2025",
+    title: "Preaching in Pastor Shakeel Nasir's Ministry",
+    slug: "preaching-in-shakeel-nasir-ministry-2025",
     description:
       "In 2025, Pastor Nayyer Gull worked with Pastor Jameel Nasir's brother, Shakeel Nasir, in their ministry, preaching and giving sermons.",
+    image: "/images/events/event3.jpg",
     status: "completed",
   },
 ];

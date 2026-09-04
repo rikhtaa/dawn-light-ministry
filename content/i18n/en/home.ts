@@ -20,7 +20,7 @@ export const home = {
       seminary: { value: "Daily", label: "Seminary classes" },
       tradition: { value: "Baptist", label: "Christian tradition" },
     },
-    imageCaption: "[Caption to be supplied — photograph, location and date]",
+    imageCaption: "Palm Sunday 2025",
     imagePlaceholder: "Congregation or seminary class",
   },
   mission: {

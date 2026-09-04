@@ -2,6 +2,8 @@
 
 import { getConfiguredEmailProvider } from "@/lib/email/provider";
 import { organization } from "@/lib/organization";
+import { isValidEmail, stripNewlines } from "@/lib/forms/sanitize";
+import { prayerSubmissionSchema } from "@/lib/forms/schema";
 
 export interface PrayerFormState {
   status: "idle" | "validationError" | "success" | "failure";
@@ -41,10 +43,23 @@ export async function submitPrayerRequest(
     return { status: "success" };
   }
 
-  const request = String(formData.get("request") ?? "").trim();
-  const consent = formData.get("consent") === "on";
-  if (!request || !consent) {
-    return { status: "validationError", requestError: !request, consentError: !consent };
+  // Zod is the authoritative check — a raw POST can skip the browser's
+  // own `required`/`maxLength` entirely.
+  const parsed = prayerSubmissionSchema.safeParse({
+    request: String(formData.get("request") ?? ""),
+    name: String(formData.get("name") ?? ""),
+    email: String(formData.get("email") ?? ""),
+    followUp: formData.get("followUp") === "on",
+    consent: formData.get("consent") === "on",
+  });
+
+  if (!parsed.success) {
+    const fieldErrors = parsed.error.flatten().fieldErrors;
+    return {
+      status: "validationError",
+      requestError: !!fieldErrors.request,
+      consentError: !!fieldErrors.consent,
+    };
   }
 
   const provider = getConfiguredEmailProvider();
@@ -53,9 +68,13 @@ export async function submitPrayerRequest(
     return { status: "failure" };
   }
 
-  const name = String(formData.get("name") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim();
-  const followUp = formData.get("followUp") === "on";
+  const { request, followUp } = parsed.data;
+  const name = stripNewlines(parsed.data.name);
+  const rawEmail = stripNewlines(parsed.data.email);
+  // Email is optional here — a malformed value is treated as not given
+  // (never passed to the provider as replyTo) rather than blocking
+  // submission over an optional field.
+  const email = rawEmail && isValidEmail(rawEmail) ? rawEmail : "";
 
   try {
     await provider.send({
@@ -64,7 +83,7 @@ export async function submitPrayerRequest(
       subject: "Prayer request from the website",
       text: [
         `From: ${name || "(not given)"}`,
-        `Email: ${email || "(not given)"}`,
+        `Email: ${rawEmail || "(not given)"}`,
         `Follow-up permitted: ${followUp ? "yes" : "no"}`,
         "",
         request,

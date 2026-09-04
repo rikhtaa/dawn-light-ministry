@@ -12,11 +12,22 @@ interface ResourceRowProps {
   href?: string;
   external?: boolean;
   isUrdu?: boolean;
+  /**
+   * A real, supplied thumbnail (a local /images/ path or a derived YouTube
+   * thumbnail URL). Omit entirely — never a placeholder box — for a
+   * resource with no retrievable image (e.g. a Medium-hosted article):
+   * the row's text column simply expands to fill the space instead.
+   */
+  imageSrc?: string;
+  imageAlt?: string;
+  /** Set when `imageSrc` is an external host (e.g. img.youtube.com) not in next.config.ts's remotePatterns. */
+  imageUnoptimized?: boolean;
 }
 
 /**
- * Dawn of Light - Resources.dc.html's index row: a 180×112 (16:9)
- * thumbnail, mono kicker (type · language · format), serif title,
+ * Dawn of Light - Resources.dc.html's index row: an optional 180×112
+ * (16:9) thumbnail (omitted, not placeholder-boxed, when no real image
+ * exists), mono kicker (type · language · format), serif title,
  * description, meta line, and a trailing action whose label states the
  * action plainly (Watch on YouTube / Read / Download PDF / Ask for a
  * copy) — never a generic "View". Deliberately untyped to `Resource` —
@@ -33,13 +44,25 @@ export function ResourceRow({
   href,
   external = false,
   isUrdu = false,
+  imageSrc,
+  imageAlt,
+  imageUnoptimized,
 }: ResourceRowProps) {
   return (
     <RuledRow align="between">
       <div className="flex min-w-0 flex-1 flex-col gap-4 sm:flex-row sm:items-center">
-        <div className="w-full shrink-0 sm:w-[180px]">
-          <ImagePlaceholder ratio="16:9" caption="thumbnail 16:9" bordered={false} />
-        </div>
+        {imageSrc ? (
+          <div className="w-full shrink-0 sm:w-[180px]">
+            <ImagePlaceholder
+              ratio="16:9"
+              caption="thumbnail 16:9"
+              bordered={false}
+              src={imageSrc}
+              alt={imageAlt ?? title}
+              unoptimized={imageUnoptimized}
+            />
+          </div>
+        ) : null}
         <div className="min-w-0 flex-1">
           <p className="text-mono-label text-accent dark:text-dark-accent">{kicker}</p>
           <p

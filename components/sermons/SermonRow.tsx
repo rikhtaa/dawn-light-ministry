@@ -45,10 +45,11 @@ function formatDateCompact(iso: string): string {
  * desktop row narrowed.
  */
 export function SermonRow({ sermon, strings, languageLabel, highlighted = false, isUrdu = false }: SermonRowProps) {
-  const { day, monthYear } = sermon.date
-    ? formatDateRail(sermon.date)
-    : { day: strings.row.dateDay, monthYear: strings.row.dateMonthYear };
-  const compactDate = sermon.date ? formatDateCompact(sermon.date) : strings.row.dateCompact;
+  // No fake "[dd]"/"[MON YYYY]" rail when the source gives no complete
+  // date — the rail (and the mobile kicker's date prefix) is omitted
+  // entirely rather than showing a placeholder date.
+  const dateRail = sermon.date ? formatDateRail(sermon.date) : null;
+  const compactDate = sermon.date ? formatDateCompact(sermon.date) : null;
   const actionKey = formatActionKey[sermon.format];
   const href = sermon.externalUrl ?? sermon.audioUrl ?? sermon.notesUrl;
   const formatLabel =
@@ -61,18 +62,20 @@ export function SermonRow({ sermon, strings, languageLabel, highlighted = false,
   return (
     <RuledRow align="between">
       <div className="flex min-w-0 flex-1 flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-        <div
-          className={cn(
-            "hidden w-[120px] shrink-0 border-s-2 ps-4 sm:block",
-            highlighted ? "border-s-accent dark:border-s-dark-accent" : "border-s-border",
-          )}
-        >
-          <p className="font-serif text-[1.625rem] leading-none text-foreground">{day}</p>
-          <p className="text-mono-label mt-1.5 text-ink-ghost">{monthYear}</p>
-        </div>
+        {dateRail ? (
+          <div
+            className={cn(
+              "hidden w-[120px] shrink-0 border-s-2 ps-4 sm:block",
+              highlighted ? "border-s-accent dark:border-s-dark-accent" : "border-s-border",
+            )}
+          >
+            <p className="font-serif text-[1.625rem] leading-none text-foreground">{dateRail.day}</p>
+            <p className="text-mono-label mt-1.5 text-ink-ghost">{dateRail.monthYear}</p>
+          </div>
+        ) : null}
         <div className="min-w-0 flex-1">
           <p className="text-mono-label text-accent dark:text-dark-accent">
-            <span className="sm:hidden">{compactDate} · </span>
+            {compactDate ? <span className="sm:hidden">{compactDate} · </span> : null}
             {strings.row.kicker} · {languageLabel} · {formatLabel}
           </p>
           <p className={cn("text-card-title mt-1.5 font-semibold text-foreground", isUrdu && "font-urdu-display")}>

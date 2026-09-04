@@ -145,21 +145,31 @@ export default async function EventDetailPage({
   const d = strings.detail;
   const related = getRelatedEvents(event.slug, 3);
 
+  // Date/time/location/city rows are omitted entirely (not shown as an
+  // "unconfirmed" [venue]/[city] placeholder) when the source document
+  // doesn't provide them — the detail table must reflect the source
+  // exactly rather than implying a fact is merely pending.
   const facts = [
-    { label: d.facts.date, value: event.date ?? d.datePlaceholder, unconfirmed: !event.date },
-    {
-      label: d.facts.time,
-      value: event.startTime ? `${event.startTime}${event.endTime ? `–${event.endTime}` : ""}` : d.timePlaceholder,
-      unconfirmed: !event.startTime,
-    },
-    { label: d.facts.location, value: event.location ?? "[venue]", unconfirmed: !event.location },
-    { label: d.facts.city, value: event.city ?? "[city]", unconfirmed: !event.city },
+    event.date ? { label: d.facts.date, value: event.date } : null,
+    event.startTime
+      ? {
+          label: d.facts.time,
+          value: `${event.startTime}${event.endTime ? `–${event.endTime}` : ""}`,
+        }
+      : null,
+    event.location ? { label: d.facts.location, value: event.location } : null,
+    event.city ? { label: d.facts.city, value: event.city } : null,
     { label: d.facts.status, value: d.status[event.status] },
-  ];
+  ].filter((fact): fact is NonNullable<typeof fact> => fact !== null);
 
   const body = (
     <div className="flex flex-col gap-10">
-      <ImagePlaceholder ratio="16:9" caption="Event photograph" />
+      <ImagePlaceholder
+        ratio="16:9"
+        caption="Event photograph"
+        src={event.image}
+        alt={event.image ? event.title : undefined}
+      />
       <div>
         <h2
           className={cn(
@@ -212,19 +222,6 @@ export default async function EventDetailPage({
         <FactTable facts={facts} layout="stacked" isUrdu={isUrdu} className="mt-3.5" />
       </Card>
 
-      <Card tone="surface">
-        <p className={cn("text-card-title font-semibold text-foreground", isUrdu && "font-urdu-display")}>
-          {d.gettingThere.heading}
-        </p>
-        <ImagePlaceholder ratio="4:3" caption="Map" className="mt-3.5" />
-        <p className="mt-3.5">
-          <PlaceholderTag>{event.address ?? d.gettingThere.addressPlaceholder}</PlaceholderTag>
-        </p>
-        <Button variant="secondary" size="compact" disabled isUrdu={isUrdu} className="mt-4 w-full">
-          {d.gettingThere.directions}
-        </Button>
-      </Card>
-
       <div className="border border-border bg-band p-6">
         <p className={cn("text-card-title font-semibold text-foreground", isUrdu && "font-urdu-display")}>
           {d.contact.heading}
@@ -267,15 +264,21 @@ export default async function EventDetailPage({
               isUrdu && "font-urdu-body",
             )}
           >
-            <span>
-              {d.meta.date}: {event.date ?? d.datePlaceholder}
-            </span>
-            <span>
-              {d.meta.time}: {event.startTime ? `${event.startTime}${event.endTime ? `–${event.endTime}` : ""}` : d.timePlaceholder}
-            </span>
-            <span>
-              {d.meta.location}: {event.location ?? "[venue]"}
-            </span>
+            {event.date ? (
+              <span>
+                {d.meta.date}: {event.date}
+              </span>
+            ) : null}
+            {event.startTime ? (
+              <span>
+                {d.meta.time}: {event.startTime}{event.endTime ? `–${event.endTime}` : ""}
+              </span>
+            ) : null}
+            {event.location ? (
+              <span>
+                {d.meta.location}: {event.location}
+              </span>
+            ) : null}
           </div>
         </Container>
       </div>
@@ -320,9 +323,9 @@ export default async function EventDetailPage({
                     >
                       {related.title}
                     </span>
-                    <span className="text-caption text-ink-faint">
-                      {related.date ?? d.datePlaceholder}
-                    </span>
+                    {related.date ? (
+                      <span className="text-caption text-ink-faint">{related.date}</span>
+                    ) : null}
                   </RuledRow>
                 ))}
               </RuledList>

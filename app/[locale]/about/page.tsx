@@ -8,7 +8,6 @@ import { SectionHeader } from "@/components/layout/SectionHeader";
 import { OnThisPageRail } from "@/components/layout/OnThisPageRail";
 import { Button } from "@/components/ui/Button";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
-import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArticleBody } from "@/components/ui/ArticleBody";
 import { ourStoryBlocks, missionBlocks, visionBlocks, leadershipSlugs } from "@/lib/about";
@@ -110,9 +109,6 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
                   </li>
                 ))}
               </ul>
-              <p className="mt-6">
-                <PlaceholderTag>{strings.ourStory.note}</PlaceholderTag>
-              </p>
               <div className="measure mt-7 border border-border">
                 <ImagePlaceholder
                   ratio="16:9"
@@ -315,7 +311,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
                 slug: leadershipSlugs.rahmat,
                 imageSrc: "/images/about/leadership/pastor_rahmat.png",
                 imageAlt: "An early ministry-era group photograph; Pastor Rahmat is circled in the original",
-                photoCaption: "Archival photograph, circled in the original",
+                photoCaption: undefined as string | undefined,
                 objectPosition: "center 45%",
               },
             ].map(({ person, slug, imageSrc, imageAlt, photoCaption, objectPosition }, i) => (

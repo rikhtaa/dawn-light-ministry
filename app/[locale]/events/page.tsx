@@ -124,12 +124,6 @@ export default async function EventsPage({ params }: PageProps<"/[locale]/events
                 >
                   {strings.filters.past}
                 </span>
-                <span className="border border-border px-4 py-2 text-[0.84375rem] whitespace-nowrap text-ink-muted">
-                  {strings.filters.karachi}
-                </span>
-                <span className="border border-border px-4 py-2 text-[0.84375rem] whitespace-nowrap text-ink-muted">
-                  {strings.filters.faisalabad}
-                </span>
               </Reveal>
               <Reveal>
                 <RuledList className="mt-6">

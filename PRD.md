@@ -120,6 +120,26 @@ Do not build unless explicitly approved:
 -   complex volunteer management
 -   complex notification infrastructure
 
+V1 has no persistent database and no CMS of any kind — not PostgreSQL,
+MySQL, MongoDB, Supabase, Firebase, Prisma, Drizzle, or any other
+database/ORM, and no headless CMS. It also has no admin dashboard,
+content-management portal, or authentication for managing content.
+Sermons, YouTube videos, books, articles, Bible studies, educational
+resources, PDFs, and events are typed static content maintained in the
+repository (`content/i18n/`, `lib/`) through the normal Git → GitHub →
+Vercel workflow — a large or growing number of content records/URLs does
+not by itself justify a database. "Backend" in V1 means the Next.js
+application's own server-side functionality (Server Actions, server-side
+validation, email delivery — see §14's Prayer form and its Contact
+counterpart) — it does not mean a persistent database, and the two must
+not be conflated.
+
+A future V2 could introduce authenticated, database-backed content
+management if the ministry later needs non-developer staff to
+create/edit/publish content without touching code — but V2 is not part of
+this PRD's scope, is not approved, and must not be implemented, scaffolded,
+or assumed as part of any V1 task.
+
 ------------------------------------------------------------------------
 
 # 3. Source-of-Truth Policy
@@ -605,7 +625,8 @@ Rules:
 -   no public display
 -   no public API exposure
 -   no sensitive data in logs
--   server-side validation if backend exists
+-   server-side validation (a Next.js Server Action — see §2.3's backend
+    definition; this is required, not conditional)
 -   anti-spam protection
 -   rate limiting where appropriate
 -   success confirmation

@@ -287,6 +287,12 @@ export const resources: Resource[] = [
     type: "article",
     author: "Pastor Nayyer Gull",
     language: "en",
+    // The only file in public/images/ministriesPages/ not already referenced
+    // by any Ministry page — its name and subject (a recorded lecture/
+    // interview) match this article specifically, unlike the Ministries
+    // index's own "teachingLectures" row image (a different file:
+    // public/images/ministries/lectures.jpg).
+    thumbnail: "/images/ministriesPages/lectures.jpg",
     standfirst: "Teaching God's Word, Equipping Disciples, and Preparing the Next Generation",
     bodyBlockDefs: lecturesBiblicalTeachingBlockDefs,
     bodyBlocksEn: {

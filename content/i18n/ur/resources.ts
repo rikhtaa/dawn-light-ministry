@@ -40,6 +40,7 @@ export const resources: Translated<ResourcesStrings> = {
     english: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "ba118bf7fc9c1aed" },
     urdu: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "234d81e4dcbe229b" },
     searchPlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "c24cfde743ee1217" },
+    noResults: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "ebd16580a3b5aab3" },
   },
   row: {
     watchOnYouTube: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "818cd7480430ffb4" },
@@ -82,7 +83,6 @@ export const resources: Translated<ResourcesStrings> = {
       date: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "99c40ab405926cb5" },
       pages: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9046da16aea909ba" },
     },
-    datePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "80502bc1a158f94a" },
     pagesPlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "cf4f25be3620a639" },
     covers: {
       heading: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "edbce190de65ae2c" },

@@ -5,10 +5,9 @@ import { Container } from "@/components/layout/Container";
 import { CtaBand } from "@/components/layout/CtaBand";
 import { Button } from "@/components/ui/Button";
 import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
-import { RuledList } from "@/components/ui/RuledRow";
 import { Reveal } from "@/components/ui/Reveal";
 import { LatestSermonBand } from "@/components/sermons/LatestSermonBand";
-import { SermonRow } from "@/components/sermons/SermonRow";
+import { SermonsFilterableList } from "@/components/sermons/SermonsFilterableList";
 import { publishedSermons } from "@/lib/sermons";
 import { getSermonsContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
@@ -96,69 +95,7 @@ export default async function SermonsPage({ params }: PageProps<"/[locale]/sermo
             isUrdu={isUrdu}
           />
 
-          <div className="border-b border-border bg-surface py-5">
-            <Container className="flex flex-nowrap items-center gap-3 overflow-x-auto sm:flex-wrap sm:overflow-visible">
-              <span className="bg-ink px-4 py-2.5 text-[0.84375rem] text-dark-heading">
-                {strings.filters.all}
-              </span>
-              <span className="border border-border px-4 py-2 text-[0.84375rem] text-ink-muted">
-                {strings.filters.bySeries}
-              </span>
-              <span className="border border-border px-4 py-2 text-[0.84375rem] text-ink-muted">
-                {strings.filters.byScripture}
-              </span>
-              {/* By speaker, the English/Urdu language chips and search are
-                  dropped below sm — Sermons.dc.html's own mobile frame
-                  ("Mobile 390 · latest above the archive") shows only
-                  All/Series/Scripture/اردو, not the full desktop filter set. */}
-              <span className="hidden border border-border px-4 py-2 text-[0.84375rem] text-ink-muted sm:inline-block">
-                {strings.filters.bySpeaker}
-              </span>
-              <span className="mx-1 hidden h-6 w-px bg-border sm:block" aria-hidden="true" />
-              <span className="hidden border border-border px-4 py-2 text-[0.84375rem] text-ink-muted sm:inline-block">
-                {strings.filters.english}
-              </span>
-              <span className="border border-border px-4 py-1.5 font-urdu-body text-sm text-ink-muted">
-                {strings.filters.urdu}
-              </span>
-              <span className="ms-auto hidden min-w-60 border border-input-border bg-surface-warm px-4 py-2.5 text-[0.84375rem] text-ink-disabled sm:block">
-                {strings.filters.searchPlaceholder}
-              </span>
-            </Container>
-          </div>
-
-          <section className="bg-surface pb-12">
-            <Container>
-              <Reveal>
-                <RuledList>
-                  {archive.map((sermon, i) => (
-                    <SermonRow
-                      key={sermon.slug}
-                      sermon={sermon}
-                      strings={strings}
-                      languageLabel={languageLabel(sermon.language)}
-                      highlighted={i === 0}
-                      isUrdu={isUrdu}
-                    />
-                  ))}
-                </RuledList>
-              </Reveal>
-              <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-                <p className="text-small text-ink-faint">
-                  {strings.pagination.showing} {archive.length} {strings.pagination.of} {archive.length}{" "}
-                  {strings.pagination.sermonsLabel}
-                </p>
-                <div className="flex gap-2">
-                  <Button variant="secondary" size="compact" disabled isUrdu={isUrdu}>
-                    {strings.pagination.previous}
-                  </Button>
-                  <Button variant="secondary" size="compact" disabled isUrdu={isUrdu}>
-                    {strings.pagination.next}
-                  </Button>
-                </div>
-              </div>
-            </Container>
-          </section>
+          <SermonsFilterableList sermons={archive} strings={strings} isUrdu={isUrdu} />
         </>
       ) : (
         <section className="bg-surface py-16 lg:py-24">

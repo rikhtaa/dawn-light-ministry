@@ -2,7 +2,7 @@ import { NavyBand } from "@/components/layout/NavyBand";
 import { Button } from "@/components/ui/Button";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { cn } from "@/lib/cn";
-import type { Sermon } from "@/lib/sermons";
+import { getYouTubeThumbnailUrl, type Sermon } from "@/lib/sermons";
 import type { SermonsStrings } from "@/content/i18n/en/sermons";
 
 interface LatestSermonBandProps {
@@ -19,10 +19,19 @@ interface LatestSermonBandProps {
  * (unlike Seminary's masthead), so this reuses NavyBand unchanged.
  */
 export function LatestSermonBand({ sermon, strings, languageLabel, isUrdu = false }: LatestSermonBandProps) {
+  const thumbnailUrl = getYouTubeThumbnailUrl(sermon.externalUrl);
+
   return (
     <NavyBand className="border-b border-border">
       <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[640px_1fr] lg:gap-11">
-        <ImagePlaceholder ratio="16:9" tone="on-navy" caption={strings.imagePlaceholder} />
+        <ImagePlaceholder
+          ratio="16:9"
+          tone="on-navy"
+          caption={strings.imagePlaceholder}
+          src={thumbnailUrl}
+          alt={thumbnailUrl ? sermon.title : undefined}
+          unoptimized
+        />
         <div className="min-w-0">
           <p
             className={cn(
@@ -76,9 +85,6 @@ export function LatestSermonBand({ sermon, strings, languageLabel, isUrdu = fals
                 {strings.watchOnYouTube}
               </Button>
             )}
-            <Button href={`/sermons/${sermon.slug}`} variant="secondary" tone="on-navy" isUrdu={isUrdu}>
-              {strings.sermonDetail}
-            </Button>
           </div>
         </div>
       </div>

@@ -48,15 +48,11 @@ export const events = {
   filters: {
     upcoming: "Upcoming",
     past: "Past",
-    karachi: "Karachi",
-    faisalabad: "Faisalabad",
   },
   row: {
     register: "Register",
     details: "Details",
     noLongerTakingPlace: "No longer taking place",
-    dateDayPlaceholder: "[00]",
-    dateMonthPlaceholder: "[Mon]",
   },
   pagination: {
     showing: "Showing",
@@ -75,8 +71,6 @@ export const events = {
       time: "Time",
       location: "Location",
     },
-    datePlaceholder: "[date]",
-    timePlaceholder: "[time]",
     action: {
       heading: "Attend",
       register: "Register",
@@ -100,11 +94,6 @@ export const events = {
       location: "Location",
       city: "City",
       status: "Status",
-    },
-    gettingThere: {
-      heading: "Getting there",
-      addressPlaceholder: "[PSEUDO/PLACEHOLDER — ADDRESS TO BE CONFIRMED]",
-      directions: "Get directions",
     },
     contact: {
       heading: "Contact",

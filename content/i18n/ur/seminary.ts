@@ -31,11 +31,11 @@ export const seminary: Translated<SeminaryStrings> = {
     standfirst: { value: "کلامِ مقدس، مسیحی عقائد، اور پاسبانی خدمات کی کلاسیں ہفتے میں دو بار (بدھ اور جمعرات کو) منعقد ہوتی ہیں، تاکہ پاکستان میں کلیسیاؤں کی رہنمائی وہ لوگ کریں جو خدا کے کلام میں باقاعدہ تربیت یافتہ ہوں۔", source: "author", published: true, reviewed: true, sourceHash: "884fdf30ea2284f0" },
     primaryCta: { value: "کلاسوں کے بارے میں دریافت کریں", source: "author", published: true, reviewed: true, sourceHash: "4106c448936c2bc1" },
     secondaryCta: { value: "سوال پوچھیں", source: "author", published: true, reviewed: true, sourceHash: "dc3cd069aae6d6bd" },
-    imagePlaceholder: { value: "", source: "author", published: true, reviewed: true, sourceHash: "308ee15614201e20" },
-    imageCaption: { value: "", source: "author", published: true, reviewed: true, sourceHash: "0646a33e77e24701" },
+    imagePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "308ee15614201e20" },
+    imageCaption: { value: "", source: "machine", published: true, reviewed: false, sourceHash: "e3b0c44298fc1c14" },
   },
   programme: {
-    eyebrow: { value: "", source: "author", published: true, reviewed: true, sourceHash: "9d316b169b01f8c8" },
+    eyebrow: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9d316b169b01f8c8" },
     heading: { value: "بائبلی تعلیم ہر شخص کی دسترس میں", source: "author", published: true, reviewed: true, sourceHash: "95884034f923a307" },
     blocks: {
       dek: { value: "بائبلی تعلیم ہر شخص کی دسترس میں", source: "author", published: true, reviewed: true, sourceHash: "95884034f923a307" },
@@ -117,21 +117,15 @@ export const seminary: Translated<SeminaryStrings> = {
       },
       doctrine: {
         title: { value: "بائبلی اور الٰہیاتی فہم کی بنیادیں", source: "author", published: true, reviewed: true, sourceHash: "842d39fd9c698ec9" },
-        description: { value: `ایسا مطالعہ جو طلبہ کو بائبلی سچائی کی مضبوط بنیاد فراہم کرنے، صحیفۂ مقدس کو اُس کے درست سیاق و سباق میں سمجھنے، اور بائبلی و الٰہیاتی موضوعات کا سنجیدگی سے مطالعہ کرنے میں مدد دے۔
-کورسز کو ایک منظم طریقۂ کار کے تحت تیار کیا جاتا ہے تاکہ طلبہ کے صحیفۂ مقدس کے فہم کو مضبوط کیا جا سکے اور انہیں مسیحی زندگی اور خدمت میں ذمہ داری کے ساتھ بائبلی علم کو بروئے کار لانے کے لیے تیار کیا جا سکے۔
-کورس کی ساخت اور تعلیمی اوقات: بعد میں حتمی کیے جائیں گے۔`, source: "author", published: true, reviewed: true, sourceHash: "5b864c8156d3b03f" },
+        description: { value: "ایسا مطالعہ جو طلبہ کو بائبلی سچائی کی مضبوط بنیاد فراہم کرنے، صحیفۂ مقدس کو اُس کے درست سیاق و سباق میں سمجھنے، اور بائبلی و الٰہیاتی موضوعات کا سنجیدگی سے مطالعہ کرنے میں مدد دے۔\nکورسز کو ایک منظم طریقۂ کار کے تحت تیار کیا جاتا ہے تاکہ طلبہ کے صحیفۂ مقدس کے فہم کو مضبوط کیا جا سکے اور انہیں مسیحی زندگی اور خدمت میں ذمہ داری کے ساتھ بائبلی علم کو بروئے کار لانے کے لیے تیار کیا جا سکے۔\nکورس کی ساخت اور تعلیمی اوقات: بعد میں حتمی کیے جائیں گے۔", source: "author", published: true, reviewed: true, sourceHash: "5b864c8156d3b03f" },
       },
       pastoralPractice: {
         title: { value: "مسیحی زندگی اور خدمت کے لیے تیاری", source: "author", published: true, reviewed: true, sourceHash: "ef636110d2903bd9" },
-        description: { value: `ایسی تربیت جس کا مقصد طلبہ کو بائبلی علم کو مسیحی زندگی اور خدمت میں ذمہ داری کے ساتھ بروئے کار لانے، صحیفۂ مقدس کا آزادانہ مطالعہ کرنے کی صلاحیت پیدا کرنے، اور کلیسیا و مسیحی خدمت میں وفادارانہ خدمت کے لیے تیار کرنا ہے۔
-
-تعلیم کا عمل منظم تحریری مطالعات، طلبہ کے اسائنمنٹس، اسائنمنٹس کی جمع آوری اور جانچ، نیز طلبہ کی شرکت اور تعلیمی پیش رفت کے ریکارڈ کے ذریعے انجام دیا جاتا ہے۔`, source: "author", published: true, reviewed: true, sourceHash: "e6b24be4cbeb61f2" },
+        description: { value: "ایسی تربیت جس کا مقصد طلبہ کو بائبلی علم کو مسیحی زندگی اور خدمت میں ذمہ داری کے ساتھ بروئے کار لانے، صحیفۂ مقدس کا آزادانہ مطالعہ کرنے کی صلاحیت پیدا کرنے، اور کلیسیا و مسیحی خدمت میں وفادارانہ خدمت کے لیے تیار کرنا ہے۔\n\nتعلیم کا عمل منظم تحریری مطالعات، طلبہ کے اسائنمنٹس، اسائنمنٹس کی جمع آوری اور جانچ، نیز طلبہ کی شرکت اور تعلیمی پیش رفت کے ریکارڈ کے ذریعے انجام دیا جاتا ہے۔", source: "author", published: true, reviewed: true, sourceHash: "e6b24be4cbeb61f2" },
       },
       lectures: {
         title: { value: "عوامی بائبلی تعلیم", source: "author", published: true, reviewed: true, sourceHash: "c2edbade3f14c953" },
-        description: { value: `عوامی تدریسی نشستیں جن کا مقصد کلیسیاؤں، آنے والے افراد اور بائبلی تعلیم میں دلچسپی رکھنے والے سیکھنے والوں کے لیے بائبلی اور الٰہیاتی تعلیم کو قابلِ رسائی بنانا ہے۔
-
-یہ لیکچرز لوگوں کو کسی باقاعدہ جسمانی سیمنری میں داخلہ لیے بغیر بائبلی موضوعات کے مطالعے اور اُن پر غور و فکر کا موقع فراہم کرتے ہیں۔`, source: "author", published: true, reviewed: true, sourceHash: "aef3bf15903d372b" },
+        description: { value: "عوامی تدریسی نشستیں جن کا مقصد کلیسیاؤں، آنے والے افراد اور بائبلی تعلیم میں دلچسپی رکھنے والے سیکھنے والوں کے لیے بائبلی اور الٰہیاتی تعلیم کو قابلِ رسائی بنانا ہے۔\n\nیہ لیکچرز لوگوں کو کسی باقاعدہ جسمانی سیمنری میں داخلہ لیے بغیر بائبلی موضوعات کے مطالعے اور اُن پر غور و فکر کا موقع فراہم کرتے ہیں۔", source: "author", published: true, reviewed: true, sourceHash: "aef3bf15903d372b" },
         meta: { value: "کھلا", source: "author", published: true, reviewed: true, sourceHash: "ed077f3d8125d60d" },
       },
     },
@@ -184,9 +178,9 @@ export const seminary: Translated<SeminaryStrings> = {
     body: { value: "وزارت کی جانب سے شائع کیے گئے وعظ، بائبل کے مطالعات اور مضامین ہر ایک کے لیے دستیاب ہیں، خواہ آپ سیمنری کی کلاسز میں شرکت کرتے ہوں یا نہ کرتے ہوں۔", source: "author", published: true, reviewed: true, sourceHash: "89d107d1ce5e7500" },
     cta: { value: "وسائل دیکھیں", source: "author", published: true, reviewed: true, sourceHash: "8a0a966943411e24" },
     lecture: {
-      kicker: { value: "", source: "author", published: true, reviewed: true, sourceHash: "a757c6b4039f9966" },
-      title: { value: "", source: "author", published: true, reviewed: true, sourceHash: "00a79915a1d02bc2" },
-      meta: { value: "", source: "author", published: true, reviewed: true, sourceHash: "94feaaeac743b79c" },
+      kicker: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a757c6b4039f9966" },
+      title: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "00a79915a1d02bc2" },
+      meta: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "94feaaeac743b79c" },
     },
   },
 };

@@ -44,12 +44,21 @@ export function Reveal({ children, index = 0, className }: RevealProps) {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       alreadyOnScreen
     ) {
-      // Deferred a frame (rather than called inline) so this stays an
-      // external-system subscription reacting via a callback, not a
-      // synchronous setState-in-effect — same shape as the observer branch
-      // below, just triggered on the next frame instead of on intersection.
-      const raf = requestAnimationFrame(() => setVisible(true));
-      return () => cancelAnimationFrame(raf);
+      // Deferred (rather than called inline) so this stays an external-
+      // system subscription reacting via a callback, not a synchronous
+      // setState-in-effect — same shape as the observer branch below.
+      // `queueMicrotask`, not `requestAnimationFrame` — found and fixed
+      // once already: browsers throttle/suspend rAF callbacks entirely
+      // while `document.hidden` is true (a backgrounded tab, a page
+      // loaded in a tab that isn't yet frontmost, low-power mode), so a
+      // page that first renders in that state could stay stuck at
+      // opacity-0 indefinitely — content that's supposed to reveal
+      // immediately never would, and everything inside stayed invisible
+      // (though still technically focusable/typeable underneath).
+      // Microtasks aren't tied to the rendering/paint pipeline the way
+      // rAF is, so they aren't subject to that throttling.
+      queueMicrotask(() => setVisible(true));
+      return;
     }
 
     const observer = new IntersectionObserver(

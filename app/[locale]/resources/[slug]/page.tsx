@@ -89,13 +89,15 @@ export default async function ResourceDetailPage({
   const facts = [
     { label: d.facts.author, value: author ?? "[author]", unconfirmed: !author },
     // A full-length biography article (bodyBlockDefs) has no page count or
-    // publish date to speak of — showing "[date]"/"[pages]" bracket
-    // placeholders there would misleadingly read as missing info on an
-    // otherwise-finished page, rather than genuinely not applicable.
+    // publish date to speak of — showing "[pages]" there would misleadingly
+    // read as missing info on an otherwise-finished page, rather than
+    // genuinely not applicable. The date row itself is omitted entirely
+    // (not shown as an "unconfirmed [date]" placeholder) whenever no
+    // resource in the current data has a verified date — do not invent one.
     ...(resource.bodyBlockDefs
       ? []
       : [
-          { label: d.facts.date, value: resource.date ?? d.datePlaceholder, unconfirmed: !resource.date },
+          ...(resource.date ? [{ label: d.facts.date, value: resource.date }] : []),
           {
             label: d.facts.pages,
             value: resource.pages ? String(resource.pages) : d.pagesPlaceholder,
@@ -258,9 +260,11 @@ export default async function ResourceDetailPage({
             </span>
             {resource.bodyBlockDefs ? null : (
               <>
-                <span>
-                  {d.meta.date}: {resource.date ?? d.datePlaceholder}
-                </span>
+                {resource.date ? (
+                  <span>
+                    {d.meta.date}: {resource.date}
+                  </span>
+                ) : null}
                 <span>
                   {d.meta.pages}: {resource.pages ? String(resource.pages) : d.pagesPlaceholder}
                 </span>

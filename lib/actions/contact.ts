@@ -2,6 +2,8 @@
 
 import { getConfiguredEmailProvider } from "@/lib/email/provider";
 import { organization } from "@/lib/organization";
+import { stripNewlines } from "@/lib/forms/sanitize";
+import { contactSubmissionSchema } from "@/lib/forms/schema";
 
 export interface ContactFormState {
   status: "idle" | "validationError" | "success" | "failure";
@@ -25,19 +27,26 @@ export async function submitContactMessage(
     return { status: "success" };
   }
 
-  const name = String(formData.get("name") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim();
-  const message = String(formData.get("message") ?? "").trim();
-  const consent = formData.get("consent") === "on";
+  const parsed = contactSubmissionSchema.safeParse({
+    name: String(formData.get("name") ?? ""),
+    email: String(formData.get("email") ?? ""),
+    phone: String(formData.get("phone") ?? ""),
+    subject: String(formData.get("subject") ?? ""),
+    message: String(formData.get("message") ?? ""),
+    consent: formData.get("consent") === "on",
+  });
 
-  const errors: ContactFormState["errors"] = {};
-  if (!name) errors.name = true;
-  if (!email) errors.email = true;
-  if (!message) errors.message = true;
-  if (!consent) errors.consent = true;
-
-  if (!name || !email || !message || !consent) {
-    return { status: "validationError", errors };
+  if (!parsed.success) {
+    const fieldErrors = parsed.error.flatten().fieldErrors;
+    return {
+      status: "validationError",
+      errors: {
+        name: !!fieldErrors.name,
+        email: !!fieldErrors.email,
+        message: !!fieldErrors.message,
+        consent: !!fieldErrors.consent,
+      },
+    };
   }
 
   const provider = getConfiguredEmailProvider();
@@ -46,8 +55,11 @@ export async function submitContactMessage(
     return { status: "failure" };
   }
 
-  const phone = String(formData.get("phone") ?? "").trim();
-  const subject = String(formData.get("subject") ?? "General enquiry").trim();
+  const name = stripNewlines(parsed.data.name);
+  const email = stripNewlines(parsed.data.email);
+  const phone = stripNewlines(parsed.data.phone);
+  const subject = stripNewlines(parsed.data.subject) || "General enquiry";
+  const { message } = parsed.data;
 
   try {
     await provider.send({

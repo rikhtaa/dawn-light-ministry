@@ -41,6 +41,7 @@ export const resources = {
     english: "English",
     urdu: "اردو",
     searchPlaceholder: "Search title, speaker or Scripture",
+    noResults: "No resources match your filters.",
   },
   row: {
     watchOnYouTube: "Watch on YouTube",
@@ -83,7 +84,6 @@ export const resources = {
       date: "Date",
       pages: "Pages",
     },
-    datePlaceholder: "[date]",
     pagesPlaceholder: "[pages]",
     covers: {
       heading: "What it covers",

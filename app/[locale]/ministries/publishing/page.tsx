@@ -11,7 +11,8 @@ import { MinistryMasthead } from "@/components/ministries/MinistryMasthead";
 import { MinistrySiblingsAndCta } from "@/components/ministries/MinistrySiblingsAndCta";
 import { ArticleBody } from "@/components/ui/ArticleBody";
 import { publishingBodyBlocks, ministryPageImageByKey } from "@/lib/ministries";
-import { getMinistryPagesContent, getCommonContent } from "@/lib/i18n/content-registry";
+import { publishedResources } from "@/lib/resources";
+import { getMinistryPagesContent, getCommonContent, getResourcesContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
 import { isLocale } from "@/lib/i18n/types";
 import { cn } from "@/lib/cn";
@@ -64,7 +65,17 @@ export default async function PublishingPage({
     d.body.activities.material,
   ];
 
-  const detailBandRows = [d.detailBand.rows.article, d.detailBand.rows.book, d.detailBand.rows.bibleStudy];
+  // "Recently published" pulls real published articles from lib/resources.ts
+  // (structural, non-translatable data — CLAUDE.md §8), replacing the old
+  // content/i18n placeholder rows ("[Article title — to be supplied]" etc.)
+  // that were never filled in with real content. No published book- or
+  // study-type resource exists yet, so this band only ever lists real
+  // articles — never an invented book or Bible study entry (CLAUDE.md §32).
+  const resourcesStrings = getResourcesContent(locale);
+  const detailBandRows = publishedResources
+    .filter((resource) => resource.type === "article")
+    .slice(0, 3)
+    .map((resource) => ({ label: resource.title, value: resourcesStrings.detail.type.article }));
 
   const siblingKeys = ["church", "seminary", "education", "childrensEducation"] as const;
   const siblingHrefs: Record<(typeof siblingKeys)[number], string> = {
@@ -163,16 +174,18 @@ export default async function PublishingPage({
         </Container>
       </section>
 
-      <NavyBand>
-        <Reveal className="grid grid-cols-1 gap-8 lg:grid-cols-[280px_1fr] lg:gap-14">
-          <div>
-            <p className={cn("text-eyebrow text-dark-accent", isUrdu && "font-urdu-body text-base normal-case tracking-normal")}>
-              {d.detailBand.eyebrow}
-            </p>
-          </div>
-          <FactTable facts={detailBandRows} tone="on-navy" isUrdu={isUrdu} />
-        </Reveal>
-      </NavyBand>
+      {detailBandRows.length > 0 ? (
+        <NavyBand>
+          <Reveal className="grid grid-cols-1 gap-8 lg:grid-cols-[280px_1fr] lg:gap-14">
+            <div>
+              <p className={cn("text-eyebrow text-dark-accent", isUrdu && "font-urdu-body text-base normal-case tracking-normal")}>
+                {d.detailBand.eyebrow}
+              </p>
+            </div>
+            <FactTable facts={detailBandRows} tone="on-navy" isUrdu={isUrdu} />
+          </Reveal>
+        </NavyBand>
+      ) : null}
 
       <MinistrySiblingsAndCta
         siblingsHeading={s.siblingsHeading}

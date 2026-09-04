@@ -21,7 +21,11 @@ export const seminary = {
     primaryCta: "Inquire About Classes",
     secondaryCta: "Ask a Question",
     imagePlaceholder: "Seminary classroom photograph",
-    imageCaption: "[Caption to be supplied — class, city, year]",
+    // No verified caption (class/city/year) has been supplied — omitted
+    // entirely rather than shown as an unfinished bracket placeholder.
+    // ImagePlaceholder's photoCaption strip only renders for a truthy
+    // value, so an empty string here correctly shows no strip at all.
+    imageCaption: "",
   },
   programme: {
     eyebrow: "The programme",

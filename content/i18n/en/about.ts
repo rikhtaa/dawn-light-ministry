@@ -114,9 +114,8 @@ export const about = {
       outreach: "Ministry among non-Christian communities, alongside the church's own congregation.",
       ongoing: "Ministry activity continuing to the present day, in Karachi and Faisalabad.",
     },
-    note: "[CONTENT REQUIRED FROM ORGANIZATION] A fuller, approved account of the ministry's founding and history will replace this list once supplied.",
     imagePlaceholder: "Archive photograph — early ministry or church building",
-    imageCaption: "[Caption to be supplied — subject, location, year]",
+    imageCaption: "Early ministry, 2016",
   },
   missionVision: {
     eyebrow: "Mission & vision",
