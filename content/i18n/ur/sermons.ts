@@ -32,20 +32,20 @@ export const sermons: Translated<SermonsStrings> = {
 
   },
   latest: {
-    label: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "7459b8690410d3da" },
+    label: { value: "سب سے حالیہ", source: "author", published: true, reviewed: true, sourceHash: "7459b8690410d3da" },
     imagePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "f88d1eaa724f09fe" },
     datePlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "80502bc1a158f94a" },
-    watchOnYouTube: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "818cd7480430ffb4" },
+    watchOnYouTube: { value: "یوٹیوب پر دیکھیں", source: "author", published: true, reviewed: true, sourceHash: "818cd7480430ffb4" },
   },
   filters: {
-    all: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9b20aebb22d0288e" },
-    english: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "ba118bf7fc9c1aed" },
-    urdu: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "234d81e4dcbe229b" },
+    all: { value: "تمام خطبات", source: "machine", published: false, reviewed: false, sourceHash: "9b20aebb22d0288e" },
+    english: { value: "انگریزی", source: "machine", published: false, reviewed: false, sourceHash: "ba118bf7fc9c1aed" },
+    urdu: { value: "اردو", source: "machine", published: false, reviewed: false, sourceHash: "234d81e4dcbe229b" },
     searchPlaceholder: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "c24cfde743ee1217" },
     noResults: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "687640def40d590e" },
   },
   actions: {
-    watch: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "a71e757324467ccf" },
+    watch: { value: "دیکھیں", source: "author", published: true, reviewed: true, sourceHash: "a71e757324467ccf" },
     listen: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "225d29f6201e1a63" },
     read: { value: "", source: "machine", published: false, reviewed: false, sourceHash: "9b9a8d05a7ec353b" },
   },
