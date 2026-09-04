@@ -63,9 +63,10 @@ function findActiveHref(pathWithoutLocale: string): string | undefined {
  * HANDOFF.md §8: utility bar, then this header. Desktop nav renders at
  * `xl` (1280px) and up — nine nav items plus the Support CTA need more
  * room than the 1024–1279px tier has to give without feeling congested,
- * so that tier uses the drawer nav (MobileHeader/MobileDrawer) instead;
- * see LogoLockup's descriptor line, which was already gated to the same
- * `xl` breakpoint for the same reason. Nav order per §8: Home · About ·
+ * so that tier uses the drawer nav (MobileHeader/MobileDrawer) instead.
+ * The logo uses LogoLockup's "compact" size — the approved navbar lockup
+ * (`dlm-logo-compact.svg`), built to sit comfortably alongside a full nav
+ * row. Nav order per §8: Home · About ·
  * Ministries · Seminary · Sermons · Resources · Events · Prayer ·
  * Contact, then the Support the mission CTA — Support is a button, not a
  * plain nav link (lib/navigation.ts).
@@ -125,7 +126,7 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
           />
 
           <div className="hidden items-center justify-between gap-7 py-5 xl:flex">
-            <LogoLockup locale={locale} showDescriptor={false} />
+            <LogoLockup locale={locale} size="compact" urduCompactScale={1.2} />
 
             <div className="flex items-center gap-6">
               <nav aria-label={strings.header.primaryNavLabel}>

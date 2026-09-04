@@ -468,7 +468,7 @@ it grows):
 **Layout/chrome:** `SiteHeader`, `MobileHeader`, `MobileDrawer`,
 `UtilityBar`, `SiteFooter`, `FooterCompact`, `LanguageSwitcher`,
 `ThemeToggle`, `Breadcrumb`, `PageMasthead`, `SectionHeader`, `NavyBand`,
-`CtaBand`, `OnThisPageRail`, `Container`, `LogoLockup`/`LogoMark`
+`CtaBand`, `OnThisPageRail`, `Container`, `LogoLockup`
 
 **UI primitives:** `Button` (primary/secondary/tertiary), `Card`
 (`topRule`, `interactive`), `MinistryCard`, `MinistryRow`, `RuledRow`/

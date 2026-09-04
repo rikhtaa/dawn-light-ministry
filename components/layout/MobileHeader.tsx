@@ -22,7 +22,7 @@ export const MobileHeader = forwardRef<HTMLButtonElement, MobileHeaderProps>(
   function MobileHeader({ locale, menuOpen, menuId, openLabel, onOpen }, ref) {
     return (
       <div className="flex items-center justify-between gap-4 py-4 xl:hidden">
-        <LogoLockup locale={locale} size="compact" />
+        <LogoLockup locale={locale} size="compact" urduCompactScale={1.2} />
         <button
           ref={ref}
           type="button"
