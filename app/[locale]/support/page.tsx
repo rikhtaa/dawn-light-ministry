@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { NavyBand } from "@/components/layout/NavyBand";
 import { Reveal } from "@/components/ui/Reveal";
+import { ManualPaymentMethods } from "@/components/support/ManualPaymentMethods";
 import { organization } from "@/lib/organization";
 import { getSupportContent, getCommonContent } from "@/lib/i18n/content-registry";
 import { localizePath } from "@/lib/i18n/paths";
@@ -30,20 +31,23 @@ export async function generateMetadata({
 }
 
 /**
- * Dawn of Light - Support.dc.html "State A · launch — giving pending
- * approval" only. State B (the post-approval giving/payment block) is not
- * built here at all — HANDOFF.md §18 is explicit that payment processing
- * must not be implemented before the organization confirms legal/banking/
- * provider approval, and the task's own instruction is that State B must
- * never be the page's default. The design's "Before giving opens" checklist
- * card carries its own footnote that it's "shown here for the client
- * review only — it will not be published on the live site unless the
- * organization wants it visible"; it's rendered as drawn (removing content
- * from a production-state frame is itself a scope decision this task
- * didn't ask for) but that self-contradiction — a checklist visible to
- * live visitors captioned as maybe-not-for-visitors — needs the
+ * Dawn of Light - Support.dc.html "State A · launch," extended with V1's
+ * actual giving mechanism: manual Easypaisa + bank transfer
+ * (`ManualPaymentMethods`, CLAUDE.md §22/PRD.md §15), explicitly
+ * authorized by the organization. State B as originally drawn (automated
+ * checkout, provider handoff, amount entry, card form) is still not built
+ * here at all — that still requires legal/banking/provider approval the
+ * organization doesn't have yet. The design's "Before giving opens"
+ * checklist card carries its own footnote that it's "shown here for the
+ * client review only — it will not be published on the live site unless
+ * the organization wants it visible"; it's rendered as drawn (removing
+ * content from a production-state frame is itself a scope decision this
+ * task didn't ask for) but that self-contradiction — a checklist visible
+ * to live visitors captioned as maybe-not-for-visitors — needs the
  * organization's explicit call, flagged in the checkpoint report rather
- * than resolved silently either way. The design has no dark-mode frame for
+ * than resolved silently either way; its own copy now specifically refers
+ * to *online/automated* giving, not giving in general, since manual
+ * giving is already live above it. The design has no dark-mode frame for
  * this page; dark styling below extrapolates from the same tokens used
  * elsewhere on the site.
  */
@@ -134,16 +138,14 @@ export default async function SupportPage({ params }: PageProps<"/[locale]/suppo
                 <span className="hidden sm:inline">{t.cards.give.body}</span>
                 <span className="sm:hidden">{t.cards.give.bodyMobile}</span>
               </p>
-              <span
-                aria-disabled="true"
-                className={cn(
-                  "inline-flex min-h-12 w-full items-center justify-center border border-border bg-disabled-bg px-6 py-3.5 text-center text-[0.9375rem] font-medium text-disabled-fg sm:w-auto",
-                  isUrdu && "font-urdu-body",
-                )}
-              >
+              <Button href="#give-manually" variant="primary" brassFill isUrdu={isUrdu}>
                 {t.cards.give.cta}
-              </span>
+              </Button>
             </Card>
+          </Reveal>
+
+          <Reveal className="mt-16 lg:mt-20">
+            <ManualPaymentMethods strings={t.manualGiving} isUrdu={isUrdu} />
           </Reveal>
 
           <div className="mt-16 grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-16 lg:mt-20">

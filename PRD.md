@@ -288,8 +288,10 @@ displayed.
 Home → Support the Mission → Why Support → Giving options → Secure
 provider or approved payment instructions → Confirmation
 
-Payment integration remains disabled until organizational eligibility,
-banking and payment-provider approval are confirmed.
+V1 provides manual Easypaisa/bank-transfer payment instructions (§15);
+automated payment-gateway integration remains disabled until
+organizational eligibility, banking and payment-provider approval are
+confirmed.
 
 ## Journey 4 --- Seminary
 
@@ -761,9 +763,61 @@ All Urdu content must be reviewed by a fluent human before production.
 
 # 15. Donation / Payment Architecture
 
-## Recommended approach
+## V1 — Manual payment methods (current, implemented)
 
-For a Pakistani organization, V1 should support a **local-first payment
+V1 does not implement any live payment gateway, checkout, card
+processor, webhook, or payment SDK. The ministry is not yet legally
+registered, and no Easypaisa or card-payment gateway has been approved.
+The existing Easypaisa wallet belongs to Pastor Nayyer Gull personally,
+not to a registered ministry merchant account; the bank account is held
+in his personal name, not the ministry's.
+
+Instead, the Support page presents two **manual** payment methods —
+Easypaisa (personal wallet) and bank transfer (HBL) — with the account
+holder's name, contact/account details, and an official QR image for
+each, exactly as supplied by the organization. A visitor sends support
+directly through their own Easypaisa app or bank, then may message the
+ministry to confirm receipt. There is no amount-entry field, card form,
+"Pay Now" button, or automated confirmation anywhere in V1. See
+`lib/organization.ts`'s `payments` object for the account data and
+`components/support/ManualPaymentMethods.tsx` for the implementation.
+
+Publishing these personal account details as the V1 manual destination
+was an explicit organizational decision — it does not by itself
+constitute the "organization confirms ownership and accounting controls"
+condition below, which is specifically about *automated/gateway*
+integration and remains unmet.
+
+## V2 — Approved payment gateway (future, not implemented)
+
+V2 becomes relevant only once Dawn of Light Ministry has completed the
+necessary legal/organizational registration and obtained the required
+merchant/payment-provider approvals and production credentials. Nothing
+below is started, scoped in detail, or scaffolded today — this is a
+roadmap note, not an authorization to begin building it (CLAUDE.md §33).
+
+V2 should eventually provide:
+
+-   a proper, approved Easypaisa online payment gateway integration
+    (replacing V1's manual wallet transfer)
+-   a proper, approved credit/debit card payment gateway integration
+-   secure server-side payment processing — no card data ever reaching
+    the client or being stored by this project
+-   provider webhook/callback handling where the chosen provider
+    requires it
+-   payment success/failure handling, distinct from V1's manual
+    "send and confirm" flow
+-   appropriate transaction/reference-ID handling
+-   production credentials (API keys/secrets) stored only in
+    server-side environment variables, never in frontend code or
+    version control
+
+Do not begin any part of V2 — including "just the schema" or "just the
+UI" — without the organization's explicit approval at that time.
+
+## V2 candidate providers (research, not yet approved)
+
+For a Pakistani organization, V2 should support a **local-first payment
 strategy**.
 
 ### Primary candidate: PayFast
@@ -796,7 +850,7 @@ participating bank apps/wallets to pay via QR.
 
 Official: https://www.jazzcash.com.pk/
 
-## Recommended V1 architecture
+## V2 target architecture
 
 ``` text
 Support the Mission
@@ -845,8 +899,12 @@ Do not build a custom card-payment system.
 
 Do not put payment credentials in frontend code.
 
-Do not publish personal wallet numbers as official donation destinations
-until the organization confirms ownership and accounting controls.
+Do not wire a personal wallet or account into any *automated* checkout,
+API, or webhook until the organization confirms ownership and accounting
+controls for that integration. (This is about automated/gateway
+integration specifically — V1's manual publication of personal account
+details as a donation destination was a separate, explicit organizational
+decision; see the V1 section above.)
 
 ------------------------------------------------------------------------
 

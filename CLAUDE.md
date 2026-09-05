@@ -837,23 +837,38 @@ create hover-only functionality.
 
 ## 22. Donation / Payments
 
-Payment functionality is sensitive. Support ships **State A only**
-(prayer/share/volunteer routes, no giving control) — do not build any
-part of State B (amount selection, provider handoff) even behind a flag,
-unless a task explicitly asks for that specific piece.
+Payment functionality is sensitive.
 
-Do not implement payment processing until the organization approves the
-provider, KYC/eligibility is confirmed, the receiving account is
-confirmed, accounting procedures exist, and donation receipt requirements
-are understood.
+**V1 (current, implemented): manual payment methods only.** Support's
+"Give directly" section (`components/support/ManualPaymentMethods.tsx`)
+presents two manual payment methods, explicitly authorized by the
+organization for this exact purpose: a personal Easypaisa wallet and a
+personal-name HBL bank account, each with its official QR image
+(`public/images/support/{easypaisa,hbl-bank}-qr.png`, displayed as
+supplied — never regenerated, re-encoded, or re-cropped). Account facts
+live in `lib/organization.ts`'s `payments` object. Neither is an
+approved online payment gateway or a registered ministry merchant
+account — the ministry is not yet legally registered, and no
+Easypaisa/card gateway is approved. There is no amount-entry field, card
+form, "Pay Now" button, live API call, checkout, webhook, or automated
+payment confirmation anywhere in this project.
 
-Preferred candidates for Pakistan (PRD §15): 1. PayFast 2. Easypaisa
-3. JazzCash/Raast where approved.
+**V2 (future, not implemented): approved payment gateway.** Do not build
+any part of an automated/gateway giving flow (amount selection, card
+form, provider handoff, webhook) even behind a flag, unless a task
+explicitly asks for that specific piece, and never before the
+organization confirms: legal/organizational status, bank account
+ownership, KYC/eligibility, accounting/receipt process, and a signed
+payment-provider contract. Preferred candidates for Pakistan (PRD §15):
+1. PayFast 2. Easypaisa 3. JazzCash/Raast where approved.
 
 Do not store card information. Do not implement custom payment
-processing. Do not commit payment credentials. Do not publish a personal
-wallet number as an official donation destination until ownership and
-accounting controls are confirmed.
+processing. Do not commit payment credentials, API keys, or API secrets.
+Publishing a personal wallet/account number as a **manual** V1 payment
+destination is authorized (see above) — this rule is about **automated/
+gateway** integration specifically: do not wire a personal wallet or
+account into any live checkout, API, or webhook until the organization's
+ownership and accounting controls for *that* integration are confirmed.
 
 ------------------------------------------------------------------------
 
