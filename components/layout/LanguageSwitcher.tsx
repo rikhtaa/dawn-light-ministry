@@ -76,11 +76,24 @@ export function LanguageSwitcher({
               href={localizePath(loc, pathWithoutLocale)}
               aria-current={active ? "true" : undefined}
               className={cn(
-                "transition-colors duration-300",
-                active ? "font-semibold text-white" : "hover:text-white",
+                "group relative inline-flex items-center py-0.5 transition-colors duration-300",
+                active ? "font-semibold text-white" : "hover:text-white focus-visible:text-white",
               )}
             >
               {loc === "en" ? "English" : "اردو"}
+              {/* Same active/hover underline language as the main nav's
+                  own indicator (SiteHeader.tsx) — brass when active,
+                  a faint hover/focus-only reveal otherwise — reused here
+                  rather than inventing a second affordance pattern. */}
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "absolute inset-x-0 -bottom-0.5 h-px origin-center transition-transform duration-300 ease-out",
+                  active
+                    ? "scale-x-100 bg-dark-accent"
+                    : "scale-x-0 bg-utility-bar-fg group-hover:scale-x-100 group-focus-visible:scale-x-100",
+                )}
+              />
             </Link>
           </span>
         );
