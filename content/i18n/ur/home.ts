@@ -23,7 +23,7 @@ import type { HomeStrings } from "@/content/i18n/en/home";
 export const home: Translated<HomeStrings> = {
   hero: {
     eyebrow: {
-      value: "1982ء سے کلیسیا، سیمنری اور تعلیمی مشن کے طور پر خدمت",
+      value: "1982ء سے بپٹسٹ چرچ، سیمنری اور تعلیمی مشن کے طور پر خدمت",
       source: "author",
       published: true,
       reviewed: true,
@@ -133,7 +133,7 @@ export const home: Translated<HomeStrings> = {
       },
     },
     imageCaption: {
-      value: "[حوالہ درکار] تصویر، جگہ اور تاریخ",
+      value: "پام سنڈے 2025",
       source: "author",
       published: true,
       reviewed: true,
