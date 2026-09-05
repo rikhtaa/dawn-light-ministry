@@ -69,6 +69,14 @@ interface ImagePlaceholderProps {
    * that host site-wide.
    */
   unoptimized?: boolean;
+  /**
+   * Set on the one image that's the Largest Contentful Paint element for
+   * its page (e.g. the Home hero photo) so next/image loads it eagerly
+   * with a preload hint instead of lazily — otherwise it's flagged by
+   * Next's own dev-time LCP warning. Defaults to false (lazy), correct
+   * for every other placement, which is below the fold.
+   */
+  priority?: boolean;
 }
 
 /**
@@ -91,6 +99,7 @@ export function ImagePlaceholder({
   objectFit = "cover",
   objectPosition,
   unoptimized,
+  priority = false,
 }: ImagePlaceholderProps) {
   const onNavy = tone === "on-navy";
 
@@ -112,6 +121,7 @@ export function ImagePlaceholder({
           className={objectFit === "contain" ? "object-contain" : "object-cover"}
           style={objectPosition ? { objectPosition } : undefined}
           unoptimized={unoptimized}
+          priority={priority}
         />
         {photoCaption ? (
           <span className="absolute inset-x-0 bottom-0 max-w-[80%] bg-ink px-5 py-3 text-[0.78125rem] leading-[1.4] text-dark-body">

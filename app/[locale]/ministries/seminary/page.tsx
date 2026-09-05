@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { FactTable } from "@/components/ui/FactTable";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
-import { PlaceholderTag } from "@/components/ui/PlaceholderTag";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArticleBody } from "@/components/ui/ArticleBody";
-import { subjectKeys, subjectMetaUnconfirmedByKey, programmeBodyBlocks, prospectusPdfPath } from "@/lib/seminary";
+import { subjectKeys, programmeBodyBlocks, prospectusPdfPath } from "@/lib/seminary";
 import { organization } from "@/lib/organization";
 import { publishedResources, resourceTitle, resourceAuthor } from "@/lib/resources";
 import { getSeminaryContent, getCommonContent, getHomeContent } from "@/lib/i18n/content-registry";
@@ -171,7 +170,6 @@ export default async function SeminaryPage({ params }: PageProps<"/[locale]/mini
             <div className="mt-9 border-t-2 border-ink dark:border-dark-accent">
               {subjectKeys.map((key, i) => {
                 const subject = strings.programme.subjects[key];
-                const unconfirmed = subjectMetaUnconfirmedByKey[key];
                 return (
                   <div
                     key={key}

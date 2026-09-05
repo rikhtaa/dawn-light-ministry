@@ -112,6 +112,7 @@ export function Hero({ strings, primaryCtaHref, secondaryCtaHref, isUrdu, imageS
             src={imageSrc}
             alt={imageAlt}
             objectPosition={imageObjectPosition}
+            priority
           />
         </div>
       </Container>
